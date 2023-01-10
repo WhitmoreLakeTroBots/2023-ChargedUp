@@ -28,5 +28,11 @@ public class Constants {
     *   public static final int kRightMotor2Port = 3; 
     * }
     */ 
+    public static final class CANID {
+        public static final int lDM1 = 1;
+        public static final int lDM2 = 2;
+        public static final int rDM1 = 3;
+        public static final int rDM2 = 4;
+    }
 }
 

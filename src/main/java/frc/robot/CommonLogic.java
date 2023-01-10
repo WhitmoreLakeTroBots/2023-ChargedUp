@@ -7,7 +7,7 @@
 
 package frc.robot;
 
-import frc.robot.Constants.Profiler_Constants_DriveTrain;
+// import frc.robot.Constants.Profiler_Constants_DriveTrain;
 
 /**
  * Add your docs here.
@@ -78,12 +78,12 @@ public class CommonLogic {
     if ((dist2_accel * 2) > dist_inch) {
       // it is triangle and we never reach curise speed;
       // this happens with short move distances and high speeds with low accel
-      retValue = (time2_accel * 2 * Profiler_Constants_DriveTrain.profileEndTimeScalar);
+     // retValue = (time2_accel * 2 * Profiler_Constants_DriveTrain.profileEndTimeScalar);
     } else {
       // it is trapazoid and we do cruise for a while
       double inchAtCruise = dist_inch - (2 * dist2_accel);
       double timeAtCruise = inchAtCruise / vel_inch_sec;
-      retValue = ((2 * time2_accel) + timeAtCruise) * Profiler_Constants_DriveTrain.profileEndTimeScalar;
+    //  retValue = ((2 * time2_accel) + timeAtCruise) * Profiler_Constants_DriveTrain.profileEndTimeScalar;
     }
     return retValue;
   }

@@ -74,13 +74,13 @@ public class RobotMath {
         // 75.4 / 168 means that motor power of .448 should give us a 1 second 360
         // degree turn.
 
-        double full360turndist = Constants.robotPysicalProperties.robotTrackWidth * Math.PI;
-        double full360throttle = full360turndist / Constants.robotPysicalProperties.theoreticalMaxSpeedInches;
+       // double full360turndist = Constants.robotPysicalProperties.robotTrackWidth * Math.PI;
+       // double full360throttle = full360turndist / Constants.robotPysicalProperties.theoreticalMaxSpeedInches;
 
-        double retValue = Math.signum(throttle) * Math.abs(full360throttle / 360);
+       // double retValue = Math.signum(throttle) * Math.abs(full360throttle / 360);
 
         // System.out.println("retValue = " + retValue);
-        return retValue;
+        return 0;
     }
 
     // calculates the motor power and scales it based on the heading delta
