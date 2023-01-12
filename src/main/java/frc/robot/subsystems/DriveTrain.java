@@ -84,6 +84,11 @@ rDM2 = new WL_Spark(Constants.CANID.rDM2,WL_Spark.MotorType.kBrushless);
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
+
+    
+
+
+
     public void CMDteleOp(XboxController driveController) {
         doDrive(driveController.getLeftY(), driveController.getLeftX(), driveController.getRightX(),0.55);
 
@@ -99,8 +104,59 @@ rDM2 = new WL_Spark(Constants.CANID.rDM2,WL_Spark.MotorType.kBrushless);
         rDM1Power = Drive - Strafe - Turn;
         lDM2Power = Drive - Strafe + Turn;
         rDM2Power = Drive + Strafe - Turn;
+        scale();
+        SetMotorPower();
 
     }
 
+
+    public double getMaxValue() {
+        double Max = -1;
+        if(Math.abs(lDM1Power) > Max) {
+            Max = Math.abs(lDM1Power);
+        }
+        if(Math.abs(lDM2Power) > Max) {
+            Max = Math.abs(lDM2Power);
+        }
+        if(Math.abs(rDM1Power) > Max) {
+            Max = Math.abs(rDM1Power);
+        }
+        if(Math.abs(rDM2Power) > Max) {
+            Max = Math.abs(rDM2Power);
+        }
+        return Max;
+    }
+    
+
+
+    public void scale() {
+        double Max = getMaxValue();
+        if(Max > 1) {
+
+
+            lDM1Power = lDM1Power / Max;
+            lDM2Power = lDM2Power / Max;
+            rDM1Power = rDM1Power / Max;
+            rDM2Power = rDM2Power / Max;
+        }
+    }
+
+
+    public void SetMotorPower(){
+        lDM1.set(lDM1Power);
+        lDM2.set(lDM2Power);
+        rDM1.set(rDM1Power);
+        rDM2.set(rDM2Power);
+    }
+
+
+    public void StopDrive(){
+        lDM1.set (0);
+        lDM2.set (0);
+        rDM1.set (0);
+        rDM2.set (0);
+    }
+
+    
 }
 
