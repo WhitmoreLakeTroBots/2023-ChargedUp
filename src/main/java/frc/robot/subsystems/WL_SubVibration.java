@@ -12,7 +12,7 @@
 
 package frc.robot.subsystems;
 
-import frc.robot.BillController;
+
 import frc.robot.CommonLogic;
 import frc.robot.RobotContainer;
 import frc.robot.Constants.*;
@@ -27,9 +27,7 @@ import javax.swing.text.AbstractDocument.LeafElement;
 import com.revrobotics.SparkMaxPIDController;
 import frc.robot.PID;
 import frc.robot.Robot;
-import frc.robot.BillController;
 import frc.robot.RobotMath;
-import frc.robot.BillController.HAND;
 //import frc.robot.commands.*;
 //import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -101,20 +99,20 @@ public class WL_SubVibration extends SubsystemBase {
     private void ExecVibLeft(){
         if (RobotMath.getTime() <= lEndTime) {
 
-            RobotContainer.getInstance().Xbox.setRumble(HAND.LEFT, lIntensity);
+       //     RobotContainer.getInstance().Xbox.setRumble(HAND.LEFT, lIntensity);
         }
         else {
-            RobotContainer.getInstance().Xbox.setRumble(HAND.LEFT, 0.0);
+       //     RobotContainer.getInstance().Xbox.setRumble(HAND.LEFT, 0.0);
         }
     }
 
     private void ExecVibRight(){
         if (RobotMath.getTime() <= rEndTime) {
 
-            RobotContainer.getInstance().Xbox.setRumble(HAND.RIGHT, rIntensity);
+       //     RobotContainer.getInstance().Xbox.setRumble(HAND.RIGHT, rIntensity);
         }
         else{
-            RobotContainer.getInstance().Xbox.setRumble(HAND.RIGHT, 0.0);
+        //    RobotContainer.getInstance().Xbox.setRumble(HAND.RIGHT, 0.0);
         }
 
     }
