@@ -130,4 +130,19 @@ public class RobotMath {
         
     }
 
+    public static double safetyCap(double targetPos, double min, double max){
+        //if target => max return max
+        if(targetPos > max){
+            return max;
+        }
+        //else if target <= min return min
+        else if(targetPos < min){
+            return min;
+        }
+        //else return target
+        else{
+            return targetPos;
+        }
+    }
+
 }
