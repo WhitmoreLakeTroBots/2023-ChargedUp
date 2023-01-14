@@ -67,11 +67,11 @@ lDM2 = new WL_Spark(Constants.CANID.lDM2,WL_Spark.MotorType.kBrushless);
  lDM2.setIdleMode(IdleMode.kBrake);
 
 rDM1 = new WL_Spark(Constants.CANID.rDM1,WL_Spark.MotorType.kBrushless);
- rDM1.setInverted(false);
+ rDM1.setInverted(true);
  rDM1.setIdleMode(IdleMode.kBrake);
 
 rDM2 = new WL_Spark(Constants.CANID.rDM2,WL_Spark.MotorType.kBrushless);
- rDM2.setInverted(false);
+ rDM2.setInverted(true);
  rDM2.setIdleMode(IdleMode.kBrake);
 
 
@@ -99,7 +99,7 @@ rDM2 = new WL_Spark(Constants.CANID.rDM2,WL_Spark.MotorType.kBrushless);
 
 
     public void CMDteleOp(XboxController driveController) {
-        doDrive(driveController.getLeftY(), driveController.getLeftX(), driveController.getRightX(),0.55);
+        doDrive(-1 *driveController.getLeftY(), driveController.getLeftX(), driveController.getRightX(),0.40);
 
     }
 

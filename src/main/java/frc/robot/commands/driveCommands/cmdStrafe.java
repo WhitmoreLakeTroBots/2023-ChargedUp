@@ -68,6 +68,7 @@ private WL_Spark.IdleMode idleMode = WL_Spark.IdleMode.kBrake;
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+        /*/
         double headingDelta = RobotMath.calcTurnRate(RobotContainer.getInstance().m_subGyro.getNormaliziedNavxAngle(), 
         targetHeading, RobotContainer.getInstance().m_driveTrain.kp_driveStraightGyro);
 
@@ -77,7 +78,7 @@ private WL_Spark.IdleMode idleMode = WL_Spark.IdleMode.kBrake;
         end(false);
         }
 
-        
+        */
 
     }
 
