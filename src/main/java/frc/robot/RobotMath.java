@@ -101,4 +101,13 @@ public class RobotMath {
         return retValue;
     }
 
+    public static boolean isInRange(double currentPos, double targetPos, double tol){
+            boolean bIsInRange = false;
+        if((currentPos >= (targetPos - tol)) && (currentPos <= (targetPos + tol))){
+                bIsInRange = true;
+        }
+
+        return bIsInRange;
+    }
+
 }
