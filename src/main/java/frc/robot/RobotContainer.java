@@ -41,6 +41,7 @@ public class RobotContainer {
 // The robot's subsystems
     public final TemplateSubsystem m_templateSubsystem = new TemplateSubsystem();
     public final DriveTrain m_driveTrain = new DriveTrain();
+    public final SubGyro m_subGyro = new SubGyro();
 
 // Joysticks
 private final XboxController driveController = new XboxController(0);
