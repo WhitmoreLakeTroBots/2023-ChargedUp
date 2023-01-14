@@ -135,6 +135,8 @@ public XboxController getArticController() {
   public void updateSmartboard (){
     
     SmartDashboard.putNumber("Heading", m_subGyro.getNormaliziedNavxAngle());
+    SmartDashboard.putNumber("Dist", m_driveTrain.getDistanceTraveledInches());
+    
   }
 
 

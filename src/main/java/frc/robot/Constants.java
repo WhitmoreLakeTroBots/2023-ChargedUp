@@ -29,10 +29,16 @@ public class Constants {
     * }
     */ 
     public static final class CANID {
+        //Drive system canID
         public static final int lDM1 = 1;
         public static final int lDM2 = 2;
         public static final int rDM1 = 3;
         public static final int rDM2 = 4;
+
+        //Arm motor canID
+        public static final int ArmMotor = 5;
+
     }
+
 }
 
