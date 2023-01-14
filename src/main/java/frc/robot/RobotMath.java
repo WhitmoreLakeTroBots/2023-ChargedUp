@@ -110,4 +110,24 @@ public class RobotMath {
         return bIsInRange;
     }
 
+    public static double goToPos(double currentPos, double targetPos, double tol, double power) {
+        //if before pos. add power
+        if((currentPos < (targetPos - tol))) {
+            return power;
+        }
+        //if after pos. subract power
+        else if((currentPos > (targetPos + tol))) {
+            return -1*power;
+        }
+        //if in range stop
+        else if(isInRange(currentPos, targetPos, tol)){
+            return 0;
+        }
+        else {
+            return 0;
+        }
+    
+        
+    }
+
 }
