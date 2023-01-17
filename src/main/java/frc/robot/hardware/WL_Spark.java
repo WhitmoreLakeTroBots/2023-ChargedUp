@@ -51,6 +51,10 @@ public class WL_Spark extends CANSparkMax {
     return ((super.getEncoder().getPosition() - encoder_zero_offset) * inverted);
   }
 
+  public double getPositionABS() {
+    return Math.abs((super.getEncoder().getPosition() - encoder_zero_offset) * inverted);
+  }
+
   public double getVelocity() {
     return (super.getEncoder().getVelocity() * inverted);
   }

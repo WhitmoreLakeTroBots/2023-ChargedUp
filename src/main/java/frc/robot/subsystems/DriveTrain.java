@@ -177,7 +177,7 @@ rDM2 = new WL_Spark(Constants.CANID.rDM2,WL_Spark.MotorType.kBrushless);
     }
     
     public double getDistanceTraveledInches(){
-        double motorAverageRotations = (lDM1.getPosition() + lDM2.getPosition() + rDM1.getPosition() + rDM2.getPosition())/4;
+        double motorAverageRotations = (lDM1.getPositionABS() + lDM2.getPositionABS() + rDM1.getPositionABS() + rDM2.getPositionABS())/4;
         return (motorAverageRotations * wheelDiameter * Math.PI) / gearRatio; 
     }
 }
