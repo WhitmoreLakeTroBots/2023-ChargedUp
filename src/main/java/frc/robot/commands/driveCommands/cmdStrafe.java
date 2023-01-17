@@ -62,7 +62,7 @@ private WL_Spark.IdleMode idleMode = WL_Spark.IdleMode.kBrake;
     public void initialize() {
         bDone = false;
         RobotContainer.getInstance().m_driveTrain.resetEncoders();
-        RobotContainer.getInstance().m_driveTrain.doDrive(0,power,0,1);
+        RobotContainer.getInstance().m_driveTrain.doDrive(0,power,0,.4);
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -72,8 +72,8 @@ private WL_Spark.IdleMode idleMode = WL_Spark.IdleMode.kBrake;
         double headingDelta = RobotMath.calcTurnRate(RobotContainer.getInstance().m_subGyro.getNormaliziedNavxAngle(), 
         targetHeading, RobotContainer.getInstance().m_driveTrain.kp_driveStraightGyro);
 
-        RobotContainer.getInstance().m_driveTrain.doDrive(0, power, headingDelta,1);
-        if(targetPosition >= RobotContainer.getInstance().m_driveTrain.getDistanceTraveledInches()){
+        RobotContainer.getInstance().m_driveTrain.doDrive(0, power, headingDelta,.4);
+        if(targetPosition <= RobotContainer.getInstance().m_driveTrain.getDistanceTraveledInches()){
         bDone = true;
         end(false);
         }
