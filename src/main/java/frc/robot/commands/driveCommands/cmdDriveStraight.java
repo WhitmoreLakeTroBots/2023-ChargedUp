@@ -74,7 +74,7 @@ private WL_Spark.IdleMode idleMode = WL_Spark.IdleMode.kBrake;
 
        
         RobotContainer.getInstance().m_driveTrain.doDrive(power, 0, headingDelta,1);
-        if(targetPosition >= RobotContainer.getInstance().m_driveTrain.getDistanceTraveledInches()){
+        if(targetPosition <= RobotContainer.getInstance().m_driveTrain.getDistanceTraveledInches()){
         bDone = true;
         end(false);
 

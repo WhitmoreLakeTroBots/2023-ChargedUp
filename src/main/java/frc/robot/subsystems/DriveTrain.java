@@ -42,6 +42,9 @@ private WL_Spark lDM2;
 private WL_Spark rDM1;
 private WL_Spark rDM2;
 
+private double wheelDiameter = 8; // in inches
+private double gearRatio = 12.75; // Motor to wheel ratio
+private double teleopPower = .40; 
 
 private double lDM1Power;
 private double lDM2Power;
@@ -99,7 +102,7 @@ rDM2 = new WL_Spark(Constants.CANID.rDM2,WL_Spark.MotorType.kBrushless);
 
 
     public void CMDteleOp(XboxController driveController) {
-        doDrive(-1 *driveController.getLeftY(), driveController.getLeftX(), driveController.getRightX(),0.40);
+        doDrive(-1 *driveController.getLeftY(), driveController.getLeftX(), driveController.getRightX(), teleopPower);
 
     }
 
@@ -175,7 +178,7 @@ rDM2 = new WL_Spark(Constants.CANID.rDM2,WL_Spark.MotorType.kBrushless);
     
     public double getDistanceTraveledInches(){
         double motorAverageRotations = (lDM1.getPosition() + lDM2.getPosition() + rDM1.getPosition() + rDM2.getPosition())/4;
-        return motorAverageRotations * 8 * Math.PI; 
+        return (motorAverageRotations * wheelDiameter * Math.PI) / gearRatio; 
     }
 }
 
