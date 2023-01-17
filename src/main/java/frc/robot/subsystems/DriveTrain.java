@@ -118,7 +118,7 @@ rDM2 = new WL_Spark(Constants.CANID.rDM2,WL_Spark.MotorType.kBrushless);
         rDM2Power = Drive + Strafe - Turn;
         scale();
         SetMotorPower();
-
+        System.err.print(lDM1Power);
     }
 
 
