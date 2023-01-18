@@ -89,7 +89,7 @@ private final XboxController articController = new XboxController(1);
     m_chooser.addOption("driveforward", new cmdDriveStraight(24,.25,0.0));
     m_chooser.addOption("driveback", new cmdDriveStraight(24, -.25, 0.0));
 
-    m_chooser.addOption("turn-90 (left)", new cmdTurnByGyro(90,.2,true));
+    m_chooser.addOption("turn-90 (left)", new cmdTurnByGyro(-90,.2,true));
     m_chooser.addOption("turn 90 (right)", new cmdTurnByGyro(90,.2,false));
    
     m_chooser.addOption("turn-180 (left)", new cmdTurnByGyro(180,.2,true));
@@ -101,7 +101,7 @@ private final XboxController articController = new XboxController(1);
     SmartDashboard.putData("turn-0", new cmdTurnByGyro(0,.2,true));
     SmartDashboard.putData("driveforward", new cmdDriveStraight(24,.25, m_subGyro.getNormaliziedNavxAngle()));
     SmartDashboard.putData("driveback", new cmdDriveStraight(24, -.25, m_subGyro.getNormaliziedNavxAngle()));
-    SmartDashboard.putData("turn-90 (left)", new cmdTurnByGyro(90,.2,true));
+    SmartDashboard.putData("turn-90 (left)", new cmdTurnByGyro(-90,.2,true));
     SmartDashboard.putData("turn 90 (right)", new cmdTurnByGyro(90,.2,false));
     SmartDashboard.putData("strafe left", new cmdStrafe(12, .25, m_subGyro.getNormaliziedNavxAngle()));
     SmartDashboard.putData("strafe right", new cmdStrafe(12, -.25, m_subGyro.getNormaliziedNavxAngle()));

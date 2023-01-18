@@ -76,9 +76,6 @@ public class cmdTurnByGyro extends CommandBase {
     @Override
     public void execute() {
         
-        double headingDelta = RobotMath.calcTurnRate(RobotContainer.getInstance().m_subGyro.getNormaliziedNavxAngle(), 
-        targetHeading, RobotContainer.getInstance().m_driveTrain.kp_driveStraightGyro);
-
         if(RobotMath.isInRange(RobotContainer.getInstance().m_subGyro.getNormaliziedNavxAngle(), targetHeading, tol)){
             bDone = true;
             end(false);
