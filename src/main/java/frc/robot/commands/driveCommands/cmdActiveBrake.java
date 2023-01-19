@@ -38,7 +38,7 @@ public class cmdActiveBrake extends CommandBase {
     public cmdActiveBrake() {
 
         
-        targetHeading = RobotContainer.getInstance().m_subGyro.getNormaliziedNavxAngle();
+        
         
 
         // m_subsystem = subsystem;
@@ -52,6 +52,7 @@ public class cmdActiveBrake extends CommandBase {
     public void initialize() {
         bDone = false;
         RobotContainer.getInstance().m_driveTrain.resetEncoders();
+        targetHeading = RobotContainer.getInstance().m_subGyro.getNormaliziedNavxAngle();
     }
 
     // Called every time the scheduler runs while the command is scheduled.

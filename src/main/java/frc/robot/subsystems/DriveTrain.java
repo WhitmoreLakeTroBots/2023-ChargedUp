@@ -182,37 +182,37 @@ rDM2 = new WL_Spark(Constants.CANID.rDM2,WL_Spark.MotorType.kBrushless);
     }
 
     public void activeBrake(double power){
-        if(lDM1.getPosition()>0){
+        if(lDM1.getPosition()<0){
             lDM1.set(power);
         }
-        else if(lDM1.getPosition()<0){
+        else if(lDM1.getPosition()>0){
             lDM1.set(-1*power);
         }
         else{lDM1.set(0);}
 
 
-        if(lDM2.getPosition()>0){
+        if(lDM2.getPosition()<0){
             lDM2.set(power);
         }
-        else if(lDM2.getPosition()<0){
+        else if(lDM2.getPosition()>0){
             lDM2.set(-1*power);
         }
         else{lDM2.set(0);}
 
 
-        if(rDM1.getPosition()>0){
+        if(rDM1.getPosition()<0){
             rDM1.set(power);
         }
-        else if(rDM1.getPosition()<0){
+        else if(rDM1.getPosition()>0){
             rDM1.set(-1*power);
         }
         else {rDM1.set(0);}
         
 
-        if(rDM2.getPosition()>0){
+        if(rDM2.getPosition()<0){
             rDM2.set(power);
         }
-        else if(rDM2.getPosition()<0){
+        else if(rDM2.getPosition()>0){
             rDM2.set(-1*power);
         }
         else {rDM2.set(0);}
