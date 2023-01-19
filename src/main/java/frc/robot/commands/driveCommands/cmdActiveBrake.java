@@ -27,7 +27,7 @@ import java.util.function.DoubleSupplier;
  */
 public class cmdActiveBrake extends CommandBase {
     private double targetPosition = 0; // inches
-    private double power = 0.05;
+    private double power = 0.025;
     private double targetHeading = 0;
     private boolean bDone = false;
     private double overshootValue = 0;
