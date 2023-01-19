@@ -180,5 +180,42 @@ rDM2 = new WL_Spark(Constants.CANID.rDM2,WL_Spark.MotorType.kBrushless);
         double motorAverageRotations = (lDM1.getPositionABS() + lDM2.getPositionABS() + rDM1.getPositionABS() + rDM2.getPositionABS())/4;
         return (motorAverageRotations * wheelDiameter * Math.PI) / gearRatio; 
     }
+
+    public void activeBrake(double power){
+        if(lDM1.getPosition()>0){
+            lDM1.set(power);
+        }
+        else if(lDM1.getPosition()<0){
+            lDM1.set(-1*power);
+        }
+        else{lDM1.set(0);}
+
+
+        if(lDM2.getPosition()>0){
+            lDM2.set(power);
+        }
+        else if(lDM2.getPosition()<0){
+            lDM2.set(-1*power);
+        }
+        else{lDM2.set(0);}
+
+
+        if(rDM1.getPosition()>0){
+            rDM1.set(power);
+        }
+        else if(rDM1.getPosition()<0){
+            rDM1.set(-1*power);
+        }
+        else {rDM1.set(0);}
+        
+
+        if(rDM2.getPosition()>0){
+            rDM2.set(power);
+        }
+        else if(rDM2.getPosition()<0){
+            rDM2.set(-1*power);
+        }
+        else {rDM2.set(0);}
+    }
 }
 
