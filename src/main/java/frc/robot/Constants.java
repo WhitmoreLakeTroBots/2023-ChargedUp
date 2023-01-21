@@ -41,6 +41,10 @@ public class Constants {
 
     }
 
+    public static final class PWM{
+        public static final int ledDriver = 10;
+    }
+
 
 
 }
