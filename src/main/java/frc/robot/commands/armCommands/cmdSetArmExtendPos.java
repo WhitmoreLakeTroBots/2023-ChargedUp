@@ -21,6 +21,8 @@ public class cmdSetArmExtendPos extends CommandBase {
 
     
     private double targPos = 0;
+    private double stagPos = 1.0;
+    private double stagPower = 1.0;
 
 
     public cmdSetArmExtendPos(double targetPos) {
@@ -31,11 +33,33 @@ public class cmdSetArmExtendPos extends CommandBase {
         // addRequirements(m_subsystem);    
 
     }
+     //if fixedDist = false => stagPosition is suposed to recieve the percantage to be traversed in stag, in 0.xx format
+     public cmdSetArmExtendPos(double targetPos, double stagPosition, double stagPow, boolean fixedDist) {
+        targPos = targetPos;
+        //if fixedDist = false => stagPosition is suposed to recieve the percantage to be traversed in stag, in 0.xx format
+        if(fixedDist){
+            //fixed distance is a specific distance from the target when to start stagging
+            stagPos = stagPosition;
+        }
+        else{
+            stagPos = -1;
+        }
+        stagPower = stagPow;
+        // m_subsystem = subsystem;
+        // addRequirements(m_subsystem);    
+
+        
+    }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        RobotContainer.getInstance().m_arm.setArmExtendTargPos(targPos);
+        if(stagPos == -1){
+            double pos = RobotContainer.getInstance().m_arm.getArmExtendPos();
+
+            stagPos = (Math.abs(pos - targPos))*stagPos;
+        }
+        RobotContainer.getInstance().m_arm.setArmExtendTargPos(targPos,stagPos,stagPower);
     }
 
     // Called every time the scheduler runs while the command is scheduled.

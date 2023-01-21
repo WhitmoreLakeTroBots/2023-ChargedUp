@@ -129,6 +129,30 @@ public class RobotMath {
     
         
     }
+    public static double goToPosStag(double currentPos, double targetPos, double tol, double power, double stagStart, double stagPower){
+        
+        //if before pos. add power
+        if((currentPos < (targetPos - tol))) {
+            return power;
+        }
+        //if after pos. subract power
+        else if((currentPos > (targetPos + tol))) {
+            return -1*power;
+        }
+        else if(currentPos<(targetPos-stagStart)){
+            return power*stagPower;
+        }
+        else if(currentPos>(targetPos+stagStart)){
+            return -1*power*stagPower;
+        }
+        //if in range stop
+        else if(isInRange(currentPos, targetPos, tol)){
+            return 0;
+        }
+        else {
+            return 0;
+        } 
+    }
 
     public static double safetyCap(double targetPos, double min, double max){
         //if target => max return max

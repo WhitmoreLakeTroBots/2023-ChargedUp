@@ -28,10 +28,16 @@ public class Arm extends SubsystemBase {
     private WL_Spark armRot;
     private double targetArmExtendPos = 0;
     private double targetArmRotPos = 0;
-    private double targetPower = 0.15;
+    private double targetPowerExtend = 0.15;
+    private double targetPowerRot = 0.15;
     private static double maxPos = 10;
     private static double minPos = -1;
-    private static double tol = 0.5;
+    private static double tolExtend = 0.5;
+    private static double tolRot = 0.5;
+    private double stagPosExtend = 1.0;
+    private double stagPosRot = 1.0;
+    private double stagPowerExtend = 1.0;
+    private double stagPowerRot = 1.0;
 
 
 
@@ -67,9 +73,9 @@ public class Arm extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        armExtend.set( RobotMath.goToPos(getArmExtendPos(), targetArmExtendPos, tol, targetPower));
+        armExtend.set( RobotMath.goToPosStag(getArmExtendPos(), targetArmExtendPos, tolExtend, targetPowerExtend,stagPosExtend,stagPowerExtend));
 
-        armRot.set(RobotMath.goToPos(getArmRotPos(), targetArmRotPos, tol, targetPower));
+        armRot.set(RobotMath.goToPosStag(getArmRotPos(), targetArmRotPos, tolRot, targetPowerRot,stagPosRot,stagPowerRot));
 
     }
 
@@ -91,12 +97,16 @@ public class Arm extends SubsystemBase {
         return armRot.getPosition();
     }
 
-    public void setArmExtendTargPos(double target){
+    public void setArmExtendTargPos(double target,double stagPos, double stagPower){
         targetArmExtendPos = RobotMath.safetyCap(target, minPos, maxPos);
+        stagPosExtend = stagPos;
+        stagPowerExtend = stagPower;
     }
 
-    public void setArmRotTargPos(double target){
+    public void setArmRotTargPos(double target, double stagPos, double stagPower){
         targetArmRotPos = RobotMath.safetyCap(target, minPos, maxPos);
+        stagPosRot = stagPos;
+        stagPowerRot = stagPower;
     }
 
 }
