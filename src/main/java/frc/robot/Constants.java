@@ -36,9 +36,12 @@ public class Constants {
         public static final int rDM2 = 4;
 
         //Arm motor canID
-        public static final int ArmMotor = 5;
+        public static final int armExtend = 5;
+        public static final int armRot = 6;
 
     }
+
+
 
 }
 

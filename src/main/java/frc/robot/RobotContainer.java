@@ -156,7 +156,8 @@ public XboxController getArticController() {
     
     SmartDashboard.putNumber("Heading", m_subGyro.getNormaliziedNavxAngle());
     SmartDashboard.putNumber("Dist", m_driveTrain.getDistanceTraveledInches());
-    SmartDashboard.putNumber("ArmPos", m_arm.getArmPos());
+    SmartDashboard.putNumber("ArmExtendPos", m_arm.getArmExtendPos());
+    SmartDashboard.putNumber("ArmRotPos", m_arm.getArmRotPos());
    // SmartDashboard.putNumber("LDM1POS", m_driveTrain.lDM1.getPositionABS());
   }
 
