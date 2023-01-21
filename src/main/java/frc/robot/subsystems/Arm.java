@@ -30,8 +30,10 @@ public class Arm extends SubsystemBase {
     private double targetArmRotPos = 0;
     private double targetPowerExtend = 0.15;
     private double targetPowerRot = 0.15;
-    private static double maxPos = 10;
-    private static double minPos = -1;
+    private static double maxPosExtend = 10;
+    private static double minPosExtend = -1;
+    private static double maxPosRot = 10;
+    private static double minPosRot = -1;
     private static double tolExtend = 0.5;
     private static double tolRot = 0.5;
     private double stagPosExtend = 1.0;
@@ -98,13 +100,13 @@ public class Arm extends SubsystemBase {
     }
 
     public void setArmExtendTargPos(double target,double stagPos, double stagPower){
-        targetArmExtendPos = RobotMath.safetyCap(target, minPos, maxPos);
+        targetArmExtendPos = RobotMath.safetyCap(target, minPosExtend, maxPosExtend);
         stagPosExtend = stagPos;
         stagPowerExtend = stagPower;
     }
 
     public void setArmRotTargPos(double target, double stagPos, double stagPower){
-        targetArmRotPos = RobotMath.safetyCap(target, minPos, maxPos);
+        targetArmRotPos = RobotMath.safetyCap(target, minPosRot, maxPosRot);
         stagPosRot = stagPos;
         stagPowerRot = stagPower;
     }
