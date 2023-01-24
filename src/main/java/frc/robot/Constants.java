@@ -45,7 +45,19 @@ public class Constants {
         public static final int ledDriver = 10;
     }
 
+    public static final class AprilTagConstants{
+        //AprilTags on the field are 6X6inches
+        //These heights are to the bottom of the april tags
 
+        public static final double gridTargetHeightMeters = 0.3691; //imperial units 1ft. 2.25in
+        public static final double doubleSubstationTargetHeightMeters = 0.0593725; // imperial units 1ft. 11.375in
+
+        //todo fix all of these once we actually test code on the bot W
+        public static final double cameraHeightMeters = 0;
+        public static final double cameraPitchDegrees = 0;
+        public static final double cameraPitchRadians = Math.toRadians(cameraPitchDegrees);
+        public static final double targetRangeMeters = 0; //how far from the target we want to be
+    }
 
 }
 
