@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.motorcontrol.Spark;
  *
  */
 public class Vision extends SubsystemBase {
-    private final PhotonCamera aprilTagCamera1 = new PhotonCamera("aprilTagCamera");
+    private final PhotonCamera aprilTagCamera1 = new PhotonCamera("IMX219");
     
     
     /**
