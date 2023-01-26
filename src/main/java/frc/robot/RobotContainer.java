@@ -54,6 +54,7 @@ public class RobotContainer {
     public final SubGyro m_subGyro = new SubGyro();
     public final Lighting m_Lighting = new Lighting();
     public final Arm m_arm = new Arm();
+    public final Vision m_Vision = new Vision();
 
 // Joysticks
 private final XboxController driveController = new XboxController(0);
@@ -168,6 +169,12 @@ public XboxController getArticController() {
     SmartDashboard.putNumber("ArmExtendPos", m_arm.getArmExtendPos());
     SmartDashboard.putNumber("ArmRotPos", m_arm.getArmRotPos());
    // SmartDashboard.putNumber("LDM1POS", m_driveTrain.lDM1.getPositionABS());
+
+   SmartDashboard.putNumber("AprilTag ID", m_Vision.getTagId());
+   SmartDashboard.putNumber("Distance in Meters", m_Vision.getRangeFromTagMeters());
+   SmartDashboard.putNumber("Target Yaw", m_Vision.getTagYawDegrees());
+   SmartDashboard.putNumber("Target Pitch", m_Vision.getTagPitchDegrees());
+
   }
 
 
