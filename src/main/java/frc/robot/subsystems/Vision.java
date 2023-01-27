@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.motorcontrol.Spark;
 public class Vision extends SubsystemBase {
     private final PhotonCamera aprilTagCamera1 = new PhotonCamera("IMX219");
     
+
     
     /**
     *
@@ -48,7 +49,11 @@ public class Vision extends SubsystemBase {
 
     
     public int getTagId(){
+        if(aprilTagCamera1.getLatestResult().getBestTarget() != null){
         return aprilTagCamera1.getLatestResult().getBestTarget().getFiducialId();
+        }else {
+        return -1;
+    }
     }
 
 
