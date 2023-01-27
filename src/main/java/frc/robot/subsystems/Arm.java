@@ -28,18 +28,18 @@ public class Arm extends SubsystemBase {
     private WL_Spark armRot;
     private double targetArmExtendPos = 0;
     private double targetArmRotPos = 0;
-    private double targetPowerExtend = 0.15;
-    private double targetPowerRot = 0.15;
-    private static double maxPosExtend = 10;
+    private double targetPowerExtend = 0.50;
+    private double targetPowerRot = 0.40;
+    private static double maxPosExtend = 224;
     private static double minPosExtend = -1;
-    private static double maxPosRot = 10;
-    private static double minPosRot = -1;
-    private static double tolExtend = 0.5;
-    private static double tolRot = 0.5;
+    private static double maxPosRot = 39;
+    private static double minPosRot = 0;
+    private static double tolExtend = 5.0;
+    private static double tolRot = 0.35;
     private double stagPosExtend = 1.0;
-    private double stagPosRot = 1.0;
+    private double stagPosRot = 2.0;
     private double stagPowerExtend = 1.0;
-    private double stagPowerRot = 1.0;
+    private double stagPowerRot = 0.2;
 
 
 
