@@ -31,20 +31,36 @@ public class Vision extends SubsystemBase {
     }
 
     public double getTagYawDegrees(){ //x error
+        if(aprilTagCamera1.getLatestResult().getBestTarget() != null){
         return aprilTagCamera1.getLatestResult().getBestTarget().getYaw();
+        }else {
+            return -1;
+        }
     }
 
     public double getTagYawRadians(){
+        if(aprilTagCamera1.getLatestResult().getBestTarget() != null){
         return Math.toRadians(getTagYawDegrees());       
+        }else {
+            return -1;
+        }
     }
 
 
     public double getTagPitchDegrees(){ //y error
+        if(aprilTagCamera1.getLatestResult().getBestTarget() != null){
         return aprilTagCamera1.getLatestResult().getBestTarget().getPitch();
+        }else {
+            return -1;
+        }
     }
 
     public double getTagPitchRadians(){ 
+        if(aprilTagCamera1.getLatestResult().getBestTarget() != null){
         return Math.toRadians(getTagPitchDegrees());       
+        }else {
+            return -1;
+        }
     }
 
     
