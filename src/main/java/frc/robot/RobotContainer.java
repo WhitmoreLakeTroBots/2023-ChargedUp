@@ -148,6 +148,7 @@ public class RobotContainer {
 
     SmartDashboard.putNumber("ArmExtendPos", m_arm.getArmExtendPos());
     SmartDashboard.putNumber("ArmRotPos", m_arm.getArmRotPos());
+    SmartDashboard.putNumber("gripperpos", m_Gripper.getGripPos());
     // SmartDashboard.putNumber("LDM1POS", m_driveTrain.lDM1.getPositionABS());
 
     SmartDashboard.putNumber("AprilTag ID", m_Vision.getTagId());

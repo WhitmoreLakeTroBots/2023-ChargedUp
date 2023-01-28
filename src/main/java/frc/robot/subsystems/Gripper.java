@@ -16,9 +16,9 @@ public class Gripper extends SubsystemBase {
     private WL_Spark gripperMoter;
 
     public static double coneClosePos = 0;
-    public static double cubeClosePos = 20;
+    public static double cubeClosePos = 13.75;
     private static double minPosGrip = 0;
-    public static double maxPosGrip = 25;
+    public static double maxPosGrip = 30;
     public static double openPos = maxPosGrip;
     private static double griptol = 1;
     private double targetGripPos = 0;
@@ -32,7 +32,7 @@ public class Gripper extends SubsystemBase {
     public Gripper() {
 
         gripperMoter = new WL_Spark(Constants.CANID.gripper, WL_Spark.MotorType.kBrushless);
-        gripperMoter.setInverted(false);
+        gripperMoter.setInverted(true);
         setSparkParms(gripperMoter);
 
     }

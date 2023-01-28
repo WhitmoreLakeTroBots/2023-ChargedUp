@@ -50,7 +50,7 @@ public class Arm extends SubsystemBase {
     setSparkParms(armExtend);
 
     armRot = new WL_Spark(Constants.CANID.armRot,WL_Spark.MotorType.kBrushless);
-    armRot.setInverted(false);
+    armRot.setInverted(true);
     setSparkParms(armRot);
 
 
