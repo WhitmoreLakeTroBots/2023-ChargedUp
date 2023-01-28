@@ -38,6 +38,7 @@ public class Constants {
         //Arm motor canID
         public static final int armExtend = 5;
         public static final int armRot = 6;
+        public static final int gripper = 7;
 
     }
 
