@@ -1,14 +1,12 @@
 package frc.robot.subsystems;
 
-import frc.robot.commands.*;
-import frc.robot.Constants;
 import com.revrobotics.CANSparkMax.IdleMode;
-import frc.robot.hardware.WL_Spark;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.revrobotics.CANSparkMax.SoftLimitDirection;
 
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
-import edu.wpi.first.wpilibj.motorcontrol.Spark;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
+import frc.robot.RobotMath;
+import frc.robot.hardware.WL_Spark;
 
 /**
  *
@@ -16,6 +14,17 @@ import edu.wpi.first.wpilibj.motorcontrol.Spark;
 public class Gripper extends SubsystemBase {
 
     private WL_Spark gripperMoter;
+
+    public static double coneClosePos = 0;
+    public static double cubeClosePos = 20;
+    private static double minPosGrip = 0;
+    public static double maxPosGrip = 25;
+    public static double openPos = maxPosGrip;
+    private static double griptol = 1;
+    private double targetGripPos = 0;
+    private double stagPosGrip = 5;
+    private double targetGripPower = .25;
+    private double stagPowerGrip = .12;
 
     /**
     *
@@ -35,14 +44,18 @@ public class Gripper extends SubsystemBase {
         // to
         // update them via the RevClient.
 
-        wls.setSmartCurrentLimit(25);
+        wls.setSmartCurrentLimit(10);
         wls.setIdleMode(IdleMode.kBrake);
+        wls.setSoftLimit(SoftLimitDirection.kReverse, -1);
+        wls.setSoftLimit(SoftLimitDirection.kForward, (float) maxPosGrip);
         wls.burnFlash();
     }
 
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
+        gripperMoter.set(RobotMath.goToPosStag(getGripPos(), targetGripPos, griptol, targetGripPower, stagPosGrip,
+                stagPowerGrip));
 
     }
 
@@ -55,4 +68,30 @@ public class Gripper extends SubsystemBase {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
+    public double getGripPos() {
+        return gripperMoter.getPosition();
+    }
+
+    public void setGripPos(double target, double stagPos, double stagPower) {
+        targetGripPos = RobotMath.safetyCap(target, minPosGrip, maxPosGrip);
+        stagPosGrip = stagPos;
+        stagPowerGrip = stagPower;
+    }
+
+    public boolean isCube() {
+        return false;
+    }
+
+    public boolean isCone() {
+        return false;
+    }
+
+    public boolean isEmpty() {
+        return true;
+    }
+
+    public void stop() {
+        stagPowerGrip = 0;
+        targetGripPos = getGripPos();
+    }
 }
