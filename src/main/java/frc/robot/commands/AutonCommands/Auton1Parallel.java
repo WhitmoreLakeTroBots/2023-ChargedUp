@@ -27,13 +27,13 @@ public class Auton1Parallel extends ParallelCommandGroup {
 
     public Auton1Parallel(double targetRotPos, double targetExtendPos, double targetDistance, double driveSpeed, boolean driveStraight) {
 //if drive straight false ==> it will strafe
-    this(targetRotPos,targetExtendPos);
+ this(targetRotPos,targetExtendPos);
 
     if(driveStraight){
-        addCommands(new cmdDriveStraight(targetDistance,driveSpeed));
+      //  addCommands(new cmdDriveStraight(targetDistance,driveSpeed));
     }
     else{
-        addCommands(new cmdStrafe(targetDistance, driveSpeed));
+      //  addCommands(new cmdStrafe(targetDistance, driveSpeed));
     }
     }
 

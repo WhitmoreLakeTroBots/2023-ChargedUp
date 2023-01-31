@@ -15,8 +15,7 @@ import edu.wpi.first.wpilibj.motorcontrol.Spark;
  *
  */
 public class Vision extends SubsystemBase {
-    private final PhotonCamera aprilTagCamera1 = new PhotonCamera("IMX219");
-
+    private final PhotonCamera aprilTagCamera1 = new PhotonCamera("photon11");
     /**
     *
     */
@@ -65,7 +64,7 @@ public class Vision extends SubsystemBase {
     }
 
     public double getRangeFromTagMeters() {
-        double range = 0;
+        double range = -99.0;
         range = PhotonUtils.calculateDistanceToTargetMeters(
                 AprilTagConstants.cameraHeightMeters,
                 AprilTagConstants.targetRangeMeters,
