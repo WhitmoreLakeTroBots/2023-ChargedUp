@@ -40,7 +40,11 @@ public class Arm extends SubsystemBase {
     private double stagPowerRot = 0.2;
 
 
-
+    public static double carryRotPos = 20;
+    public static double carryExtendPos = 0;
+    public static double deliveryRotPos = 60;
+    public static double deliveryExtendPos = 195;
+    
     
     
     public Arm() {
