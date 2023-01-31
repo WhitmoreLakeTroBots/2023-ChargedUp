@@ -1,6 +1,7 @@
 package frc.robot;
 
 import frc.robot.commands.*;
+import frc.robot.commands.AutonCommands.Auton1;
 import frc.robot.commands.armCommands.cmdSetArmExtendPos;
 import frc.robot.commands.armCommands.cmdSetArmRotPos;
 import frc.robot.commands.armCommands.cmdSetGripperPos;
@@ -103,6 +104,7 @@ public class RobotContainer {
     SmartDashboard.putData("Grip Open", new cmdSetGripperPos(Gripper.openPos));
     SmartDashboard.putData("Grip Cone", new cmdSetGripperPos(Gripper.coneClosePos));
     SmartDashboard.putData("Grip cube", new cmdSetGripperPos(Gripper.cubeClosePos));
+    SmartDashboard.putData("auton1test", new Auton1());
 
     SmartDashboard.putData("Auto Mode", m_chooser);
   }
