@@ -20,6 +20,17 @@ private double overshootValue = 0;
 private WL_Spark.IdleMode idleMode = WL_Spark.IdleMode.kBrake;
 
 
+
+public cmdStrafe(double targetDistance, double speed) {
+
+    targetPosition = targetDistance;
+    power = speed;
+    targetHeading = RobotContainer.getInstance().m_subGyro.getNormaliziedNavxAngle();
+
+    // m_subsystem = subsystem;
+    // addRequirements(m_subsystem);    
+
+}
     public cmdStrafe(double targetDistance, double speed, double heading) {
 
         targetPosition = targetDistance;
