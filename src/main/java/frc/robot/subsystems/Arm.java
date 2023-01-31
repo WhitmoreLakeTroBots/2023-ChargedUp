@@ -45,6 +45,8 @@ public class Arm extends SubsystemBase {
     public static double deliveryRotPos = 60;
     public static double deliveryExtendPos = 195;
     
+    private static double safetyArmRotPos = 20;
+    private static double safetyArmExtPos = 7;
     
     
     public Arm() {
@@ -77,9 +79,17 @@ public class Arm extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        armExtend.set( RobotMath.goToPosStag(getArmExtendPos(), targetArmExtendPos, tolExtend, targetPowerExtend,stagPosExtend,stagPowerExtend));
+      // if((targetArmExtendPos > safetyArmExtPos) && (getArmRotPos() > safetyArmRotPos)){
 
+        armExtend.set( RobotMath.goToPosStag(getArmExtendPos(), 
+        targetArmExtendPos, tolExtend, targetPowerExtend,stagPosExtend,stagPowerExtend));
+     //  }
+
+
+      // if((getArmExtendPos() < safetyArmExtPos) && (getArmRotPos() < safetyArmRotPos)){
         armRot.set(RobotMath.goToPosStag(getArmRotPos(), targetArmRotPos, tolRot, targetPowerRot,stagPosRot,stagPowerRot));
+     //  }
+       
 
     }
 
