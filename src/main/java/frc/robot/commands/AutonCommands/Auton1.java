@@ -21,7 +21,7 @@ public class Auton1 extends SequentialCommandGroup {
     public Auton1() {
 
         addCommands(new cmdSetArmRotPos(Arm.carryRotPos, 30, .15, false));
-        addCommands(new Auton1Parallel(Arm.deliveryRotPos,Arm.deliveryExtendPos,0,0,true));
+        addCommands(new Auton1Parallel(Arm.deliveryRotPos,Arm.deliveryExtendPos));
 
         addCommands(new cmdSetGripperPos(Gripper.openPos));
 
