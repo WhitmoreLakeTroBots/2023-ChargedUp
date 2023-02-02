@@ -2,8 +2,6 @@ package frc.robot;
 
 import frc.robot.commands.*;
 import frc.robot.commands.AutonCommands.Auton1;
-import frc.robot.commands.armCommands.cmdSetArmExtendPos;
-import frc.robot.commands.armCommands.cmdSetArmRotPos;
 import frc.robot.commands.armCommands.cmdSetGripperPos;
 import frc.robot.commands.driveCommands.cmdActiveBrake;
 import frc.robot.commands.driveCommands.cmdDriveStraight;
@@ -94,13 +92,7 @@ public class RobotContainer {
     SmartDashboard.putNumber("Extend arm Pos", 0);
     SmartDashboard.putData("set color red", new cmdUpdateBaseColor(lightPattern.RED));
     SmartDashboard.putData("set color blue", new cmdUpdateBaseColor(lightPattern.BLUE));
-    SmartDashboard.putData("Extend arm go to pos",
-        new cmdSetArmExtendPos(SmartDashboard.getNumber("Extend arm Pos", 0)));
-
-    SmartDashboard.putData("Rot in", new cmdSetArmRotPos(0, 30, .15, false));
-    SmartDashboard.putData("Rot out", new cmdSetArmRotPos(61, 30, .15, false));
-    SmartDashboard.putData("Extend Arm", new cmdSetArmExtendPos(195, 30, .15, false));
-    SmartDashboard.putData("Retract Arm", new cmdSetArmExtendPos(1, 30, .15, false));
+    
     SmartDashboard.putData("Grip Open", new cmdSetGripperPos(Gripper.openPos));
     SmartDashboard.putData("Grip Cone", new cmdSetGripperPos(Gripper.coneClosePos));
     SmartDashboard.putData("Grip cube", new cmdSetGripperPos(Gripper.cubeClosePos));

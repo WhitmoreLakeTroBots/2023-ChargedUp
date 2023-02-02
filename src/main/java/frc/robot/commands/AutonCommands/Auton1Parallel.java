@@ -8,6 +8,7 @@ import java.util.function.DoubleSupplier;
 import frc.robot.commands.armCommands.*;
 import frc.robot.commands.driveCommands.*;
 import frc.robot.commands.lightingCommands.*;
+import frc.robot.subsystems.Arm;
 
 /**
  *
@@ -18,17 +19,16 @@ public class Auton1Parallel extends ParallelCommandGroup {
 
     }
 
-    public Auton1Parallel(double targetRotPos, double targetExtendPos) {
+    public Auton1Parallel(Arm.Mode Mode) {
 
-        addCommands(new cmdSetArmRotPos(targetRotPos, 30, .15, false));
-        addCommands(new cmdSetArmExtendPos(targetExtendPos, 30, 0.15, false));
+        addCommands(new cmdSetArmMode(Mode));
 
     }
 
-    public Auton1Parallel(double targetRotPos, double targetExtendPos, double targetDistance, double driveSpeed,
+    public Auton1Parallel(Arm.Mode Mode, double targetDistance, double driveSpeed,
             boolean driveStraight) {
         // if drive straight false ==> it will strafe
-        this(targetRotPos, targetExtendPos);
+        this(Mode);
 
         if (driveStraight) {
             // addCommands(new cmdDriveStraight(targetDistance,driveSpeed));

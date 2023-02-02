@@ -20,13 +20,13 @@ public class Auton1 extends SequentialCommandGroup {
 
     public Auton1() {
 
-        addCommands(new cmdSetArmRotPos(Arm.carryRotPos, 30, .15, false));
-        addCommands(new Auton1Parallel(Arm.deliveryRotPos,Arm.deliveryExtendPos));
+        addCommands(new cmdSetArmMode(Arm.Mode.DELIVERHIGH));
+       // addCommands(new Auton1Parallel(Arm.deliveryRotPos,Arm.deliveryExtendPos));
 
         addCommands(new cmdSetGripperPos(Gripper.openPos));
 
         
-        addCommands(new Auton1Parallel(Arm.carryRotPos,Arm.carryExtendPos,10,0.3,true));
+        addCommands(new Auton1Parallel(Arm.Mode.INTAKE,10,0.3,true));
     }
 
 
