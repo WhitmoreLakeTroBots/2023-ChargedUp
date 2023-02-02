@@ -64,7 +64,7 @@ public class Vision extends SubsystemBase {
     }
 
     public double getRangeFromTagMeters() {
-        double range = -99.0;
+        double range = 0.0;
         range = PhotonUtils.calculateDistanceToTargetMeters(
                 AprilTagConstants.cameraHeightMeters,
                 AprilTagConstants.targetRangeMeters,
