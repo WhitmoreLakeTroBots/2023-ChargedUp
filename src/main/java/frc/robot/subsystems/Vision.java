@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.motorcontrol.Spark;
  */
 public class Vision extends SubsystemBase {
     private final PhotonCamera aprilTagCamera1 = new PhotonCamera("photon11");
+
     /**
     *
     */
@@ -64,13 +65,21 @@ public class Vision extends SubsystemBase {
     }
 
     public double getRangeFromTagMeters() {
-        double range = 0.0;
-        range = PhotonUtils.calculateDistanceToTargetMeters(
-                AprilTagConstants.cameraHeightMeters,
-                AprilTagConstants.targetRangeMeters,
-                AprilTagConstants.cameraPitchRadians,
-                getTagPitchRadians());
-        return range;
+        /*
+         * double range = 0.0;
+         * range = PhotonUtils.calculateDistanceToTargetMeters(
+         * AprilTagConstants.cameraHeightMeters,
+         * AprilTagConstants.targetRangeMeters,
+         * AprilTagConstants.cameraPitchRadians,
+         * getTagPitchRadians());
+         * return range;
+         */
+        if (aprilTagCamera1.getLatestResult().getBestTarget() != null) {
+            return aprilTagCamera1.getLatestResult().getBestTarget().getBestCameraToTarget().getX();
+        } else {
+            return 0.0;
+        }
+
     }
 
     @Override
