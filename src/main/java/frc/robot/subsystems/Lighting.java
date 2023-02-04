@@ -23,8 +23,8 @@ import edu.wpi.first.wpilibj.motorcontrol.Spark;
  *
  */
 public class Lighting extends SubsystemBase {
-private double curBaseColor = -0.85;
-private double newBaseColor = 0;
+private double curBaseColor = -0.45;
+private double newBaseColor = -0.45;
 private double tempColor = 0;
 private double duration = 2000; //in ms 
 private Spark ledDriver;
