@@ -25,28 +25,28 @@ public class Arm extends SubsystemBase {
     private double targetPowerExtend = 0.80;
     private double targetPowerRot = 0.55;
 
-    private static double maxPosExtend = 224;
+    private static double maxPosExtend = 250;
     private static double minPosExtend = -1;
     private static double maxPosRot = 92;
     private static double minPosRot = 0;
     private static double tolExtend = 4.0;
     private static double tolRot = 2;
     private double stagPosExtend = 40.0;
-    private double stagPosRot = 30.0;
+    private double stagPosRot = 35.0;
     private double stagPowerExtend = 0.2;
-    private double stagPowerRot = 0.1;
+    private double stagPowerRot = 0.05;
 
     public static double carryRotPos = 30;
     public static double carryExtendPos = 0;
-    public static double deliveryHighRotPos = 73;
-    public static double deliveryHighExtendPos = 225;
+    public static double deliveryHighRotPos = 77;
+    public static double deliveryHighExtendPos = 245;
     // fix med and low delivery positions to where they should be
-    public static double deliveryMedRotPos = 80;
-    public static double deliveryMedExtendPos = 0;
+    public static double deliveryMedRotPos = 79;
+    public static double deliveryMedExtendPos = 12;
     public static double deliveryLowRotPos = 60;
     public static double deliveryLowExtendPos = 0;
     public static double intakeRotPos = 0;
-    public static double intakeExtPos = 0;
+    public static double intakeExtPos = 1;
 
     private static double safetyArmRotPos = 20;
     private static double safetyArmExtPos = 7;
