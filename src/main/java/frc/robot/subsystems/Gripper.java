@@ -1,8 +1,10 @@
 package frc.robot.subsystems;
 
+import com.revrobotics.ColorSensorV3;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMax.SoftLimitDirection;
 
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotMath;
@@ -29,6 +31,8 @@ public class Gripper extends SubsystemBase {
     private double targetGripPower = .25;
     private double stagPowerGrip = .12;
 
+    private ColorSensorV3 cSensor;
+
     /**
     *
     */
@@ -38,6 +42,7 @@ public class Gripper extends SubsystemBase {
         gripperMoter.setInverted(true);
         setSparkParms(gripperMoter);
 
+        cSensor = new ColorSensorV3(I2C.Port.kOnboard);
     }
 
     private void setSparkParms(WL_Spark wls) {
@@ -96,5 +101,9 @@ public class Gripper extends SubsystemBase {
     public void stop() {
         stagPowerGrip = 0;
         targetGripPos = getGripPos();
+    }
+
+    public int getDistance() {
+        return cSensor.getProximity();
     }
 }

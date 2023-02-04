@@ -8,60 +8,63 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in the future.
 
-
 package frc.robot;
 
 /**
- * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
- * constants.  This class should not be used for any other purpose.  All constants should be
- * declared globally (i.e. public static).  Do not put anything functional in this class.
+ * The Constants class provides a convenient place for teams to hold robot-wide
+ * numerical or boolean
+ * constants. This class should not be used for any other purpose. All constants
+ * should be
+ * declared globally (i.e. public static). Do not put anything functional in
+ * this class.
  *
- * <p>It is advised to statically import this class (or one of its inner classes) wherever the
+ * <p>
+ * It is advised to statically import this class (or one of its inner classes)
+ * wherever the
  * constants are needed, to reduce verbosity.
  */
 public class Constants {
-   /**
-    * public static final class DriveConstants {
-    *   public static final int kLeftMotor1Port = 0;
-    *   public static final int kLeftMotor2Port = 1;
-    *   public static final int kRightMotor1Port = 2;
-    *   public static final int kRightMotor2Port = 3; 
-    * }
-    */ 
+    /**
+     * public static final class DriveConstants {
+     * public static final int kLeftMotor1Port = 0;
+     * public static final int kLeftMotor2Port = 1;
+     * public static final int kRightMotor1Port = 2;
+     * public static final int kRightMotor2Port = 3;
+     * }
+     */
     public static final class CANID {
-        //Drive system canID
+        // Drive system canID
         public static final int lDM1 = 1;
         public static final int lDM2 = 2;
         public static final int rDM1 = 3;
         public static final int rDM2 = 4;
 
-        //Arm motor canID
+        // Arm motor canID
         public static final int armExtend = 5;
         public static final int armRot = 6;
         public static final int gripper = 7;
 
-        //pdh 
+        // pdh
         public static final int pdh = 20;
 
     }
 
-    public static final class PWM{
+    public static final class PWM {
         public static final int ledDriver = 0;
     }
 
-    public static final class AprilTagConstants{
-        //AprilTags on the field are 6X6inches
-        //These heights are to the bottom of the april tags
+    public static final class AprilTagConstants {
+        // AprilTags on the field are 6X6inches
+        // These heights are to the bottom of the april tags
 
-        public static final double gridTargetHeightMeters = 0.3691; //imperial units 1ft. 2.25in
+        public static final double gridTargetHeightMeters = 0.3691; // imperial units 1ft. 2.25in
         public static final double doubleSubstationTargetHeightMeters = 0.0593725; // imperial units 1ft. 11.375in
 
-        //todo fix all of these once we actually test code on the bot W
+        // todo fix all of these once we actually test code on the bot W
         public static final double cameraHeightMeters = .45;
         public static final double cameraPitchDegrees = 0;
         public static final double cameraPitchRadians = Math.toRadians(cameraPitchDegrees);
-        public static double targetRangeMeters = 0; //how far from the target we want to be
+        public static double targetRangeMeters = 0; // how far from the target we want to be
     }
 
 }
-

@@ -20,7 +20,7 @@ import frc.robot.RobotMath;
  *
  */
 public class DriveTrain extends SubsystemBase {
-        
+
     private WL_Spark lDM1;
     private WL_Spark lDM2;
     private WL_Spark rDM1;
@@ -35,11 +35,12 @@ public class DriveTrain extends SubsystemBase {
     private double rDM1Power;
     private double rDM2Power;
 
+    private final double maxrpn = 5676;
+
     public final double kp_driveStraightGyro = 0.006;
 
     private double joyDeadBand = 0.03;
 
-    
     /**
     *
     */
@@ -70,7 +71,8 @@ public class DriveTrain extends SubsystemBase {
     private void setSparkParms(WL_Spark wls) {
         // set Spark Max params for all 4 sparks to be the same and burn them in
         // This is good practice because if you brown out they can return to default
-        // or if you replace one mid comp then you do not have to worry about forgetting to 
+        // or if you replace one mid comp then you do not have to worry about forgetting
+        // to
         // update them via the RevClient.
 
         wls.setSmartCurrentLimit(40);
@@ -95,10 +97,9 @@ public class DriveTrain extends SubsystemBase {
     // here. Call these from Commands.
 
     public void CMDteleOp(CommandXboxController driveController) {
-        doDrive(-1 * CommonLogic.joyDeadBand(driveController.getLeftY(), joyDeadBand), 
-        CommonLogic.joyDeadBand(driveController.getLeftX(), joyDeadBand), 
-        CommonLogic.joyDeadBand(driveController.getRightX(), joyDeadBand), teleopPower);
-        
+        doDrive(-1 * CommonLogic.joyDeadBand(driveController.getLeftY(), joyDeadBand),
+                CommonLogic.joyDeadBand(driveController.getLeftX(), joyDeadBand),
+                CommonLogic.joyDeadBand(driveController.getRightX(), joyDeadBand), teleopPower);
 
     }
 
@@ -149,6 +150,7 @@ public class DriveTrain extends SubsystemBase {
         lDM2.set(lDM2Power);
         rDM1.set(rDM1Power);
         rDM2.set(rDM2Power);
+
     }
 
     public void StopDrive() {
@@ -177,5 +179,9 @@ public class DriveTrain extends SubsystemBase {
         lDM2.set(RobotMath.goToPos(lDM2.getPosition(), 0, 0.1, power));
         rDM1.set(RobotMath.goToPos(rDM1.getPosition(), 0, 0.1, power));
         rDM2.set(RobotMath.goToPos(rDM2.getPosition(), 0, 0.1, power));
+    }
+
+    private double powerToRPM(double pwr) {
+        return (maxrpn * pwr);
     }
 }
