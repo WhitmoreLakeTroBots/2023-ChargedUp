@@ -52,6 +52,9 @@ public class Arm extends SubsystemBase {
     private static double pauseRotPos = 0;
     private static double pauseExtPos = 0;
 
+    private boolean bDoneRot = true;
+    private boolean bDoneExt = true;
+
     private Mode CurrentMode = Mode.START;
 
     public Arm() {
@@ -86,6 +89,20 @@ public class Arm extends SubsystemBase {
 
         armRot.set(RobotMath.goToPosStag(getArmRotPos(), targetArmRotPos, tolRot, targetPowerRot, stagPosRot,
                 stagPowerRot));
+
+        if(armExtend.get() == 0){
+            bDoneExt = true;
+        }
+        else {
+            bDoneExt = false;
+        }
+
+        if(armRot.get() == 0){
+            bDoneRot = true;
+        }
+        else{
+            bDoneRot = false;
+        }
 
         switch (CurrentMode) {
 
@@ -137,13 +154,13 @@ public class Arm extends SubsystemBase {
         return armRot.getPosition();
     }
 
-    public void setArmExtendTargPos(double target, double stagPos, double stagPower) {
+    private void setArmExtendTargPos(double target, double stagPos, double stagPower) {
         targetArmExtendPos = RobotMath.safetyCap(target, minPosExtend, maxPosExtend);
         stagPosExtend = stagPos;
         stagPowerExtend = stagPower;
     }
 
-    public void setArmRotTargPos(double target, double stagPos, double stagPower) {
+    private void setArmRotTargPos(double target, double stagPos, double stagPower) {
         targetArmRotPos = RobotMath.safetyCap(target, minPosRot, maxPosRot);
         stagPosRot = stagPos;
         stagPowerRot = stagPower;
@@ -256,6 +273,15 @@ public class Arm extends SubsystemBase {
 
     public void setCurrentMode(Mode newMode) {
         CurrentMode = newMode;
+    }
+
+    public boolean isInPos(){
+        if((bDoneRot) && (bDoneExt)){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     public enum Mode {

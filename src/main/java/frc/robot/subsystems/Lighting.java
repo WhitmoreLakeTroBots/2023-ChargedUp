@@ -33,7 +33,7 @@ private Spark ledDriver;
 
     
     public Lighting() {
-      //  ledDriver = new Spark(Constants.PWM.ledDriver);
+        ledDriver = new Spark(Constants.PWM.ledDriver);
 
        
     }

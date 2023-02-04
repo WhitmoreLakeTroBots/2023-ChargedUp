@@ -40,10 +40,13 @@ public class Constants {
         public static final int armRot = 6;
         public static final int gripper = 7;
 
+        //pdh 
+        public static final int pdh = 20;
+
     }
 
     public static final class PWM{
-        public static final int ledDriver = 10;
+        public static final int ledDriver = 0;
     }
 
     public static final class AprilTagConstants{
