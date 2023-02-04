@@ -64,6 +64,9 @@ private Spark ledDriver;
 
 
     public enum lightPattern{
+        RAINBOW("rainbow rainbow", -0.99),
+        CONFETTI("confetti", -0.87),
+        RAINWAVES("rainbow waves",-0.45),
         HOTPINK("hot pink", 0.57),
         DARKRED("dark red", 0.59),
         RED("red", 0.61),
