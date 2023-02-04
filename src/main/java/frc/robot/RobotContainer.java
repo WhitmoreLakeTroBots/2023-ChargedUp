@@ -158,7 +158,7 @@ public class RobotContainer {
     //select set extension pos carry
     Trigger back_ArticButton = articController.back();
     back_ArticButton.debounce(debounce)
-    .onTrue(new cmdSetArmMode(Arm.Mode.DELIVERLOW, false));
+    .onTrue(new cmdSetArmMode(Arm.Mode.CARRY, false));
 
   }
 
