@@ -104,9 +104,9 @@ public class RobotContainer {
     SmartDashboard.putData("set color red", new cmdUpdateBaseColor(lightPattern.RED));
     SmartDashboard.putData("set color blue", new cmdUpdateBaseColor(lightPattern.BLUE));
 
-    SmartDashboard.putData("Grip Open", new cmdSetGripperPos(Gripper.openPos));
-    SmartDashboard.putData("Grip Cone", new cmdSetGripperPos(Gripper.coneClosePos));
-    SmartDashboard.putData("Grip cube", new cmdSetGripperPos(Gripper.cubeClosePos));
+    SmartDashboard.putData("Grip Open", new cmdSetGripperPos(Gripper.openPos,false));
+    SmartDashboard.putData("Grip Cone", new cmdSetGripperPos(Gripper.coneClosePos, false));
+    SmartDashboard.putData("Grip cube", new cmdSetGripperPos(Gripper.cubeClosePos, false));
     SmartDashboard.putData("auton1test", new A_R_P1_V1());
 
     SmartDashboard.putData("Auto Mode", m_chooser);
@@ -128,17 +128,17 @@ public class RobotContainer {
 
     // A is gripper close cone
     Trigger A_ArticButton = articController.a();
-    A_ArticButton.onTrue(new cmdSetGripperPos(Gripper.coneClosePos))
+    A_ArticButton.onTrue(new cmdSetGripperPos(Gripper.coneClosePos,false))
         .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.ORANGE));
 
     // X is gripper close cube
     Trigger X_ArticButton = articController.x();
-    X_ArticButton.onTrue(new cmdSetGripperPos(Gripper.cubeClosePos))
+    X_ArticButton.onTrue(new cmdSetGripperPos(Gripper.cubeClosePos,false))
         .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.ORANGE));
 
     // Y is gripper open
     Trigger Y_ArticButton = articController.y();
-    Y_ArticButton.onTrue(new cmdSetGripperPos(Gripper.openPos))
+    Y_ArticButton.onTrue(new cmdSetGripperPos(Gripper.openPos,false))
         .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.GOLD));
 
     // DUp set extention high
