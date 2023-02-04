@@ -84,7 +84,7 @@ public class cmdSetGripperPos extends CommandBase {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        RobotContainer.getInstance().m_Gripper.stop();
+       // RobotContainer.getInstance().m_Gripper.stop();
     }
 
     // Returns true when the command should end.

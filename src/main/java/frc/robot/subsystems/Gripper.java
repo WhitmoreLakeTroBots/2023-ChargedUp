@@ -21,10 +21,10 @@ public class Gripper extends SubsystemBase {
     public static double cubeClosePos = 13.75;
 
     private static double minPosGrip = 0;
-    public static double maxPosGrip = 30;
+    public static double maxPosGrip = 35;
     public static double openPos = maxPosGrip;
 
-    private static double griptol = 1;
+    private static double griptol = 1.5;
 
     private double targetGripPos = 0;
     private double stagPosGrip = 0;
