@@ -22,35 +22,39 @@ public class Arm extends SubsystemBase {
     private WL_Spark armRot;
     private double targetArmExtendPos = 0;
     private double targetArmRotPos = 0;
-    private double targetPowerExtend = 0.50;
-    private double targetPowerRot = 0.40;
+    private double targetPowerExtend = 0.80;
+    private double targetPowerRot = 0.55;
+
     private static double maxPosExtend = 224;
     private static double minPosExtend = -1;
-    private static double maxPosRot = 70;
+    private static double maxPosRot = 92;
     private static double minPosRot = 0;
-    private static double tolExtend = 5.0;
-    private static double tolRot = 0.5;
+    private static double tolExtend = 4.0;
+    private static double tolRot = 2;
     private double stagPosExtend = 40.0;
-    private double stagPosRot = 20.0;
+    private double stagPosRot = 30.0;
     private double stagPowerExtend = 0.2;
     private double stagPowerRot = 0.1;
 
-    public static double carryRotPos = 20;
+    public static double carryRotPos = 30;
     public static double carryExtendPos = 0;
-    public static double deliveryHighRotPos = 60;
-    public static double deliveryHighExtendPos = 195;
+    public static double deliveryHighRotPos = 73;
+    public static double deliveryHighExtendPos = 225;
     // fix med and low delivery positions to where they should be
-    public static double deliveryMedRotPos = 60;
-    public static double deliveryMedExtendPos = 195;
+    public static double deliveryMedRotPos = 80;
+    public static double deliveryMedExtendPos = 0;
     public static double deliveryLowRotPos = 60;
-    public static double deliveryLowExtendPos = 195;
+    public static double deliveryLowExtendPos = 0;
     public static double intakeRotPos = 0;
-    public static double intakeExtPos = 3;
+    public static double intakeExtPos = 0;
 
     private static double safetyArmRotPos = 20;
     private static double safetyArmExtPos = 7;
     private static double pauseRotPos = 0;
     private static double pauseExtPos = 0;
+
+    private boolean bDoneRot = true;
+    private boolean bDoneExt = true;
 
     private Mode CurrentMode = Mode.START;
 
@@ -86,6 +90,20 @@ public class Arm extends SubsystemBase {
 
         armRot.set(RobotMath.goToPosStag(getArmRotPos(), targetArmRotPos, tolRot, targetPowerRot, stagPosRot,
                 stagPowerRot));
+
+        if(armExtend.get() == 0){
+            bDoneExt = true;
+        }
+        else {
+            bDoneExt = false;
+        }
+
+        if(armRot.get() == 0){
+            bDoneRot = true;
+        }
+        else{
+            bDoneRot = false;
+        }
 
         switch (CurrentMode) {
 
@@ -137,13 +155,13 @@ public class Arm extends SubsystemBase {
         return armRot.getPosition();
     }
 
-    public void setArmExtendTargPos(double target, double stagPos, double stagPower) {
+    private void setArmExtendTargPos(double target, double stagPos, double stagPower) {
         targetArmExtendPos = RobotMath.safetyCap(target, minPosExtend, maxPosExtend);
         stagPosExtend = stagPos;
         stagPowerExtend = stagPower;
     }
 
-    public void setArmRotTargPos(double target, double stagPos, double stagPower) {
+    private void setArmRotTargPos(double target, double stagPos, double stagPower) {
         targetArmRotPos = RobotMath.safetyCap(target, minPosRot, maxPosRot);
         stagPosRot = stagPos;
         stagPowerRot = stagPower;
@@ -256,6 +274,15 @@ public class Arm extends SubsystemBase {
 
     public void setCurrentMode(Mode newMode) {
         CurrentMode = newMode;
+    }
+
+    public boolean isInPos(){
+        if((bDoneRot) && (bDoneExt)){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     public enum Mode {

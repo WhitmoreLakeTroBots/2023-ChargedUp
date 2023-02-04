@@ -21,7 +21,7 @@ public class Auton1Parallel extends ParallelCommandGroup {
 
     public Auton1Parallel(Arm.Mode Mode) {
 
-        addCommands(new cmdSetArmMode(Mode));
+       // addCommands(new cmdSetArmMode(Mode));
 
     }
 

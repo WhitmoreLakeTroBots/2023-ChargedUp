@@ -9,11 +9,15 @@ import java.util.function.DoubleSupplier;
 public class cmdSetArmMode extends CommandBase {
 
     private Arm.Mode nMode;
+
+    private boolean bWait = false;
+    private boolean bDone = false;
    
 
 
-    public cmdSetArmMode(Arm.Mode pMode) {
+    public cmdSetArmMode(Arm.Mode pMode, boolean wait) {
         nMode = pMode;
+        bWait = wait;
 
 
         // m_subsystem = subsystem;
@@ -32,6 +36,17 @@ public class cmdSetArmMode extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+        if(bWait){
+            if(RobotContainer.getInstance().m_arm.isInPos()){
+                bDone = true;
+            }
+            else{
+                bDone = false;
+            }
+        }
+        else{
+            bDone = true;
+        }
     }
 
     // Called once the command ends or is interrupted.
@@ -42,7 +57,7 @@ public class cmdSetArmMode extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return true;
+        return bDone;
     }
 
     @Override

@@ -23,8 +23,8 @@ import edu.wpi.first.wpilibj.motorcontrol.Spark;
  *
  */
 public class Lighting extends SubsystemBase {
-private double curBaseColor = -0.85;
-private double newBaseColor = 0;
+private double curBaseColor = -0.45;
+private double newBaseColor = -0.45;
 private double tempColor = 0;
 private double duration = 2000; //in ms 
 private Spark ledDriver;
@@ -33,7 +33,7 @@ private Spark ledDriver;
 
     
     public Lighting() {
-      //  ledDriver = new Spark(Constants.PWM.ledDriver);
+        ledDriver = new Spark(Constants.PWM.ledDriver);
 
        
     }
@@ -64,6 +64,9 @@ private Spark ledDriver;
 
 
     public enum lightPattern{
+        RAINBOW("rainbow rainbow", -0.99),
+        CONFETTI("confetti", -0.87),
+        RAINWAVES("rainbow waves",-0.45),
         HOTPINK("hot pink", 0.57),
         DARKRED("dark red", 0.59),
         RED("red", 0.61),

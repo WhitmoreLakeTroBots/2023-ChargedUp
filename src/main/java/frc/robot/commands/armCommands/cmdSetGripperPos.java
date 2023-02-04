@@ -12,12 +12,17 @@ public class cmdSetGripperPos extends CommandBase {
     private double stagPos = 1.0;
     private double stagPower = 1.0;
     private double startTime = 0;
-    private double timeOut = 1500;
+    
+    private double timeOut = 1.5; // in seconds
+
     private double endTime = 0;
     private boolean bdone = false;
 
-    public cmdSetGripperPos(double targetPos) {
+    private boolean bWait = false;
+
+    public cmdSetGripperPos(double targetPos, boolean wait) {
         targPos = targetPos;
+        bWait = wait;
 
         // m_subsystem = subsystem;
         // addRequirements(m_subsystem);
@@ -28,6 +33,8 @@ public class cmdSetGripperPos extends CommandBase {
     // be traversed in stag, in 0.xx format
     public cmdSetGripperPos(double targetPos, double stagPosition, double stagPow, boolean fixedDist) {
         targPos = targetPos;
+        bWait = true;
+
         // if fixedDist = false => stagPosition is suposed to recieve the percantage to
         // be traversed in stag, in 0.xx format
         if (fixedDist) {
@@ -58,18 +65,26 @@ public class cmdSetGripperPos extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+       if(bWait){
+
+       
         double curTime = RobotMath.getTime();
         if (curTime >= endTime) {
             bdone = true;
             end(false);
         }
+    }
 
+        else{
+            bdone = true;
+            end(false);
+        }
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        RobotContainer.getInstance().m_Gripper.stop();
+       // RobotContainer.getInstance().m_Gripper.stop();
     }
 
     // Returns true when the command should end.

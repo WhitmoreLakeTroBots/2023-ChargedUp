@@ -1,7 +1,8 @@
 package frc.robot;
 
 import frc.robot.commands.*;
-import frc.robot.commands.AutonCommands.Auton1;
+import frc.robot.commands.AutonCommands.A_R_P1_V1;
+import frc.robot.commands.armCommands.cmdSetArmMode;
 import frc.robot.commands.armCommands.cmdSetGripperPos;
 import frc.robot.commands.driveCommands.cmdActiveBrake;
 import frc.robot.commands.driveCommands.cmdDriveStraight;
@@ -50,7 +51,7 @@ public class RobotContainer {
   private final CommandXboxController driveController = new CommandXboxController(0);
   private final CommandXboxController articController = new CommandXboxController(1);
 
- private final double debounce = 0.5;
+  private final double debounce = 0.5;
 
   // A chooser for autonomous commands
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -69,34 +70,44 @@ public class RobotContainer {
 
     // Test Drive code
     m_chooser.setDefaultOption("active break", new cmdActiveBrake());
-    m_chooser.addOption("driveforward", new cmdDriveStraight(24, .25, 0.0));
-    m_chooser.addOption("driveback", new cmdDriveStraight(24, -.25, 0.0));
+    m_chooser.addOption("A_R_P1_V1", new A_R_P1_V1());
+    /*
+     * m_chooser.addOption("driveforward", new cmdDriveStraight(24, .25, 0.0));
+     * m_chooser.addOption("driveback", new cmdDriveStraight(24, -.25, 0.0));
+     * 
+     * m_chooser.addOption("turn-90 (left)", new cmdTurnByGyro(-90, .2, true));
+     * m_chooser.addOption("turn 90 (right)", new cmdTurnByGyro(90, .2, false));
+     * 
+     * m_chooser.addOption("turn-180 (left)", new cmdTurnByGyro(180, .2, true));
+     * m_chooser.addOption("turn 180 (right)", new cmdTurnByGyro(180, .2, false));
+     * 
+     * m_chooser.addOption("strafe left", new cmdStrafe(12, .25, 0.0));
+     * m_chooser.addOption("strafe right", new cmdStrafe(12, -.25, 0.0));
+     */
 
-    m_chooser.addOption("turn-90 (left)", new cmdTurnByGyro(-90, .2, true));
-    m_chooser.addOption("turn 90 (right)", new cmdTurnByGyro(90, .2, false));
-
-    m_chooser.addOption("turn-180 (left)", new cmdTurnByGyro(180, .2, true));
-    m_chooser.addOption("turn 180 (right)", new cmdTurnByGyro(180, .2, false));
-
-    m_chooser.addOption("strafe left", new cmdStrafe(12, .25, 0.0));
-    m_chooser.addOption("strafe right", new cmdStrafe(12, -.25, 0.0));
-
-    SmartDashboard.putData("turn-0", new cmdTurnByGyro(0, .2, true));
-    SmartDashboard.putData("driveforward", new cmdDriveStraight(24, .25, m_subGyro.getNormaliziedNavxAngle()));
-    SmartDashboard.putData("driveback", new cmdDriveStraight(24, -.25, m_subGyro.getNormaliziedNavxAngle()));
-    SmartDashboard.putData("turn-90 (left)", new cmdTurnByGyro(-90, .2, true));
-    SmartDashboard.putData("turn 90 (right)", new cmdTurnByGyro(90, .2, false));
-    SmartDashboard.putData("strafe left", new cmdStrafe(12, .25, m_subGyro.getNormaliziedNavxAngle()));
-    SmartDashboard.putData("strafe right", new cmdStrafe(12, -.25, m_subGyro.getNormaliziedNavxAngle()));
+    /*
+     * SmartDashboard.putData("turn-0", new cmdTurnByGyro(0, .2, true));
+     * SmartDashboard.putData("driveforward", new cmdDriveStraight(24, .25,
+     * m_subGyro.getNormaliziedNavxAngle()));
+     * SmartDashboard.putData("driveback", new cmdDriveStraight(24, -.25,
+     * m_subGyro.getNormaliziedNavxAngle()));
+     * SmartDashboard.putData("turn-90 (left)", new cmdTurnByGyro(-90, .2, true));
+     * SmartDashboard.putData("turn 90 (right)", new cmdTurnByGyro(90, .2, false));
+     * SmartDashboard.putData("strafe left", new cmdStrafe(12, .25,
+     * m_subGyro.getNormaliziedNavxAngle()));
+     * SmartDashboard.putData("strafe right", new cmdStrafe(12, -.25,
+     * m_subGyro.getNormaliziedNavxAngle()));
+     */
     SmartDashboard.putData("active break", new cmdActiveBrake());
-    SmartDashboard.putNumber("Extend arm Pos", 0);
+    SmartDashboard.putData("Extend arm Pos", new cmdSetArmMode(Arm.Mode.DELIVERHIGH, false));
+    SmartDashboard.putData("arm Pos Intake", new cmdSetArmMode(Arm.Mode.INTAKE, false));
     SmartDashboard.putData("set color red", new cmdUpdateBaseColor(lightPattern.RED));
     SmartDashboard.putData("set color blue", new cmdUpdateBaseColor(lightPattern.BLUE));
-    
-    SmartDashboard.putData("Grip Open", new cmdSetGripperPos(Gripper.openPos));
-    SmartDashboard.putData("Grip Cone", new cmdSetGripperPos(Gripper.coneClosePos));
-    SmartDashboard.putData("Grip cube", new cmdSetGripperPos(Gripper.cubeClosePos));
-    SmartDashboard.putData("auton1test", new Auton1());
+
+    SmartDashboard.putData("Grip Open", new cmdSetGripperPos(Gripper.openPos,false));
+    SmartDashboard.putData("Grip Cone", new cmdSetGripperPos(Gripper.coneClosePos, false));
+    SmartDashboard.putData("Grip cube", new cmdSetGripperPos(Gripper.cubeClosePos, false));
+    SmartDashboard.putData("auton1test", new A_R_P1_V1());
 
     SmartDashboard.putData("Auto Mode", m_chooser);
   }
@@ -117,28 +128,44 @@ public class RobotContainer {
 
     // A is gripper close cone
     Trigger A_ArticButton = articController.a();
-    A_ArticButton.debounce(debounce)
-      .onTrue(new cmdSetGripperPos(Gripper.coneClosePos));
+    A_ArticButton.onTrue(new cmdSetGripperPos(Gripper.coneClosePos,false))
+        .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.ORANGE));
 
-    //X is gripper close cube
+    // X is gripper close cube
     Trigger X_ArticButton = articController.x();
-    X_ArticButton.debounce(debounce)
-      .onTrue(new cmdSetGripperPos(Gripper.cubeClosePos));
+    X_ArticButton.onTrue(new cmdSetGripperPos(Gripper.cubeClosePos,false))
+        .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.ORANGE));
 
-    //Y is gripper open 
+    // Y is gripper open
     Trigger Y_ArticButton = articController.y();
-    Y_ArticButton.debounce(debounce)
-    .onTrue(new cmdSetGripperPos(Gripper.openPos));
+    Y_ArticButton.onTrue(new cmdSetGripperPos(Gripper.openPos,false))
+        .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.GOLD));
 
-    //DUp set extention far
+    // DUp set extention high
+    Trigger dUP_ArticButton = articController.povUp();
+    dUP_ArticButton.onTrue(new cmdSetArmMode(Arm.Mode.DELIVERHIGH, false))
+        .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.BLUEGREEN));
 
+    // DLeft set extention middle
+    Trigger dLeft_ArticButton = articController.povLeft();
+    dLeft_ArticButton.onTrue(new cmdSetArmMode(Arm.Mode.DELIVERMED, false))
+        .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.GREEN));
 
-    //DLeft set extention middle
+    // DRight is intake
+    Trigger dRight_ArticButton = articController.povRight();
+    dRight_ArticButton.onTrue(new cmdSetArmMode(Arm.Mode.INTAKE, false))
+        .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.LAWNGREEN));
 
+    // DDown set extention pos low
+    Trigger dDown_ArticButton = articController.povDown();
+    dDown_ArticButton.onTrue(new cmdSetArmMode(Arm.Mode.DELIVERLOW, false))
+        .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.LIME));
 
-    //DDown set extention pos low 
+    // select set extension pos carry
+    Trigger back_ArticButton = articController.back();
+    back_ArticButton.onTrue(new cmdSetArmMode(Arm.Mode.CARRY, false))
+        .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.DARKGREEN));
 
-  
   }
 
   public CommandXboxController getDriveController() {
@@ -173,6 +200,8 @@ public class RobotContainer {
     SmartDashboard.putNumber("Distance in Meters", m_Vision.getRangeFromTagMeters());
     SmartDashboard.putNumber("Target Yaw", m_Vision.getTagYawDegrees());
     SmartDashboard.putNumber("Target Pitch", m_Vision.getTagPitchDegrees());
+
+    SmartDashboard.putNumber("cSensor", m_Gripper.getDistance());
 
   }
 
