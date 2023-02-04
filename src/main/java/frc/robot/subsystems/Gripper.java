@@ -17,12 +17,15 @@ public class Gripper extends SubsystemBase {
 
     public static double coneClosePos = 0;
     public static double cubeClosePos = 13.75;
+
     private static double minPosGrip = 0;
     public static double maxPosGrip = 30;
     public static double openPos = maxPosGrip;
+
     private static double griptol = 1;
+
     private double targetGripPos = 0;
-    private double stagPosGrip = 5;
+    private double stagPosGrip = 0;
     private double targetGripPower = .25;
     private double stagPowerGrip = .12;
 

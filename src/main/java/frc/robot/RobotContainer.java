@@ -122,43 +122,35 @@ public class RobotContainer {
 
     // A is gripper close cone
     Trigger A_ArticButton = articController.a();
-    A_ArticButton.debounce(debounce)
-      .onTrue(new cmdSetGripperPos(Gripper.coneClosePos));
+    A_ArticButton.onTrue(new cmdSetGripperPos(Gripper.coneClosePos));
 
     //X is gripper close cube
     Trigger X_ArticButton = articController.x();
-    X_ArticButton.debounce(debounce)
-      .onTrue(new cmdSetGripperPos(Gripper.cubeClosePos));
+    X_ArticButton.onTrue(new cmdSetGripperPos(Gripper.cubeClosePos));
 
     //Y is gripper open 
     Trigger Y_ArticButton = articController.y();
-    Y_ArticButton.debounce(debounce)
-    .onTrue(new cmdSetGripperPos(Gripper.openPos));
+    Y_ArticButton.onTrue(new cmdSetGripperPos(Gripper.openPos));
 
     //DUp set extention high
     Trigger dUP_ArticButton = articController.povUp();
-    dUP_ArticButton.debounce(debounce)
-    .onTrue(new cmdSetArmMode(Arm.Mode.DELIVERHIGH, false));
+    dUP_ArticButton.onTrue(new cmdSetArmMode(Arm.Mode.DELIVERHIGH, false));
 
     //DLeft set extention middle
     Trigger dLeft_ArticButton = articController.povLeft();
-    dLeft_ArticButton.debounce(debounce)
-    .onTrue(new cmdSetArmMode(Arm.Mode.DELIVERMED, false));
+    dLeft_ArticButton.onTrue(new cmdSetArmMode(Arm.Mode.DELIVERMED, false));
 
     //DRight is intake 
     Trigger dRight_ArticButton = articController.povRight();
-    dRight_ArticButton.debounce(debounce)
-    .onTrue(new cmdSetArmMode(Arm.Mode.INTAKE, false));
+    dRight_ArticButton.onTrue(new cmdSetArmMode(Arm.Mode.INTAKE, false));
 
     //DDown set extention pos low 
     Trigger dDown_ArticButton = articController.povDown();
-    dDown_ArticButton.debounce(debounce)
-    .onTrue(new cmdSetArmMode(Arm.Mode.DELIVERLOW, false));
+    dDown_ArticButton.onTrue(new cmdSetArmMode(Arm.Mode.DELIVERLOW, false));
 
     //select set extension pos carry
     Trigger back_ArticButton = articController.back();
-    back_ArticButton.debounce(debounce)
-    .onTrue(new cmdSetArmMode(Arm.Mode.CARRY, false));
+    back_ArticButton.onTrue(new cmdSetArmMode(Arm.Mode.CARRY, false));
 
   }
 

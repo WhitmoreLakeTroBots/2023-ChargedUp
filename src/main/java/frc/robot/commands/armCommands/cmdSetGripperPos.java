@@ -12,7 +12,9 @@ public class cmdSetGripperPos extends CommandBase {
     private double stagPos = 1.0;
     private double stagPower = 1.0;
     private double startTime = 0;
-    private double timeOut = 1500;
+    
+    private double timeOut = 1.5;
+
     private double endTime = 0;
     private boolean bdone = false;
 
