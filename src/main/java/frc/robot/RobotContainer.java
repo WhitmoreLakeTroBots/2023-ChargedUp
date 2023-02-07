@@ -8,6 +8,7 @@ import frc.robot.commands.driveCommands.cmdActiveBrake;
 import frc.robot.commands.driveCommands.cmdDriveStraight;
 import frc.robot.commands.driveCommands.cmdStrafe;
 import frc.robot.commands.driveCommands.cmdTurnByGyro;
+import frc.robot.commands.driveCommands.cmdUpdateDriveSpeed;
 import frc.robot.commands.lightingCommands.cmdUpdateBaseColor;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.Lighting.lightPattern;
@@ -165,6 +166,16 @@ public class RobotContainer {
     Trigger back_ArticButton = articController.back();
     back_ArticButton.onTrue(new cmdSetArmMode(Arm.Mode.CARRY, false))
         .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.DARKGREEN));
+
+    //left trigger on driver = boost
+    Trigger lTrigger_driveController = driveController.leftTrigger();
+    lTrigger_driveController.onTrue(new cmdUpdateDriveSpeed(DriveTrain.boostSpeed))
+    .onFalse(new cmdUpdateDriveSpeed(DriveTrain.normalDriveSpeed));
+
+
+    //right bumper on driver = active break
+    Trigger rBumper_driveController = driveController.rightBumper();
+    rBumper_driveController.onTrue(new cmdActiveBrake());
 
   }
 

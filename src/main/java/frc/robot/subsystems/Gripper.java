@@ -31,8 +31,19 @@ public class Gripper extends SubsystemBase {
     private double targetGripPower = .25;
     private double stagPowerGrip = .12;
 
+    //for cSensor
+    private boolean isCube;
+    private boolean isCone;
+    private static double conePos = 1750;
+    private static double coneTol = 250;
+    private static double cubePos = 750;
+    private static double cubeTol = 250;
+
     private ColorSensorV3 cSensor;
 
+
+    private boolean isClosedCube = false;
+    private boolean isClosedCone = false;
     /**
     *
     */
@@ -64,6 +75,8 @@ public class Gripper extends SubsystemBase {
         // This method will be called once per scheduler run
         gripperMoter.set(RobotMath.goToPosStag(getGripPos(), targetGripPos, griptol, targetGripPower, stagPosGrip,
                 stagPowerGrip));
+        checkObject();
+        //closeGripperObject();
 
     }
 
@@ -84,6 +97,7 @@ public class Gripper extends SubsystemBase {
         targetGripPos = RobotMath.safetyCap(target, minPosGrip, maxPosGrip);
         stagPosGrip = stagPos;
         stagPowerGrip = stagPower;
+        
     }
 
     public boolean isCube() {
@@ -106,4 +120,35 @@ public class Gripper extends SubsystemBase {
     public int getDistance() {
         return cSensor.getProximity();
     }
+
+    private void checkObject(){
+        if(RobotMath.isInRange(cSensor.getProximity(), conePos, coneTol)){
+            isCone = true;
+        }
+        else{
+            isCone = false;
+            isClosedCone = false;
+        }
+        
+        
+        if(RobotMath.isInRange(cSensor.getProximity(), cubePos, cubeTol)){
+            isCube = true;
+        }
+        else{
+            isCube = false;
+            isClosedCube = false;
+        }
+    }
+
+    private void closeGripperObject(){
+        if(isCube && !isClosedCube){
+            targetGripPos = cubeClosePos;
+            isClosedCube = true;
+        }
+        if(isCone && !isClosedCone){
+            targetGripPos = coneClosePos;
+            isClosedCone = true;  
+        }
+    }
+
 }
