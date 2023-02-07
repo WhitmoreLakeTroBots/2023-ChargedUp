@@ -183,6 +183,6 @@ public class DriveTrain extends SubsystemBase {
         rDM2.set(RobotMath.goToPos(rDM2.getPosition(), 0, 0.1, power));
     }
     public void setMaxSpeed(double newSpeed){
-        teleopPower = RobotMath.safetyCap(newSpeed, -1, 1);
+        teleopPower = RobotMath.safetyCap(newSpeed, 0.40, 1);
     }
 }
