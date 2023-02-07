@@ -29,13 +29,15 @@ public class DriveTrain extends SubsystemBase {
     private double wheelDiameter = 8; // in inches
     private double gearRatio = 12.75; // Motor to wheel ratio
     private double teleopPower = .40;
+    public static double normalDriveSpeed = 0.40;
+    public static double boostSpeed = 0.80;
 
     private double lDM1Power;
     private double lDM2Power;
     private double rDM1Power;
     private double rDM2Power;
 
-    private final double maxrpn = 5676;
+    //private final double maxrpm = 5676;
 
     public final double kp_driveStraightGyro = 0.006;
 
@@ -180,8 +182,7 @@ public class DriveTrain extends SubsystemBase {
         rDM1.set(RobotMath.goToPos(rDM1.getPosition(), 0, 0.1, power));
         rDM2.set(RobotMath.goToPos(rDM2.getPosition(), 0, 0.1, power));
     }
-
-    private double powerToRPM(double pwr) {
-        return (maxrpn * pwr);
+    public void setMaxSpeed(double newSpeed){
+        teleopPower = RobotMath.safetyCap(newSpeed, -1, 1);
     }
 }
