@@ -43,13 +43,17 @@ public class Arm extends SubsystemBase {
     // fix med and low delivery positions to where they should be
     public static double deliveryMedRotPos = 79;
     public static double deliveryMedExtendPos = 12;
-    public static double deliveryLowRotPos = 60;
+    public static double deliveryLowRotPos = 66;
     public static double deliveryLowExtendPos = 0;
     public static double intakeRotPos = 0;
     public static double intakeExtPos = 1;
 
     private static double safetyArmRotPos = 20;
     private static double safetyArmExtPos = 7;
+    // fix safety positions
+    private static double safetyUpperArmRotPos = 060;
+    private static double safetyUpperArmExtPos = 180;
+
     private static double pauseRotPos = 0;
     private static double pauseExtPos = 0;
 
@@ -196,8 +200,7 @@ public class Arm extends SubsystemBase {
             pauseRot();
         } else {
             unpauseRot();
-        }
-
+        } 
     }
 
     private void goToCarry() {
@@ -207,10 +210,17 @@ public class Arm extends SubsystemBase {
         setArmRotTargPos(carryRotPos, stagPosRot, stagPosRot);
         // beware of rot safety pos
         pauseRotPos = carryRotPos;
+        pauseExtPos = carryExtendPos;
         if ((armRot.getPosition() <= safetyArmRotPos) && (armExtend.getPosition() > safetyArmExtPos)) {
             pauseRot();
         } else {
             unpauseRot();
+        }
+        
+        if((armRot.getPosition() > safetyUpperArmRotPos) && (armExtend.getPosition() < safetyUpperArmExtPos)){
+            pauseExt();
+        } else {
+            unpauseExt();
         }
 
     }
@@ -222,7 +232,8 @@ public class Arm extends SubsystemBase {
         setArmRotTargPos(deliveryLowRotPos, stagPosRot, stagPowerRot);
         // beware of rot safety pos
         pauseExtPos = deliveryLowExtendPos;
-
+       
+        // preventing arm from extending while too low
         if (armRot.getPosition() < safetyArmRotPos) {
             pauseExt();
         } else {
@@ -238,12 +249,14 @@ public class Arm extends SubsystemBase {
         setArmRotTargPos(deliveryMedRotPos, stagPosRot, stagPowerRot);
         // beware of rot safety pos
         pauseExtPos = deliveryMedExtendPos;
-
+      
+        // preventing arm from extending while too low
         if (armRot.getPosition() < safetyArmRotPos) {
             pauseExt();
         } else {
             unpauseExt();
         }
+    
     }
 
     private void goToDeliverHigh() {
@@ -253,23 +266,41 @@ public class Arm extends SubsystemBase {
         setArmRotTargPos(deliveryHighRotPos, stagPosRot, stagPowerRot);
         // beware of rot safety pos
         pauseExtPos = deliveryHighExtendPos;
+        pauseRotPos = deliveryHighRotPos; 
 
+        // preventing arm from extending while too low
         if (armRot.getPosition() < safetyArmRotPos) {
             pauseExt();
         } else {
             unpauseExt();
+        }
+        // preventing arm from rotating when extention isn't fully extended
+        if((armRot.getPosition() > safetyUpperArmRotPos) && (armExtend.getPosition() < safetyUpperArmExtPos)){
+            pauseRot();
+        }
+        else{
+            unpauseRot();
         }
     }
 
     private void goToIntake() {
         setArmExtendTargPos(intakeExtPos, stagPosExtend, stagPowerExtend);
         setArmRotTargPos(intakeRotPos, stagPosRot, stagPowerRot);
-        pauseRotPos = intakeRotPos;
+        pauseExtPos = intakeExtPos;
+
+        
         if ((armRot.getPosition() <= safetyArmRotPos) && (armExtend.getPosition() > safetyArmExtPos)) {
-            pauseRot();
+            pauseExt();
         } else {
-            unpauseRot();
+            unpauseExt();
         }
+
+        if((armRot.getPosition() > safetyUpperArmRotPos) && (armExtend.getPosition() < safetyUpperArmExtPos)){
+            pauseExt();
+        } else {
+            unpauseExt();
+        }
+
     }
 
     public void setCurrentMode(Mode newMode) {
