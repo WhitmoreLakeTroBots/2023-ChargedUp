@@ -53,7 +53,7 @@ public class Gripper extends SubsystemBase {
         gripperMoter.setInverted(true);
         setSparkParms(gripperMoter);
 
-        cSensor = new ColorSensorV3(I2C.Port.kOnboard);
+        cSensor = new ColorSensorV3(I2C.Port.kMXP);
     }
 
     private void setSparkParms(WL_Spark wls) {
