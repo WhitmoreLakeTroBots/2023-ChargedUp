@@ -24,11 +24,21 @@ import java.util.Optional;
  */
 public class SubPoseEstimator extends SubsystemBase {
     Pose3d robotPose = null;
-    Vision camera11 = null;
-    // Vision camera12 = null;
-
+    PhotonCamera cam11 = new PhotonCamera("photon11");
+    Transform3d cam11_2_robotTransform3d = new Transform3d (new Translation3d(0,0,.45),new Rotation3d(0,0,0));
     // The parameter for loadFromResource() will be different depending on the game.
     AprilTagFieldLayout aprilTagFieldLayout = null;
+
+
+    private double m_cam11_x = 0.0;
+    private double m_cam11_y = 0.0;
+    private double m_cam11_z = 0.0;
+
+    private int m_tag_ID = 0;
+    private double m_field_x = 0.0;
+    private double m_field_y = 0.0;
+    private double m_field_z = 0.0;
+
 
     public SubPoseEstimator() {
 
@@ -46,20 +56,25 @@ public class SubPoseEstimator extends SubsystemBase {
     public void periodic() {
         // This method will be called once per scheduler run
 
-        if (camera11.hasTargets()) {
-            Optional<Pose3d> bestTagPose = aprilTagFieldLayout.getTagPose(camera11.getTagId());
+        var results = cam11.getLatestResult();
+        if (results.hasTargets()) {
+            m_tag_ID = results.getBestTarget().getFiducialId();
+            Optional<Pose3d> bestTagPose = aprilTagFieldLayout.getTagPose(m_tag_ID);
 
             if (bestTagPose.isPresent()) {
                 robotPose = PhotonUtils.estimateFieldToRobotAprilTag(
-                        camera11.getCamToTargetTransform3d(),
+                        results.getBestTarget().getBestCameraToTarget(),
                         bestTagPose.get(),
-                        camera11.getCamToRobotTransform3d());
+                        cam11_2_robotTransform3d);
 
-            } else {
-                NullThePose();
-            }
-        } else {
-            NullThePose();
+                m_field_x = robotPose.getX();
+                m_field_y = robotPose.getY();
+                m_field_z = robotPose.getZ();
+            } 
+            m_cam11_x = results.getBestTarget().getBestCameraToTarget().getX();
+            m_cam11_y = results.getBestTarget().getBestCameraToTarget().getY();
+            m_cam11_z = results.getBestTarget().getBestCameraToTarget().getZ();
+            
         }
 
     }
@@ -73,17 +88,7 @@ public class SubPoseEstimator extends SubsystemBase {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
-    public void initiaizeCameras() {
-        // create the vision cameras here.
-
-        Vision camera11 = new Vision();
-        // Vision camera12 = new Vision();
-        // camera11.init("camera11",new Transform3d (.02,0,.45,new Rotation3d(0,0,0)));
-
-        camera11.init("camera11", new Transform3d(new Translation3d(-0.20, 0.0, 0.45),
-                new Rotation3d(0, 0, 0)));
-
-    }
+    
 
     private void NullThePose() {
         robotPose = null;
@@ -98,30 +103,46 @@ public class SubPoseEstimator extends SubsystemBase {
         }
     }
 
-    public Optional<Double> getX() {
+    public int getFiducialId () {
+        return m_tag_ID;
+    }
+
+    public double getCameraX() {
         if (robotPose == null) {
-            return Optional.empty();
+            return -99;
         } else {
-            return Optional.of(robotPose.getX());
+            return m_cam11_x;
         }
 
     }
 
-    public Optional<Double> getY() {
+    public double getCameraY() {
         if (robotPose == null) {
-            return Optional.empty();
+            return -99;
         } else {
-            return Optional.of(robotPose.getY());
+            return m_cam11_y;
         }
 
     }
 
-    public Optional<Double> getZ() {
+    public double getCameraZ() {
         if (robotPose == null) {
-            return Optional.empty();
+            return -99;
         } else {
-            return Optional.of(robotPose.getZ());
+            return m_cam11_z;
         }
     }
 
+
+    public double getFieldX (){
+        return m_field_x;
+    }
+
+    public double getFieldY (){
+        return m_field_y;
+    }
+    
+    public double getFieldZ (){
+        return m_field_z;
+    }
 }

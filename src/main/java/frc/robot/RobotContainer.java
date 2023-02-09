@@ -45,7 +45,7 @@ public class RobotContainer {
   public final SubGyro m_subGyro = new SubGyro();
   public final Lighting m_Lighting = new Lighting();
   public final Arm m_arm = new Arm();
-  public final Vision m_Vision = new Vision();
+  public final SubPoseEstimator  m_Estimator = new SubPoseEstimator(); 
   public final Gripper m_Gripper = new Gripper();
   public final Intake m_Intake = new Intake();
 
@@ -209,12 +209,18 @@ public class RobotContainer {
     SmartDashboard.putNumber("gripperpos", m_Gripper.getGripPos());
     // SmartDashboard.putNumber("LDM1POS", m_driveTrain.lDM1.getPositionABS());
 
-    SmartDashboard.putNumber("AprilTag ID", m_Vision.getTagId());
-    SmartDashboard.putNumber("Distance in Meters", m_Vision.getRangeFromTagMeters());
-    SmartDashboard.putNumber("Target Yaw", m_Vision.getTagYawDegrees());
-    SmartDashboard.putNumber("Target Pitch", m_Vision.getTagPitchDegrees());
+    
 
     SmartDashboard.putNumber("cSensor", m_Gripper.getDistance());
+
+    SmartDashboard.putNumber("Field_x", m_Estimator.getFieldX());
+    SmartDashboard.putNumber("Field_y", m_Estimator.getFieldY());
+    SmartDashboard.putNumber("Field_z", m_Estimator.getFieldZ());
+
+    
+    SmartDashboard.putNumber("cam11_x", m_Estimator.getCameraX());
+    SmartDashboard.putNumber("cam11_y", m_Estimator.getCameraY());
+    SmartDashboard.putNumber("cam11_z", m_Estimator.getCameraZ());
 
   }
 
