@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-
 import frc.robot.commands.*;
 import frc.robot.hardware.WL_Spark;
 
@@ -16,35 +15,25 @@ import frc.robot.RobotMath;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 
-
-
-
 /**
  *
  */
 public class Lighting extends SubsystemBase {
-private double curBaseColor = -0.45;
-private double newBaseColor = -0.45;
-private double tempColor = 0;
-private double duration = 2000; //in ms 
-private Spark ledDriver;
+    private double curBaseColor = -0.45;
+    private double newBaseColor = -0.45;
+    private double tempColor = 0;
+    private double duration = 2000; // in ms
+    private Spark ledDriver;
 
-    
-
-    
     public Lighting() {
         ledDriver = new Spark(Constants.PWM.ledDriver);
 
-       
     }
-
-    
-
 
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        
+
     }
 
     @Override
@@ -53,20 +42,21 @@ private Spark ledDriver;
 
     }
 
-    public void setNewBaseColor(double newCol){
+    public void setNewBaseColor(double newCol) {
         newBaseColor = newCol;
         ledDriver.set(newBaseColor);
     }
 
-
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
-
-    public enum lightPattern{
+    public enum lightPattern {
+        RAINBOWOCEAN("rainbow ocean", -0.95),
+        RAINBOWLAVA("rainbow lava", -0.93),
+        RAINBOWPARTY("rainbow party", -0.97),
         RAINBOW("rainbow rainbow", -0.99),
         CONFETTI("confetti", -0.87),
-        RAINWAVES("rainbow waves",-0.45),
+        RAINWAVES("rainbow waves", -0.45),
         HOTPINK("hot pink", 0.57),
         DARKRED("dark red", 0.59),
         RED("red", 0.61),
@@ -90,27 +80,22 @@ private Spark ledDriver;
         DARKGRAY("dark gray", 0.97),
         BLACK("black", 0.99);
 
-
         private final String name;
         private final double value;
 
-        public double getValue(){
+        public double getValue() {
             return value;
         }
 
-
-        public String getName(){
+        public String getName() {
             return name;
         }
 
-        lightPattern(String name, double value){
+        lightPattern(String name, double value) {
             this.name = name;
             this.value = value;
         }
 
     }
 
-    
-
 }
-

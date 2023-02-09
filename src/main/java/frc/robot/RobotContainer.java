@@ -47,6 +47,7 @@ public class RobotContainer {
   public final Arm m_arm = new Arm();
   public final Vision m_Vision = new Vision();
   public final Gripper m_Gripper = new Gripper();
+  public final Intake m_Intake = new Intake();
 
   // Joysticks
   private final CommandXboxController driveController = new CommandXboxController(0);
@@ -105,7 +106,7 @@ public class RobotContainer {
     SmartDashboard.putData("set color red", new cmdUpdateBaseColor(lightPattern.RED));
     SmartDashboard.putData("set color blue", new cmdUpdateBaseColor(lightPattern.BLUE));
 
-    SmartDashboard.putData("Grip Open", new cmdSetGripperPos(Gripper.openPos,false));
+    SmartDashboard.putData("Grip Open", new cmdSetGripperPos(Gripper.openPos, false));
     SmartDashboard.putData("Grip Cone", new cmdSetGripperPos(Gripper.coneClosePos, false));
     SmartDashboard.putData("Grip cube", new cmdSetGripperPos(Gripper.cubeClosePos, false));
     SmartDashboard.putData("auton1test", new A_R_P1_V1());
@@ -129,17 +130,17 @@ public class RobotContainer {
 
     // A is gripper close cone
     Trigger A_ArticButton = articController.a();
-    A_ArticButton.onTrue(new cmdSetGripperPos(Gripper.coneClosePos,false))
+    A_ArticButton.onTrue(new cmdSetGripperPos(Gripper.coneClosePos, false))
         .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.ORANGE));
 
     // X is gripper close cube
     Trigger X_ArticButton = articController.x();
-    X_ArticButton.onTrue(new cmdSetGripperPos(Gripper.cubeClosePos,false))
+    X_ArticButton.onTrue(new cmdSetGripperPos(Gripper.cubeClosePos, false))
         .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.ORANGE));
 
     // Y is gripper open
     Trigger Y_ArticButton = articController.y();
-    Y_ArticButton.onTrue(new cmdSetGripperPos(Gripper.openPos,false))
+    Y_ArticButton.onTrue(new cmdSetGripperPos(Gripper.openPos, false))
         .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.GOLD));
 
     // DUp set extention high
@@ -167,15 +168,16 @@ public class RobotContainer {
     back_ArticButton.onTrue(new cmdSetArmMode(Arm.Mode.CARRY, false))
         .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.DARKGREEN));
 
-    //left trigger on driver = boost
+    // left trigger on driver = boost
     Trigger lTrigger_driveController = driveController.leftTrigger();
     lTrigger_driveController.onTrue(new cmdUpdateDriveSpeed(DriveTrain.boostSpeed))
-    .onFalse(new cmdUpdateDriveSpeed(DriveTrain.normalDriveSpeed));
+        .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.RAINBOWPARTY))
+        .onFalse(new cmdUpdateDriveSpeed(DriveTrain.normalDriveSpeed));
 
-
-    //right bumper on driver = active break
+    // right bumper on driver = active break
     Trigger rBumper_driveController = driveController.rightBumper();
-    rBumper_driveController.onTrue(new cmdActiveBrake());
+    rBumper_driveController.whileTrue(new cmdActiveBrake())
+        .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.RED));
 
   }
 

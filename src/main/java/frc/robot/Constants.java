@@ -43,7 +43,8 @@ public class Constants {
         public static final int armExtend = 5;
         public static final int armRot = 6;
         public static final int gripper = 7;
-
+        public static final int intake = 8;
+        public static final int intakeRot = 9;
         // pdh
         public static final int pdh = 20;
 
