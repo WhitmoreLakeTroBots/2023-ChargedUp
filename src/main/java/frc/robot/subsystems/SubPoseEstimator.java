@@ -25,7 +25,7 @@ import java.util.Optional;
 public class SubPoseEstimator extends SubsystemBase {
     Pose3d robotPose = null;
     private final Pose3d nullPose = new Pose3d(new Translation3d(-99, -99, -99), new Rotation3d(0.0, 0.0, 0.0));
-    private final PhotonCamera cam11 = new PhotonCamera("photon11");
+    private final PhotonCamera cam11 = new PhotonCamera("photon12");
     private final Transform3d cam11_2_robotTransform3d = new Transform3d(new Translation3d(0, 0, .45),
             new Rotation3d(0, 0, 0));
     // The parameter for loadFromResource() will be different depending on the game.
