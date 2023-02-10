@@ -24,11 +24,12 @@ import java.util.Optional;
  */
 public class SubPoseEstimator extends SubsystemBase {
     Pose3d robotPose = null;
-    PhotonCamera cam11 = new PhotonCamera("photon11");
-    Transform3d cam11_2_robotTransform3d = new Transform3d (new Translation3d(0,0,.45),new Rotation3d(0,0,0));
+    private final Pose3d nullPose = new Pose3d(new Translation3d(-99, -99, -99), new Rotation3d(0.0, 0.0, 0.0));
+    private final PhotonCamera cam11 = new PhotonCamera("photon11");
+    private final Transform3d cam11_2_robotTransform3d = new Transform3d(new Translation3d(0, 0, .45),
+            new Rotation3d(0, 0, 0));
     // The parameter for loadFromResource() will be different depending on the game.
-    AprilTagFieldLayout aprilTagFieldLayout = null;
-
+    private AprilTagFieldLayout aprilTagFieldLayout = null;
 
     private double m_cam11_x = 0.0;
     private double m_cam11_y = 0.0;
@@ -39,6 +40,11 @@ public class SubPoseEstimator extends SubsystemBase {
     private double m_field_y = 0.0;
     private double m_field_z = 0.0;
 
+    private double m_field_rollRad = 0.0;
+    private double m_field_yawRad = 0.0;
+    private double m_field_pitchRad = 0.0;
+
+    private Boolean m_HasTargets = false;
 
     public SubPoseEstimator() {
 
@@ -57,11 +63,13 @@ public class SubPoseEstimator extends SubsystemBase {
         // This method will be called once per scheduler run
 
         var results = cam11.getLatestResult();
+
         if (results.hasTargets()) {
             m_tag_ID = results.getBestTarget().getFiducialId();
             Optional<Pose3d> bestTagPose = aprilTagFieldLayout.getTagPose(m_tag_ID);
 
             if (bestTagPose.isPresent()) {
+                m_HasTargets = results.hasTargets();
                 robotPose = PhotonUtils.estimateFieldToRobotAprilTag(
                         results.getBestTarget().getBestCameraToTarget(),
                         bestTagPose.get(),
@@ -70,13 +78,20 @@ public class SubPoseEstimator extends SubsystemBase {
                 m_field_x = robotPose.getX();
                 m_field_y = robotPose.getY();
                 m_field_z = robotPose.getZ();
-            } 
-            m_cam11_x = results.getBestTarget().getBestCameraToTarget().getX();
-            m_cam11_y = results.getBestTarget().getBestCameraToTarget().getY();
-            m_cam11_z = results.getBestTarget().getBestCameraToTarget().getZ();
-            
-        }
+                m_field_rollRad = robotPose.getRotation().getX();
+                m_field_yawRad = robotPose.getRotation().getZ();
+                m_field_pitchRad = robotPose.getRotation().getY();
 
+                m_cam11_x = results.getBestTarget().getBestCameraToTarget().getX();
+                m_cam11_y = results.getBestTarget().getBestCameraToTarget().getY();
+                m_cam11_z = results.getBestTarget().getBestCameraToTarget().getZ();
+
+            } else {
+                NullThePose();
+            }
+        } else {
+            NullThePose();
+        }
     }
 
     @Override
@@ -88,61 +103,64 @@ public class SubPoseEstimator extends SubsystemBase {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
-    
-
     private void NullThePose() {
-        robotPose = null;
+        robotPose = nullPose;
+        m_field_x = robotPose.getX();
+        m_field_y = robotPose.getY();
+        m_field_z = robotPose.getZ();
+        m_tag_ID = 0;
 
+        m_field_rollRad = robotPose.getRotation().getX();
+        m_field_yawRad = robotPose.getRotation().getZ();
+        m_field_pitchRad = robotPose.getRotation().getY();
+
+        m_cam11_x = 0.0;
+        m_cam11_y = 0.0;
+        m_cam11_z = 0.0;
+        m_HasTargets = false;
     }
 
-    private Optional<Pose3d> getRobotPose() {
-        if (robotPose == null) {
-            return Optional.empty();
-        } else {
-            return Optional.of(robotPose);
-        }
+    private Pose3d getRobotPose() {
+        return robotPose;
     }
 
-    public int getFiducialId () {
+    public int getFiducialId() {
         return m_tag_ID;
     }
 
     public double getCameraX() {
-        if (robotPose == null) {
-            return -99;
-        } else {
-            return m_cam11_x;
-        }
-
+        return m_cam11_x;
     }
 
     public double getCameraY() {
-        if (robotPose == null) {
-            return -99;
-        } else {
-            return m_cam11_y;
-        }
-
+        return m_cam11_y;
     }
 
     public double getCameraZ() {
-        if (robotPose == null) {
-            return -99;
-        } else {
-            return m_cam11_z;
-        }
+        return m_cam11_z;
     }
 
-
-    public double getFieldX (){
+    public double getFieldX() {
         return m_field_x;
     }
 
-    public double getFieldY (){
+    public double getFieldY() {
         return m_field_y;
     }
-    
-    public double getFieldZ (){
+
+    public double getFieldZ() {
         return m_field_z;
+    }
+
+    public double getFieldRollRad() {
+        return m_field_rollRad;
+    }
+
+    public double getFieldYawRad() {
+        return m_field_yawRad;
+    }
+
+    public double getFieldPitchRad() {
+        return m_field_pitchRad;
     }
 }
