@@ -32,24 +32,13 @@ public class cmdDriveToTarget extends CommandBase {
 
         targetPose = tPose.getPose();
         power = speed;
-        targetHeading = RobotContainer.getInstance().m_subGyro.getNormaliziedNavxAngle();
+        // targetHeading = RobotContainer.getInstance().m_subGyro.getNormaliziedNavxAngle();
 
 
         // m_subsystem = subsystem;
         // addRequirements(m_subsystem);
     }
 
-
-    public cmdDriveToTarget(double targetDistance, double speed, double heading) {
-
-        targetPosition = targetDistance;
-        power = speed;
-        targetHeading = heading;
-
-
-        // m_subsystem = subsystem;
-        // addRequirements(m_subsystem);
-    }
 
     // Called when the command is initially scheduled.
     @Override
@@ -57,30 +46,32 @@ public class cmdDriveToTarget extends CommandBase {
         bDone = false;
         RobotContainer.getInstance().m_driveTrain.resetEncoders();
         // Figure out initial drive based on pose.
-        diffPose = targetPose.relativeTo(RobotContainer.getInstance().m_Estimator.getRobotFieldPose());
-        RobotContainer.getInstance().m_driveTrain.doDrive(power, 0, 0, .4);
+        RobotContainer.getInstance().m_driveTrain.enableGoToPos();
+
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+        if (RobotContainer.getInstance().m_Estimator.getRobotFieldPose().getZ() > 0) {
 
-        double headingDelta = RobotMath.calcTurnRate(RobotContainer.getInstance().m_subGyro.getNormaliziedNavxAngle(),
-                targetHeading, RobotContainer.getInstance().m_driveTrain.kp_driveStraightGyro);
-
-        RobotContainer.getInstance().m_driveTrain.doDrive(power, 0, headingDelta, .4);
-        if (targetPosition <= RobotContainer.getInstance().m_driveTrain.getDistanceTraveledInches()) {
-            bDone = true;
-            // end(false);
-            RobotContainer.getInstance().m_driveTrain.StopDrive();
+            diffPose = targetPose.relativeTo(RobotContainer.getInstance().m_Estimator.getRobotFieldPose());
+            RobotContainer.getInstance().m_driveTrain.cmdGoToPos(diffPose.getX(),
+             diffPose.getY(),Math.toDegrees(diffPose.getRotation().getZ()), power);
         }
+        if (RobotContainer.getInstance().m_driveTrain.isComplete()) {
+            RobotContainer.getInstance().m_driveTrain.StopDrive();
+            bDone = true;
+            end (false);
+        }
+        RobotContainer.getInstance().m_driveTrain.gyroHeading = RobotContainer.getInstance().m_subGyro.getNormaliziedNavxAngle();
 
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        RobotContainer.getInstance().m_driveTrain.StopDrive();
+        RobotContainer.getInstance().m_driveTrain.disableGoToPos();
     }
 
     // Returns true when the command should end.

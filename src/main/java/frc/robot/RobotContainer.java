@@ -10,6 +10,8 @@ import frc.robot.commands.driveCommands.cmdStrafe;
 import frc.robot.commands.driveCommands.cmdTurnByGyro;
 import frc.robot.commands.driveCommands.cmdUpdateDriveSpeed;
 import frc.robot.commands.lightingCommands.cmdUpdateBaseColor;
+import frc.robot.commands.visionCommands.cmdDisableAutoDrive;
+import frc.robot.commands.visionCommands.cmdDriveToTarget;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.Lighting.lightPattern;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -19,6 +21,8 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+
+//import org.apache.commons.io.filefilter.TrueFileFilter;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -174,6 +178,12 @@ public class RobotContainer {
         .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.RAINBOWPARTY))
         .onFalse(new cmdUpdateDriveSpeed(DriveTrain.normalDriveSpeed));
 
+    // right trigger on driver is AUTO DRIVE
+    Trigger rTrigger_driveController = driveController.rightTrigger();
+    rTrigger_driveController.onTrue(new cmdDriveToTarget(SubPoseEstimator.targetPoses.TAGID1, .15))
+      .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.RAINBOW))
+      .onFalse(new cmdDisableAutoDrive());    
+
     // right bumper on driver = active break
     Trigger rBumper_driveController = driveController.rightBumper();
     rBumper_driveController.whileTrue(new cmdActiveBrake())
@@ -207,6 +217,7 @@ public class RobotContainer {
     SmartDashboard.putNumber("ArmExtendPos", m_arm.getArmExtendPos());
     SmartDashboard.putNumber("ArmRotPos", m_arm.getArmRotPos());
     SmartDashboard.putNumber("gripperpos", m_Gripper.getGripPos());
+    SmartDashboard.putNumber("Intake Rot", m_Intake.getIntakeVelocity());
     // SmartDashboard.putNumber("LDM1POS", m_driveTrain.lDM1.getPositionABS());
 
     
@@ -216,6 +227,9 @@ public class RobotContainer {
     SmartDashboard.putNumber("Field_x", m_Estimator.getFieldX());
     SmartDashboard.putNumber("Field_y", m_Estimator.getFieldY());
     SmartDashboard.putNumber("Field_z", m_Estimator.getFieldZ());
+    SmartDashboard.putNumber("Field_yaw", Math.toDegrees(m_Estimator.getFieldYawRad()));
+    SmartDashboard.putNumber("Field_pitch", Math.toDegrees(m_Estimator.getFieldPitchRad()));
+    SmartDashboard.putNumber("Field_roll", Math.toDegrees(m_Estimator.getFieldRollRad()));
 
     
     SmartDashboard.putNumber("cam11_x", m_Estimator.getCameraX());

@@ -3,7 +3,7 @@ package frc.robot.subsystems;
 import frc.robot.commands.*;
 
 import com.revrobotics.CANSparkMax.IdleMode;
-import frc.robot.RobotContainer;
+// import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -39,6 +39,7 @@ public class DriveTrain extends SubsystemBase {
     private double travelDist = 0.0;
     private double drivePower = 0.0;
     private boolean bComplete = true;
+    public double gyroHeading = 0.0; 
 
     private double lDM1Power;
     private double lDM2Power;
@@ -200,16 +201,17 @@ public class DriveTrain extends SubsystemBase {
 
     private void driveGoToPos(){
 
-        double headingDelta = RobotMath.calcTurnRate(RobotContainer.getInstance().m_subGyro.getNormaliziedNavxAngle(),
-        this.heading, RobotContainer.getInstance().m_driveTrain.kp_driveStraightGyro);
+        double headingDelta = RobotMath.calcTurnRate(gyroHeading,
+        this.heading, kp_driveStraightGyro);
 
         if (travelDist <= getDistanceTraveledInches()) {
             bComplete = true;
             // end(false);
             this.StopDrive();
         }
-        doDrive(driveDist, strafeDist, headingDelta, drivePower);
+       else { doDrive(driveDist, strafeDist, headingDelta, drivePower);
     }
+}
 
     public void cmdGoToPos(double drive, double strafe, double heading, double mPower){
         // calculate drive power and calculate strafe power
@@ -219,8 +221,14 @@ public class DriveTrain extends SubsystemBase {
         this.heading = heading;
         this.drivePower = mPower;
         // calculate drive hypotenuse and save 
+        this.travelDist = Math.sqrt(Math.pow(driveDist, 2) + Math.pow(strafeDist, 2));
     }
-
+    public void enableGoToPos() {
+        bGoToPos = true;
+    }
+    public void disableGoToPos() {
+        bGoToPos = false;
+    }
     public boolean isComplete(){
         return bComplete;
     }
