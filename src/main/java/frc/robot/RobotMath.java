@@ -168,5 +168,9 @@ public class RobotMath {
             return targetPos;
         }
     }
+    public static double metersToInches(double meter) {
+        return meter/0.0254;
+
+    }
 
 }

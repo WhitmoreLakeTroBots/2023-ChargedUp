@@ -1,33 +1,27 @@
 package frc.robot;
 
-import frc.robot.commands.*;
 import frc.robot.commands.AutonCommands.A_R_P1_V1;
 import frc.robot.commands.armCommands.cmdSetArmMode;
 import frc.robot.commands.armCommands.cmdSetGripperPos;
 import frc.robot.commands.driveCommands.cmdActiveBrake;
 import frc.robot.commands.driveCommands.cmdDriveStraight;
-import frc.robot.commands.driveCommands.cmdStrafe;
-import frc.robot.commands.driveCommands.cmdTurnByGyro;
+import frc.robot.commands.driveCommands.cmdResetGyro;
 import frc.robot.commands.driveCommands.cmdUpdateDriveSpeed;
+import frc.robot.commands.intakeCommands.cmdStartIntake;
+import frc.robot.commands.intakeCommands.cmdStopIntake;
 import frc.robot.commands.lightingCommands.cmdUpdateBaseColor;
 import frc.robot.commands.visionCommands.cmdDisableAutoDrive;
 import frc.robot.commands.visionCommands.cmdDriveToTarget;
 import frc.robot.subsystems.*;
-import frc.robot.subsystems.Lighting.lightPattern;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command.InterruptionBehavior;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 //import org.apache.commons.io.filefilter.TrueFileFilter;
 
-import com.kauailabs.navx.frc.AHRS;
-
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.subsystems.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -49,15 +43,13 @@ public class RobotContainer {
   public final SubGyro m_subGyro = new SubGyro();
   public final Lighting m_Lighting = new Lighting();
   public final Arm m_arm = new Arm();
-  public final SubPoseEstimator  m_Estimator = new SubPoseEstimator(); 
+  public final SubPoseEstimator m_Estimator = new SubPoseEstimator();
   public final Gripper m_Gripper = new Gripper();
   public final Intake m_Intake = new Intake();
 
   // Joysticks
   private final CommandXboxController driveController = new CommandXboxController(0);
   private final CommandXboxController articController = new CommandXboxController(1);
-
-  private final double debounce = 0.5;
 
   // A chooser for autonomous commands
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -78,7 +70,7 @@ public class RobotContainer {
     m_chooser.setDefaultOption("A_R_P1_V1", new A_R_P1_V1());
     m_chooser.addOption("A_R_P1_V1", new A_R_P1_V1());
     m_chooser.addOption("active break", new cmdActiveBrake());
-    
+
     /*
      * m_chooser.addOption("driveforward", new cmdDriveStraight(24, .25, 0.0));
      * m_chooser.addOption("driveback", new cmdDriveStraight(24, -.25, 0.0));
@@ -106,18 +98,25 @@ public class RobotContainer {
      * SmartDashboard.putData("strafe right", new cmdStrafe(12, -.25,
      * m_subGyro.getNormaliziedNavxAngle()));
      */
-   // SmartDashboard.putData("active break", new cmdActiveBrake());
-   // SmartDashboard.putData("Extend arm Pos", new cmdSetArmMode(Arm.Mode.DELIVERHIGH, false));
-   // SmartDashboard.putData("arm Pos Intake", new cmdSetArmMode(Arm.Mode.INTAKE, false));
-   // SmartDashboard.putData("set color red", new cmdUpdateBaseColor(lightPattern.RED));
-   // SmartDashboard.putData("set color blue", new cmdUpdateBaseColor(lightPattern.BLUE));
+    // SmartDashboard.putData("active break", new cmdActiveBrake());
+    // SmartDashboard.putData("Extend arm Pos", new
+    // cmdSetArmMode(Arm.Mode.DELIVERHIGH, false));
+    // SmartDashboard.putData("arm Pos Intake", new cmdSetArmMode(Arm.Mode.INTAKE,
+    // false));
+    // SmartDashboard.putData("set color red", new
+    // cmdUpdateBaseColor(lightPattern.RED));
+    // SmartDashboard.putData("set color blue", new
+    // cmdUpdateBaseColor(lightPattern.BLUE));
 
-   // SmartDashboard.putData("Grip Open", new cmdSetGripperPos(Gripper.openPos, false));
-   // SmartDashboard.putData("Grip Cone", new cmdSetGripperPos(Gripper.coneClosePos, false));
-   // SmartDashboard.putData("Grip cube", new cmdSetGripperPos(Gripper.cubeClosePos, false));
-   // SmartDashboard.putData("auton1test", new A_R_P1_V1());
+    // SmartDashboard.putData("Grip Open", new cmdSetGripperPos(Gripper.openPos,
+    // false));
+    // SmartDashboard.putData("Grip Cone", new
+    // cmdSetGripperPos(Gripper.coneClosePos, false));
+    // SmartDashboard.putData("Grip cube", new
+    // cmdSetGripperPos(Gripper.cubeClosePos, false));
+    // SmartDashboard.putData("auton1test", new A_R_P1_V1());
 
-   // SmartDashboard.putData("Auto Mode", m_chooser);
+    // SmartDashboard.putData("Auto Mode", m_chooser);
   }
 
   public static RobotContainer getInstance() {
@@ -174,6 +173,16 @@ public class RobotContainer {
     back_ArticButton.onTrue(new cmdSetArmMode(Arm.Mode.CARRY, false))
         .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.DARKGREEN));
 
+    // Start intake artic
+    Trigger rTrigger_ArticButton = articController.rightTrigger();
+    rTrigger_ArticButton.onTrue(new cmdStartIntake())
+        .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.LAWNGREEN));
+
+    // Stop intake artic
+    Trigger rBumper_ArticButton = articController.rightBumper();
+    rBumper_ArticButton.onTrue(new cmdStopIntake())
+        .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.SKYBLUE));
+
     // left trigger on driver = boost
     Trigger lTrigger_driveController = driveController.leftTrigger();
     lTrigger_driveController.onTrue(new cmdUpdateDriveSpeed(DriveTrain.boostSpeed))
@@ -182,14 +191,24 @@ public class RobotContainer {
 
     // right trigger on driver is AUTO DRIVE
     Trigger rTrigger_driveController = driveController.rightTrigger();
-    rTrigger_driveController.onTrue(new cmdDriveToTarget(SubPoseEstimator.targetPoses.TAGID1, .15))
-      .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.RAINBOW))
-      .onFalse(new cmdDisableAutoDrive());    
+    rTrigger_driveController.whileTrue(new cmdDriveToTarget(SubPoseEstimator.targetPoses.TAGID1, .30))
+        .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.RAINBOW))
+        .onFalse(new cmdDisableAutoDrive());
 
     // right bumper on driver = active break
-    Trigger rBumper_driveController = driveController.rightBumper();
-    rBumper_driveController.whileTrue(new cmdActiveBrake())
+    // Trigger rBumper_driveController = driveController.rightBumper();
+    // rBumper_driveController.whileTrue(new cmdActiveBrake())
+    // .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.RED));
+
+    // dDown on driver is active break
+    Trigger dDown_driveController = driveController.povDown();
+    dDown_driveController.whileTrue(new cmdActiveBrake())
         .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.RED));
+
+    // Back button on driver, reset navx
+    Trigger rBack_driveController = driveController.back();
+    rBack_driveController.onTrue(new cmdResetGyro())
+        .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.WHITE));
 
   }
 
@@ -219,10 +238,9 @@ public class RobotContainer {
     SmartDashboard.putNumber("ArmExtendPos", m_arm.getArmExtendPos());
     SmartDashboard.putNumber("ArmRotPos", m_arm.getArmRotPos());
     SmartDashboard.putNumber("gripperpos", m_Gripper.getGripPos());
-    SmartDashboard.putNumber("Intake Rot", m_Intake.getIntakeVelocity());
+    SmartDashboard.putNumber("Intake Velocity", m_Intake.getIntakeVelocity());
+    SmartDashboard.putNumber("Intake Current", m_Intake.getIntakeCur());
     // SmartDashboard.putNumber("LDM1POS", m_driveTrain.lDM1.getPositionABS());
-
-    
 
     SmartDashboard.putNumber("cSensor", m_Gripper.getDistance());
 
@@ -233,7 +251,6 @@ public class RobotContainer {
     SmartDashboard.putNumber("Field_pitch", Math.toDegrees(m_Estimator.getFieldPitchRad()));
     SmartDashboard.putNumber("Field_roll", Math.toDegrees(m_Estimator.getFieldRollRad()));
 
-    
     SmartDashboard.putNumber("cam11_x", m_Estimator.getCameraX());
     SmartDashboard.putNumber("cam11_y", m_Estimator.getCameraY());
     SmartDashboard.putNumber("cam11_z", m_Estimator.getCameraZ());

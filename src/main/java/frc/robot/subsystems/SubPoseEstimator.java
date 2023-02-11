@@ -1,7 +1,5 @@
 package frc.robot.subsystems;
 
-import frc.robot.commands.*;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 //import edu.wpi.first.apriltag.*;
 
@@ -9,7 +7,6 @@ import java.io.IOException;
 
 import org.photonvision.PhotonCamera;
 import org.photonvision.PhotonUtils;
-import frc.robot.Constants.AprilTagConstants;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
@@ -26,8 +23,8 @@ public class SubPoseEstimator extends SubsystemBase {
     Pose3d robotFieldPose = null;
     private final Pose3d nullPose = new Pose3d(new Translation3d(-99, -99, -99), new Rotation3d(0.0, 0.0, 0.0));
     private final PhotonCamera cam11 = new PhotonCamera("photon12");
-   
-   //default camera position
+
+    // default camera position
     private final Transform3d cam11_2_robotTransform3d = new Transform3d(new Translation3d(0, 0, .45),
             new Rotation3d(Math.toRadians(97), Math.toRadians(18), 0));
     // The parameter for loadFromResource() will be different depending on the game.
@@ -47,6 +44,9 @@ public class SubPoseEstimator extends SubsystemBase {
     private double m_field_pitchRad = 0.0;
 
     private Boolean m_HasTargets = false;
+
+    public int grid = 0;
+    public int column = 0;
 
     public SubPoseEstimator() {
 
@@ -168,12 +168,13 @@ public class SubPoseEstimator extends SubsystemBase {
 
     public enum targetPoses {
 
-
-        NULLPOSE("Null pose", new Pose3d(new Translation3d(-99, -99, -99), new Rotation3d(0.0, 0.0, 0.0))),
-        TAGID1("April Tag 1", new Pose3d(new Translation3d(14.4, 1.70, 0.5), new Rotation3d(0.0, 0.0, 0.0)));
+        NULLPOSE("Null pose", -99, -99, new Pose3d(new Translation3d(-99, -99, -99), new Rotation3d(0.0, 0.0, 0.0))),
+        TAGID1("April Tag 1", 1, 1, new Pose3d(new Translation3d(14.4, 1.70, 0.5), new Rotation3d(0.0, 0.0, 0.0)));
 
         private final String name;
         private final Pose3d pose;
+        private final int grid;
+        private final int column;
 
         public Pose3d getPose() {
             return pose;
@@ -183,10 +184,16 @@ public class SubPoseEstimator extends SubsystemBase {
             return name;
         }
 
+        public Pose3d getPoseByPos(int grid, int column) {
+            return pose;
 
-        targetPoses(String name, Pose3d pose){
+        }
+
+        targetPoses(String name, int grid, int column, Pose3d pose) {
             this.name = name;
             this.pose = pose;
+            this.grid = grid;
+            this.column = column;
         }
     }
 }

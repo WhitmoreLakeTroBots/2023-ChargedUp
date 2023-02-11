@@ -25,7 +25,7 @@ public class Intake extends SubsystemBase {
     public static double maxPos = 35;
     public static double safetyPos = 15;
 
-    private static double intakePow = .1;
+    private static double intakePow = 0.5;
 
     private static double rotTol = 1.5;
     private static double stagPower = .25;
@@ -33,7 +33,7 @@ public class Intake extends SubsystemBase {
 
     private boolean isRunning = false;
     private boolean cubeFound = false;
-    private double intakeRPMCutOff = 1500;
+    private double intakeRPMCutOff = 150000;
     private intakeState currentState = intakeState.STOP;
 
     private double targetRotPos = 0;
@@ -41,7 +41,7 @@ public class Intake extends SubsystemBase {
     public Intake() {
 
         intakeMotor = new WL_Spark(Constants.CANID.intake, WL_Spark.MotorType.kBrushless);
-        intakeMotor.setInverted(true);
+        intakeMotor.setInverted(false);
         setSparkParms(intakeMotor);
 
         rotMotor = new WL_Spark(Constants.CANID.intakeRot, WL_Spark.MotorType.kBrushless);
@@ -120,6 +120,9 @@ public class Intake extends SubsystemBase {
     }
     public double getIntakeVelocity() {
         return intakeMotor.getVelocity();
+    }
+    public double getIntakeCur() {
+        return intakeMotor.getOutputCurrent();
     }
     public void setIntakeRotPos(double target) {
         targetRotPos = RobotMath.safetyCap(target, minPos, maxPos);

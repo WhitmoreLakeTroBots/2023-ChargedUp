@@ -95,14 +95,14 @@ public class Arm extends SubsystemBase {
         armRot.set(RobotMath.goToPosStag(getArmRotPos(), targetArmRotPos, tolRot, targetPowerRot, stagPosRot,
                 stagPowerRot));
 
-        if(armExtend.get() == 0){
+        if (RobotMath.isInRange(getArmExtendPos(), targetArmExtendPos, tolExtend)){
             bDoneExt = true;
         }
         else {
             bDoneExt = false;
         }
 
-        if(armRot.get() == 0){
+        if(RobotMath.isInRange(getArmRotPos(), targetArmRotPos, tolRot)){
             bDoneRot = true;
         }
         else{
