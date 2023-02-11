@@ -20,6 +20,7 @@ public class Intake extends SubsystemBase {
 
     public static double inPos = 0;
     public static double outPos = 13.75;
+    public static double transferPos = 3.0;
     private static double minPos = 0;
     public static double maxPos = 35;
     public static double safetyPos = 15;
@@ -29,6 +30,11 @@ public class Intake extends SubsystemBase {
     private static double rotTol = 1.5;
     private static double stagPower = .25;
     private static double stagRotPos = 10;
+
+    private boolean isRunning = false;
+    private boolean cubeFound = false;
+    private double intakeRPMCutOff = 1500;
+    private intakeState currentState = intakeState.STOP;
 
     private double targetRotPos = 0;
 
@@ -50,7 +56,7 @@ public class Intake extends SubsystemBase {
         // to
         // update them via the RevClient.
 
-        wls.setSmartCurrentLimit(10);
+        wls.setSmartCurrentLimit(15);
         wls.setIdleMode(IdleMode.kBrake);
         wls.setSoftLimit(SoftLimitDirection.kReverse, -1);
         wls.setSoftLimit(SoftLimitDirection.kForward, (float) maxPos);
@@ -63,7 +69,42 @@ public class Intake extends SubsystemBase {
         rotMotor.set(RobotMath.goToPosStag(getIntakeRotPos(), targetRotPos, rotTol, intakePow, stagRotPos,
                 stagPower));
 
-    }
+
+        switch (currentState) {
+
+            case STOP: 
+
+            break;
+            case STARTING:
+            if (getIntakeVelocity() > intakeRPMCutOff) {
+                currentState = intakeState.RUNNING;
+            }
+            break;
+
+            case RUNNING: 
+                detectCube();
+            break;
+            case DETECTED:
+                
+            break;
+
+            case TRANSFER:
+
+            break;
+
+            case STORAGE:
+
+            break;
+
+            case SAFTEY:
+
+            break;
+
+
+
+            default:
+        }
+     }
 
     @Override
     public void simulationPeriodic() {
@@ -77,14 +118,24 @@ public class Intake extends SubsystemBase {
     public double getIntakeRotPos() {
         return rotMotor.getPosition();
     }
-
+    public double getIntakeVelocity() {
+        return intakeMotor.getVelocity();
+    }
     public void setIntakeRotPos(double target) {
         targetRotPos = RobotMath.safetyCap(target, minPos, maxPos);
+    }
+
+    private void detectCube() {
+        if (getIntakeVelocity() < intakeRPMCutOff) {
+            stopIntake();
+            currentState = intakeState.DETECTED;
+        }
 
     }
 
     public void startIntake() {
         intakeMotor.set(intakePow);
+        currentState = intakeState.STARTING;
     }
 
     public void stopIntake() {
@@ -94,5 +145,13 @@ public class Intake extends SubsystemBase {
     public void stopIntakeRot() {
         targetRotPos = getIntakeRotPos();
     }
-
+    public enum intakeState {
+        STOP,
+        STARTING,
+        RUNNING,
+        DETECTED,
+        TRANSFER,
+        STORAGE,
+        SAFTEY;
+    }
 }

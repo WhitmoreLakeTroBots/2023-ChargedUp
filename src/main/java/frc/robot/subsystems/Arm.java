@@ -38,7 +38,7 @@ public class Arm extends SubsystemBase {
 
     public static double carryRotPos = 30;
     public static double carryExtendPos = 0;
-    public static double deliveryHighRotPos = 77;
+    public static double deliveryHighRotPos = 79;
     public static double deliveryHighExtendPos = 245;
     // fix med and low delivery positions to where they should be
     public static double deliveryMedRotPos = 79;
@@ -51,7 +51,7 @@ public class Arm extends SubsystemBase {
     private static double safetyArmRotPos = 20;
     private static double safetyArmExtPos = 7;
     // fix safety positions
-    private static double safetyUpperArmRotPos = 060;
+    private static double safetyUpperArmRotPos = 065;
     private static double safetyUpperArmExtPos = 180;
 
     private static double pauseRotPos = 0;

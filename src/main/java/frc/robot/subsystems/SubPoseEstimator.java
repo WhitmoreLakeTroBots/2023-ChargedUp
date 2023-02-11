@@ -26,8 +26,10 @@ public class SubPoseEstimator extends SubsystemBase {
     Pose3d robotFieldPose = null;
     private final Pose3d nullPose = new Pose3d(new Translation3d(-99, -99, -99), new Rotation3d(0.0, 0.0, 0.0));
     private final PhotonCamera cam11 = new PhotonCamera("photon12");
+   
+   //default camera position
     private final Transform3d cam11_2_robotTransform3d = new Transform3d(new Translation3d(0, 0, .45),
-            new Rotation3d(0, 0, 0));
+            new Rotation3d(Math.toRadians(97), Math.toRadians(18), 0));
     // The parameter for loadFromResource() will be different depending on the game.
     private AprilTagFieldLayout aprilTagFieldLayout = null;
 
@@ -168,7 +170,7 @@ public class SubPoseEstimator extends SubsystemBase {
 
 
         NULLPOSE("Null pose", new Pose3d(new Translation3d(-99, -99, -99), new Rotation3d(0.0, 0.0, 0.0))),
-        TAGID1("April Tag 1", new Pose3d(new Translation3d(14, .67, .78), new Rotation3d(0.0, 0.0, 0.0)));
+        TAGID1("April Tag 1", new Pose3d(new Translation3d(14.4, 1.70, 0.5), new Rotation3d(0.0, 0.0, 0.0)));
 
         private final String name;
         private final Pose3d pose;

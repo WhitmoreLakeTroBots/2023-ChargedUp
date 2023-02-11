@@ -25,7 +25,7 @@ public class A_R_P1_V1 extends SequentialCommandGroup {
 
         addCommands(new cmdSetGripperPos(Gripper.openPos,true));
         addCommands(new cmdSetArmMode(Arm.Mode.INTAKE, false));
-        addCommands(new cmdDriveStraight(10, 0.3, 0)); //dist in inches
+        addCommands(new cmdDriveStraight(20, 0.5, 0)); //dist in inches
         //addCommands(new Auton1Parallel(Arm.Mode.INTAKE,10,0.3,true));
     }
 

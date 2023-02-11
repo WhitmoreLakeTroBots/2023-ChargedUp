@@ -75,8 +75,10 @@ public class RobotContainer {
     configureButtonBindings();
 
     // Test Drive code
-    m_chooser.setDefaultOption("active break", new cmdActiveBrake());
+    m_chooser.setDefaultOption("A_R_P1_V1", new A_R_P1_V1());
     m_chooser.addOption("A_R_P1_V1", new A_R_P1_V1());
+    m_chooser.addOption("active break", new cmdActiveBrake());
+    
     /*
      * m_chooser.addOption("driveforward", new cmdDriveStraight(24, .25, 0.0));
      * m_chooser.addOption("driveback", new cmdDriveStraight(24, -.25, 0.0));
@@ -90,7 +92,7 @@ public class RobotContainer {
      * m_chooser.addOption("strafe left", new cmdStrafe(12, .25, 0.0));
      * m_chooser.addOption("strafe right", new cmdStrafe(12, -.25, 0.0));
      */
-
+    SmartDashboard.putData("Auton", new A_R_P1_V1());
     /*
      * SmartDashboard.putData("turn-0", new cmdTurnByGyro(0, .2, true));
      * SmartDashboard.putData("driveforward", new cmdDriveStraight(24, .25,
@@ -104,18 +106,18 @@ public class RobotContainer {
      * SmartDashboard.putData("strafe right", new cmdStrafe(12, -.25,
      * m_subGyro.getNormaliziedNavxAngle()));
      */
-    SmartDashboard.putData("active break", new cmdActiveBrake());
-    SmartDashboard.putData("Extend arm Pos", new cmdSetArmMode(Arm.Mode.DELIVERHIGH, false));
-    SmartDashboard.putData("arm Pos Intake", new cmdSetArmMode(Arm.Mode.INTAKE, false));
-    SmartDashboard.putData("set color red", new cmdUpdateBaseColor(lightPattern.RED));
-    SmartDashboard.putData("set color blue", new cmdUpdateBaseColor(lightPattern.BLUE));
+   // SmartDashboard.putData("active break", new cmdActiveBrake());
+   // SmartDashboard.putData("Extend arm Pos", new cmdSetArmMode(Arm.Mode.DELIVERHIGH, false));
+   // SmartDashboard.putData("arm Pos Intake", new cmdSetArmMode(Arm.Mode.INTAKE, false));
+   // SmartDashboard.putData("set color red", new cmdUpdateBaseColor(lightPattern.RED));
+   // SmartDashboard.putData("set color blue", new cmdUpdateBaseColor(lightPattern.BLUE));
 
-    SmartDashboard.putData("Grip Open", new cmdSetGripperPos(Gripper.openPos, false));
-    SmartDashboard.putData("Grip Cone", new cmdSetGripperPos(Gripper.coneClosePos, false));
-    SmartDashboard.putData("Grip cube", new cmdSetGripperPos(Gripper.cubeClosePos, false));
-    SmartDashboard.putData("auton1test", new A_R_P1_V1());
+   // SmartDashboard.putData("Grip Open", new cmdSetGripperPos(Gripper.openPos, false));
+   // SmartDashboard.putData("Grip Cone", new cmdSetGripperPos(Gripper.coneClosePos, false));
+   // SmartDashboard.putData("Grip cube", new cmdSetGripperPos(Gripper.cubeClosePos, false));
+   // SmartDashboard.putData("auton1test", new A_R_P1_V1());
 
-    SmartDashboard.putData("Auto Mode", m_chooser);
+   // SmartDashboard.putData("Auto Mode", m_chooser);
   }
 
   public static RobotContainer getInstance() {
@@ -235,7 +237,7 @@ public class RobotContainer {
     SmartDashboard.putNumber("cam11_x", m_Estimator.getCameraX());
     SmartDashboard.putNumber("cam11_y", m_Estimator.getCameraY());
     SmartDashboard.putNumber("cam11_z", m_Estimator.getCameraZ());
-
+    SmartDashboard.putNumber("TagID", m_Estimator.getFiducialId());
   }
 
 }
