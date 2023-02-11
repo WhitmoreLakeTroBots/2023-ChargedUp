@@ -23,7 +23,7 @@ import java.util.Optional;
  *
  */
 public class SubPoseEstimator extends SubsystemBase {
-    Pose3d robotPose = null;
+    Pose3d robotFieldPose = null;
     private final Pose3d nullPose = new Pose3d(new Translation3d(-99, -99, -99), new Rotation3d(0.0, 0.0, 0.0));
     private final PhotonCamera cam11 = new PhotonCamera("photon12");
     private final Transform3d cam11_2_robotTransform3d = new Transform3d(new Translation3d(0, 0, .45),
@@ -70,17 +70,17 @@ public class SubPoseEstimator extends SubsystemBase {
 
             if (bestTagPose.isPresent()) {
                 m_HasTargets = results.hasTargets();
-                robotPose = PhotonUtils.estimateFieldToRobotAprilTag(
+                robotFieldPose = PhotonUtils.estimateFieldToRobotAprilTag(
                         results.getBestTarget().getBestCameraToTarget(),
                         bestTagPose.get(),
                         cam11_2_robotTransform3d);
 
-                m_field_x = robotPose.getX();
-                m_field_y = robotPose.getY();
-                m_field_z = robotPose.getZ();
-                m_field_rollRad = robotPose.getRotation().getX();
-                m_field_yawRad = robotPose.getRotation().getZ();
-                m_field_pitchRad = robotPose.getRotation().getY();
+                m_field_x = robotFieldPose.getX();
+                m_field_y = robotFieldPose.getY();
+                m_field_z = robotFieldPose.getZ();
+                m_field_rollRad = robotFieldPose.getRotation().getX();
+                m_field_yawRad = robotFieldPose.getRotation().getZ();
+                m_field_pitchRad = robotFieldPose.getRotation().getY();
 
                 m_cam11_x = results.getBestTarget().getBestCameraToTarget().getX();
                 m_cam11_y = results.getBestTarget().getBestCameraToTarget().getY();
@@ -104,15 +104,15 @@ public class SubPoseEstimator extends SubsystemBase {
     // here. Call these from Commands.
 
     private void NullThePose() {
-        robotPose = nullPose;
-        m_field_x = robotPose.getX();
-        m_field_y = robotPose.getY();
-        m_field_z = robotPose.getZ();
+        robotFieldPose = nullPose;
+        m_field_x = robotFieldPose.getX();
+        m_field_y = robotFieldPose.getY();
+        m_field_z = robotFieldPose.getZ();
         m_tag_ID = 0;
 
-        m_field_rollRad = robotPose.getRotation().getX();
-        m_field_yawRad = robotPose.getRotation().getZ();
-        m_field_pitchRad = robotPose.getRotation().getY();
+        m_field_rollRad = robotFieldPose.getRotation().getX();
+        m_field_yawRad = robotFieldPose.getRotation().getZ();
+        m_field_pitchRad = robotFieldPose.getRotation().getY();
 
         m_cam11_x = 0.0;
         m_cam11_y = 0.0;
@@ -120,8 +120,8 @@ public class SubPoseEstimator extends SubsystemBase {
         m_HasTargets = false;
     }
 
-    private Pose3d getRobotPose() {
-        return robotPose;
+    public Pose3d getRobotFieldPose() {
+        return robotFieldPose;
     }
 
     public int getFiducialId() {
@@ -162,5 +162,29 @@ public class SubPoseEstimator extends SubsystemBase {
 
     public double getFieldPitchRad() {
         return m_field_pitchRad;
+    }
+
+    public enum targetPoses {
+
+
+        NULLPOSE("Null pose", new Pose3d(new Translation3d(-99, -99, -99), new Rotation3d(0.0, 0.0, 0.0))),
+        TAGID1("April Tag 1", new Pose3d(new Translation3d(14, .67, .78), new Rotation3d(0.0, 0.0, 0.0)));
+
+        private final String name;
+        private final Pose3d pose;
+
+        public Pose3d getPose() {
+            return pose;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+
+        targetPoses(String name, Pose3d pose){
+            this.name = name;
+            this.pose = pose;
+        }
     }
 }

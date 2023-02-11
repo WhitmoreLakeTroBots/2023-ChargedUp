@@ -3,7 +3,7 @@ package frc.robot.subsystems;
 import frc.robot.commands.*;
 
 import com.revrobotics.CANSparkMax.IdleMode;
-
+import frc.robot.RobotContainer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -31,6 +31,14 @@ public class DriveTrain extends SubsystemBase {
     private double teleopPower = .40;
     public static double normalDriveSpeed = 0.40;
     public static double boostSpeed = 0.80;
+
+    private boolean bGoToPos = false;
+    private double driveDist = 0.0;
+    private double strafeDist = 0.0;
+    private double heading = 0.0;
+    private double travelDist = 0.0;
+    private double drivePower = 0.0;
+    private boolean bComplete = true;
 
     private double lDM1Power;
     private double lDM2Power;
@@ -87,6 +95,10 @@ public class DriveTrain extends SubsystemBase {
     public void periodic() {
         // This method will be called once per scheduler run
 
+        if(bGoToPos){
+            driveGoToPos();
+
+        }
     }
 
     @Override
@@ -184,5 +196,32 @@ public class DriveTrain extends SubsystemBase {
     }
     public void setMaxSpeed(double newSpeed){
         teleopPower = RobotMath.safetyCap(newSpeed, 0.40, 1);
+    }
+
+    private void driveGoToPos(){
+
+        double headingDelta = RobotMath.calcTurnRate(RobotContainer.getInstance().m_subGyro.getNormaliziedNavxAngle(),
+        this.heading, RobotContainer.getInstance().m_driveTrain.kp_driveStraightGyro);
+
+        if (travelDist <= getDistanceTraveledInches()) {
+            bComplete = true;
+            // end(false);
+            this.StopDrive();
+        }
+        doDrive(driveDist, strafeDist, headingDelta, drivePower);
+    }
+
+    public void cmdGoToPos(double drive, double strafe, double heading, double mPower){
+        // calculate drive power and calculate strafe power
+        bComplete = false;
+        this.driveDist = drive;
+        this.strafeDist = strafe;
+        this.heading = heading;
+        this.drivePower = mPower;
+        // calculate drive hypotenuse and save 
+    }
+
+    public boolean isComplete(){
+        return bComplete;
     }
 }
