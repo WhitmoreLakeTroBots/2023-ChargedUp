@@ -33,7 +33,7 @@ public class Intake extends SubsystemBase {
 
     private boolean isRunning = false;
     private boolean cubeFound = false;
-    private double intakeRPMCutOff = 150000;
+    private double intakeCurrCutOff = 8;
     private intakeState currentState = intakeState.STOP;
 
     private double targetRotPos = 0;
@@ -76,7 +76,7 @@ public class Intake extends SubsystemBase {
 
             break;
             case STARTING:
-            if (getIntakeVelocity() > intakeRPMCutOff) {
+            if ((getIntakeCur() < intakeCurrCutOff )&&(getIntakeCur()>1)) {
                 currentState = intakeState.RUNNING;
             }
             break;
@@ -129,7 +129,7 @@ public class Intake extends SubsystemBase {
     }
 
     private void detectCube() {
-        if (getIntakeVelocity() < intakeRPMCutOff) {
+        if (getIntakeCur() > intakeCurrCutOff) {
             stopIntake();
             currentState = intakeState.DETECTED;
         }

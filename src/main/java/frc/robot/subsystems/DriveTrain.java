@@ -232,4 +232,6 @@ public class DriveTrain extends SubsystemBase {
     public boolean isComplete(){
         return bComplete;
     }
+    public double getDriveDist(){return driveDist;}
+    public double getStrafeDist(){return strafeDist;}
 }

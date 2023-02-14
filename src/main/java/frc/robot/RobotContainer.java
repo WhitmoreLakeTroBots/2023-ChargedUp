@@ -39,8 +39,8 @@ public class RobotContainer {
 
   // The robot's subsystems
   public final TemplateSubsystem m_templateSubsystem = new TemplateSubsystem();
-  public final DriveTrain m_driveTrain = new DriveTrain();
   public final SubGyro m_subGyro = new SubGyro();
+  public final DriveTrain m_driveTrain = new DriveTrain();
   public final Lighting m_Lighting = new Lighting();
   public final Arm m_arm = new Arm();
   public final SubPoseEstimator m_Estimator = new SubPoseEstimator();
@@ -191,7 +191,7 @@ public class RobotContainer {
 
     // right trigger on driver is AUTO DRIVE
     Trigger rTrigger_driveController = driveController.rightTrigger();
-    rTrigger_driveController.whileTrue(new cmdDriveToTarget(SubPoseEstimator.targetPoses.TAGID1, .30))
+    rTrigger_driveController.whileTrue(new cmdDriveToTarget(SubPoseEstimator.targetPoses.TAGID1, .05))
         .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.RAINBOW))
         .onFalse(new cmdDisableAutoDrive());
 
@@ -255,6 +255,9 @@ public class RobotContainer {
     SmartDashboard.putNumber("cam11_y", m_Estimator.getCameraY());
     SmartDashboard.putNumber("cam11_z", m_Estimator.getCameraZ());
     SmartDashboard.putNumber("TagID", m_Estimator.getFiducialId());
+
+    SmartDashboard.putNumber("Drive distance", m_driveTrain.getDriveDist());
+    SmartDashboard.putNumber("Strafe distance", m_driveTrain.getStrafeDist());
   }
 
 }

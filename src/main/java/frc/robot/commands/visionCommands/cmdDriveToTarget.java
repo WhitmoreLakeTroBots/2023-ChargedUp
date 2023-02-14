@@ -13,7 +13,7 @@ public class cmdDriveToTarget extends CommandBase {
     private Pose3d targetPose;
     private Pose3d diffPose;
 
-    private double power = 0.15;
+    private double power = 0.05;
     private boolean bDone = false;
 
     public cmdDriveToTarget(SubPoseEstimator.targetPoses tPose, double speed) {
@@ -44,9 +44,10 @@ public class cmdDriveToTarget extends CommandBase {
 
             // converting to inches from pos value before entering drive train
             // Pos may be reversed, currently driving the wrong direction
-            diffPose = targetPose.relativeTo(RobotContainer.getInstance().m_Estimator.getRobotFieldPose());
+            //diffPose = targetPose.relativeTo(RobotContainer.getInstance().m_Estimator.getRobotFieldPose());
+            diffPose = RobotContainer.getInstance().m_Estimator.getRobotFieldPose().relativeTo(targetPose);
             RobotContainer.getInstance().m_driveTrain.cmdGoToPos(RobotMath.metersToInches(diffPose.getX()),
-                    RobotMath.metersToInches(diffPose.getY()), Math.toDegrees(diffPose.getRotation().getZ()), power);
+                    RobotMath.metersToInches(diffPose.getY()), Math.toDegrees(diffPose.getRotation().getY())*-1, power);
         }
         if (RobotContainer.getInstance().m_driveTrain.isComplete()) {
             RobotContainer.getInstance().m_driveTrain.StopDrive();

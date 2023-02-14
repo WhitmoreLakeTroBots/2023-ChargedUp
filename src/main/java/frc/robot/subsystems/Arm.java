@@ -89,26 +89,6 @@ public class Arm extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        armExtend.set(RobotMath.goToPosStag(getArmExtendPos(),
-                targetArmExtendPos, tolExtend, targetPowerExtend, stagPosExtend, stagPowerExtend));
-
-        armRot.set(RobotMath.goToPosStag(getArmRotPos(), targetArmRotPos, tolRot, targetPowerRot, stagPosRot,
-                stagPowerRot));
-
-        if (RobotMath.isInRange(getArmExtendPos(), targetArmExtendPos, tolExtend)){
-            bDoneExt = true;
-        }
-        else {
-            bDoneExt = false;
-        }
-
-        if(RobotMath.isInRange(getArmRotPos(), targetArmRotPos, tolRot)){
-            bDoneRot = true;
-        }
-        else{
-            bDoneRot = false;
-        }
-
         switch (CurrentMode) {
 
             case START:
@@ -140,6 +120,25 @@ public class Arm extends SubsystemBase {
 
         }
 
+        armExtend.set(RobotMath.goToPosStag(getArmExtendPos(),
+                targetArmExtendPos, tolExtend, targetPowerExtend, stagPosExtend, stagPowerExtend));
+
+        armRot.set(RobotMath.goToPosStag(getArmRotPos(), targetArmRotPos, tolRot, targetPowerRot, stagPosRot,
+                stagPowerRot));
+
+        if (RobotMath.isInRange(getArmExtendPos(), targetArmExtendPos, tolExtend)){
+            bDoneExt = true;
+        }
+        else {
+            bDoneExt = false;
+        }
+
+        if(RobotMath.isInRange(getArmRotPos(), targetArmRotPos, tolRot)){
+            bDoneRot = true;
+        }
+        else{
+            bDoneRot = false;
+        }
     }
 
     @Override
