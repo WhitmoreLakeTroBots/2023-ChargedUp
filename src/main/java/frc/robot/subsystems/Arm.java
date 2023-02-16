@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
+import frc.robot.RobotContainer;
 import frc.robot.RobotMath;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
@@ -115,6 +116,10 @@ public class Arm extends SubsystemBase {
                 goToIntake();
                 break;
 
+            case SAFETYMODE:
+                goToStart();
+                break;
+
             default:
                 goToStart();
 
@@ -126,17 +131,15 @@ public class Arm extends SubsystemBase {
         armRot.set(RobotMath.goToPosStag(getArmRotPos(), targetArmRotPos, tolRot, targetPowerRot, stagPosRot,
                 stagPowerRot));
 
-        if (RobotMath.isInRange(getArmExtendPos(), targetArmExtendPos, tolExtend)){
+        if (RobotMath.isInRange(getArmExtendPos(), targetArmExtendPos, tolExtend)) {
             bDoneExt = true;
-        }
-        else {
+        } else {
             bDoneExt = false;
         }
 
-        if(RobotMath.isInRange(getArmRotPos(), targetArmRotPos, tolRot)){
+        if (RobotMath.isInRange(getArmRotPos(), targetArmRotPos, tolRot)) {
             bDoneRot = true;
-        }
-        else{
+        } else {
             bDoneRot = false;
         }
     }
@@ -199,7 +202,7 @@ public class Arm extends SubsystemBase {
             pauseRot();
         } else {
             unpauseRot();
-        } 
+        }
     }
 
     private void goToCarry() {
@@ -215,8 +218,8 @@ public class Arm extends SubsystemBase {
         } else {
             unpauseRot();
         }
-        
-        if((armRot.getPosition() > safetyUpperArmRotPos) && (armExtend.getPosition() < safetyUpperArmExtPos)){
+
+        if ((armRot.getPosition() > safetyUpperArmRotPos) && (armExtend.getPosition() < safetyUpperArmExtPos)) {
             pauseExt();
         } else {
             unpauseExt();
@@ -231,7 +234,7 @@ public class Arm extends SubsystemBase {
         setArmRotTargPos(deliveryLowRotPos, stagPosRot, stagPowerRot);
         // beware of rot safety pos
         pauseExtPos = deliveryLowExtendPos;
-       
+
         // preventing arm from extending while too low
         if (armRot.getPosition() < safetyArmRotPos) {
             pauseExt();
@@ -248,14 +251,14 @@ public class Arm extends SubsystemBase {
         setArmRotTargPos(deliveryMedRotPos, stagPosRot, stagPowerRot);
         // beware of rot safety pos
         pauseExtPos = deliveryMedExtendPos;
-      
+
         // preventing arm from extending while too low
         if (armRot.getPosition() < safetyArmRotPos) {
             pauseExt();
         } else {
             unpauseExt();
         }
-    
+
     }
 
     private void goToDeliverHigh() {
@@ -265,7 +268,7 @@ public class Arm extends SubsystemBase {
         setArmRotTargPos(deliveryHighRotPos, stagPosRot, stagPowerRot);
         // beware of rot safety pos
         pauseExtPos = deliveryHighExtendPos;
-        pauseRotPos = deliveryHighRotPos; 
+        pauseRotPos = deliveryHighRotPos;
 
         // preventing arm from extending while too low
         if (armRot.getPosition() < safetyArmRotPos) {
@@ -274,10 +277,9 @@ public class Arm extends SubsystemBase {
             unpauseExt();
         }
         // preventing arm from rotating when extention isn't fully extended
-        if((armRot.getPosition() > safetyUpperArmRotPos) && (armExtend.getPosition() < safetyUpperArmExtPos)){
+        if ((armRot.getPosition() > safetyUpperArmRotPos) && (armExtend.getPosition() < safetyUpperArmExtPos)) {
             pauseRot();
-        }
-        else{
+        } else {
             unpauseRot();
         }
     }
@@ -287,14 +289,13 @@ public class Arm extends SubsystemBase {
         setArmRotTargPos(intakeRotPos, stagPosRot, stagPowerRot);
         pauseExtPos = intakeExtPos;
 
-        
         if ((armRot.getPosition() <= safetyArmRotPos) && (armExtend.getPosition() > safetyArmExtPos)) {
             pauseExt();
         } else {
             unpauseExt();
         }
 
-        if((armRot.getPosition() > safetyUpperArmRotPos) && (armExtend.getPosition() < safetyUpperArmExtPos)){
+        if ((armRot.getPosition() > safetyUpperArmRotPos) && (armExtend.getPosition() < safetyUpperArmExtPos)) {
             pauseExt();
         } else {
             unpauseExt();
@@ -303,16 +304,23 @@ public class Arm extends SubsystemBase {
     }
 
     public void setCurrentMode(Mode newMode) {
-        CurrentMode = newMode;
+
+        if (RobotContainer.getInstance().m_Intake.getIntakeRotPos() > Intake.safetyPos) {
+            CurrentMode = newMode;
+        } else {
+            CurrentMode = Mode.SAFETYMODE;
+        }
     }
 
-    public boolean isInPos(){
-        if((bDoneRot) && (bDoneExt)){
+    public boolean isInPos() {
+        if ((bDoneRot) && (bDoneExt)) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
+    }
+    public Mode getCurrentMode(){
+        return CurrentMode;
     }
 
     public enum Mode {
@@ -321,7 +329,8 @@ public class Arm extends SubsystemBase {
         DELIVERLOW,
         DELIVERMED,
         DELIVERHIGH,
-        INTAKE;
+        INTAKE,
+        SAFETYMODE;
     }
 
 }

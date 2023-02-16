@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotMath;
 import frc.robot.hardware.WL_Spark;
+import frc.robot.subsystems.Arm.Mode;
+import frc.robot.RobotContainer;
 
 /**
  *
@@ -21,6 +23,7 @@ public class Intake extends SubsystemBase {
     public static double inPos = 0;
     public static double outPos = 13.75;
     public static double transferPos = 3.0;
+    private static double outOfTheWayPos = 20.0;
     private static double minPos = 0;
     public static double maxPos = 35;
     public static double safetyPos = 15;
@@ -96,7 +99,7 @@ public class Intake extends SubsystemBase {
 
             break;
 
-            case SAFTEY:
+            case SAFETY:
 
             break;
 
@@ -125,7 +128,10 @@ public class Intake extends SubsystemBase {
         return intakeMotor.getOutputCurrent();
     }
     public void setIntakeRotPos(double target) {
-        targetRotPos = RobotMath.safetyCap(target, minPos, maxPos);
+        if((RobotContainer.getInstance().m_arm.getCurrentMode() == Mode.SAFETYMODE) && 
+        (RobotContainer.getInstance().m_arm.isInPos())){
+            targetRotPos = RobotMath.safetyCap(target, minPos, maxPos);
+        }
     }
 
     private void detectCube() {
@@ -148,6 +154,32 @@ public class Intake extends SubsystemBase {
     public void stopIntakeRot() {
         targetRotPos = getIntakeRotPos();
     }
+
+    public void changePos(){
+        if(RobotMath.isInRange(targetRotPos, outPos, rotTol)){
+            setIntakeRotPos(transferPos);
+        }
+        else if(RobotMath.isInRange(targetRotPos, transferPos, rotTol)){
+            setIntakeRotPos(outPos);
+        }
+        else{
+            setIntakeRotPos(outPos);
+        }
+    }
+
+    public void getOutOfWay(){
+        setIntakeRotPos(outOfTheWayPos);
+    }
+
+    public void goToIn(){
+        setIntakeRotPos(inPos);
+    }
+
+    public void runInReverse(){
+        intakeMotor.set(-intakePow);
+    }
+    
+
     public enum intakeState {
         STOP,
         STARTING,
@@ -155,6 +187,6 @@ public class Intake extends SubsystemBase {
         DETECTED,
         TRANSFER,
         STORAGE,
-        SAFTEY;
+        SAFETY;
     }
 }

@@ -119,16 +119,16 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public void doDrive(double drive, double strafe, double turn, double speed) {
-        double Drive = drive * speed;
-        double Strafe = strafe * speed;
-        double Turn = turn * speed;
+        double Drive = drive;
+        double Strafe = strafe;
+        double Turn = turn;
 
         lDM1Power = Drive + Strafe + Turn;
         rDM1Power = Drive - Strafe - Turn;
         lDM2Power = Drive - Strafe + Turn;
         rDM2Power = Drive + Strafe - Turn;
         scale();
-        SetMotorPower();
+        SetMotorPower(speed);
         System.err.print(lDM1Power);
     }
 
@@ -160,11 +160,11 @@ public class DriveTrain extends SubsystemBase {
         }
     }
 
-    public void SetMotorPower() {
-        lDM1.set(lDM1Power);
-        lDM2.set(lDM2Power);
-        rDM1.set(rDM1Power);
-        rDM2.set(rDM2Power);
+    public void SetMotorPower(double speed) {
+        lDM1.set(lDM1Power * speed);
+        lDM2.set(lDM2Power * speed);
+        rDM1.set(rDM1Power * speed);
+        rDM2.set(rDM2Power * speed);
 
     }
 
