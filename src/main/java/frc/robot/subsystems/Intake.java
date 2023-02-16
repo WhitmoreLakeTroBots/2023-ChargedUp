@@ -23,8 +23,8 @@ public class Intake extends SubsystemBase {
     public static double inPos = 0;
     public static double outPos = 13.75;
     public static double transferPos = 3.0;
-    private static double outOfTheWayPos = 20.0;
-    private static double minPos = 0;
+    public static double outOfTheWayPos = 20.0;
+    public static double minPos = 0;
     public static double maxPos = 35;
     public static double safetyPos = 15;
 
@@ -38,6 +38,7 @@ public class Intake extends SubsystemBase {
     private boolean cubeFound = false;
     private double intakeCurrCutOff = 8;
     private intakeState currentState = intakeState.STOP;
+    private boolean isInPos = false;
 
     private double targetRotPos = 0;
 
@@ -60,7 +61,7 @@ public class Intake extends SubsystemBase {
         // update them via the RevClient.
 
         wls.setSmartCurrentLimit(15);
-        wls.setIdleMode(IdleMode.kBrake);
+        wls.setIdleMode(IdleMode.kCoast);
         wls.setSoftLimit(SoftLimitDirection.kReverse, -1);
         wls.setSoftLimit(SoftLimitDirection.kForward, (float) maxPos);
         wls.burnFlash();
@@ -69,10 +70,8 @@ public class Intake extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        rotMotor.set(RobotMath.goToPosStag(getIntakeRotPos(), targetRotPos, rotTol, intakePow, stagRotPos,
-                stagPower));
 
-
+        
         switch (currentState) {
 
             case STOP: 
@@ -107,6 +106,15 @@ public class Intake extends SubsystemBase {
 
             default:
         }
+
+        rotMotor.set(RobotMath.goToPosStag(getIntakeRotPos(), targetRotPos, rotTol, intakePow, stagRotPos,
+                stagPower));
+
+
+        if(RobotMath.isInRange(intakeMotor.getPosition(), targetRotPos, rotTol)){
+            isInPos = true;
+        }
+
      }
 
     @Override
@@ -131,6 +139,7 @@ public class Intake extends SubsystemBase {
         if((RobotContainer.getInstance().m_arm.getCurrentMode() == Mode.SAFETYMODE) && 
         (RobotContainer.getInstance().m_arm.isInPos())){
             targetRotPos = RobotMath.safetyCap(target, minPos, maxPos);
+            isInPos = false;
         }
     }
 
@@ -178,6 +187,7 @@ public class Intake extends SubsystemBase {
     public void runInReverse(){
         intakeMotor.set(-intakePow);
     }
+    public boolean getIsInPos(){return isInPos;}
     
 
     public enum intakeState {

@@ -7,11 +7,12 @@ import frc.robot.subsystems.Intake;
 public class cmdIntakePos extends CommandBase {
 
     private boolean bDone = true;
+    private boolean bWait = false;
     private double target;
 
-    public cmdIntakePos(double ntarget) {
+    public cmdIntakePos(double ntarget, boolean wait) {
         target = ntarget;
-
+        bWait = wait;
         // m_subsystem = subsystem;
         // addRequirements(m_subsystem);
 
@@ -28,6 +29,17 @@ public class cmdIntakePos extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+        if(bWait){
+            if(RobotContainer.getInstance().m_Intake.getIsInPos()){
+                bDone = true;
+            }
+            else{
+                bDone = false;
+            }
+        }
+        else{
+            bDone = true;
+        }
     }
 
     // Called once the command ends or is interrupted.

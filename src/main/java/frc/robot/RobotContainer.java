@@ -240,6 +240,7 @@ public class RobotContainer {
     SmartDashboard.putNumber("gripperpos", m_Gripper.getGripPos());
     SmartDashboard.putNumber("Intake Velocity", m_Intake.getIntakeVelocity());
     SmartDashboard.putNumber("Intake Current", m_Intake.getIntakeCur());
+    SmartDashboard.putNumber("Intake Rotation",m_Intake.getIntakeRotPos());
     // SmartDashboard.putNumber("LDM1POS", m_driveTrain.lDM1.getPositionABS());
 
     SmartDashboard.putNumber("cSensor", m_Gripper.getDistance());

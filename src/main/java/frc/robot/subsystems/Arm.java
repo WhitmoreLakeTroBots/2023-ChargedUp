@@ -93,30 +93,37 @@ public class Arm extends SubsystemBase {
         switch (CurrentMode) {
 
             case START:
+                RobotContainer.getInstance().m_Intake.setIntakeRotPos(Intake.inPos);
                 goToStart();
                 break;
 
             case CARRY:
+                RobotContainer.getInstance().m_Intake.setIntakeRotPos(Intake.outOfTheWayPos);
                 goToCarry();
                 break;
 
             case DELIVERLOW:
+                RobotContainer.getInstance().m_Intake.setIntakeRotPos(Intake.outPos);
                 goToDeliverLow();
                 break;
 
             case DELIVERMED:
+                RobotContainer.getInstance().m_Intake.setIntakeRotPos(Intake.outOfTheWayPos);
                 goToDeliverMed();
                 break;
 
             case DELIVERHIGH:
+                RobotContainer.getInstance().m_Intake.setIntakeRotPos(Intake.outOfTheWayPos);
                 goToDeliverHigh();
                 break;
 
             case INTAKE:
                 goToIntake();
+                RobotContainer.getInstance().m_Intake.setIntakeRotPos(Intake.inPos);
                 break;
 
             case SAFETYMODE:
+                RobotContainer.getInstance().m_Intake.setIntakeRotPos(Intake.outOfTheWayPos);
                 goToStart();
                 break;
 
@@ -319,7 +326,8 @@ public class Arm extends SubsystemBase {
             return false;
         }
     }
-    public Mode getCurrentMode(){
+
+    public Mode getCurrentMode() {
         return CurrentMode;
     }
 
