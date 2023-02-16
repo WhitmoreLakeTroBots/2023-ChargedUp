@@ -7,8 +7,10 @@ import frc.robot.commands.driveCommands.cmdActiveBrake;
 import frc.robot.commands.driveCommands.cmdDriveStraight;
 import frc.robot.commands.driveCommands.cmdResetGyro;
 import frc.robot.commands.driveCommands.cmdUpdateDriveSpeed;
+import frc.robot.commands.intakeCommands.cmdReverseIntake;
 import frc.robot.commands.intakeCommands.cmdStartIntake;
 import frc.robot.commands.intakeCommands.cmdStopIntake;
+import frc.robot.commands.intakeCommands.cmdTogglePos;
 import frc.robot.commands.lightingCommands.cmdUpdateBaseColor;
 import frc.robot.commands.visionCommands.cmdDisableAutoDrive;
 import frc.robot.commands.visionCommands.cmdDriveToTarget;
@@ -182,6 +184,12 @@ public class RobotContainer {
     Trigger rBumper_ArticButton = articController.rightBumper();
     rBumper_ArticButton.onTrue(new cmdStopIntake())
         .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.SKYBLUE));
+    
+    Trigger lBumper_ArticButton = articController.leftBumper();
+    lBumper_ArticButton.onTrue(new cmdTogglePos());
+
+    Trigger lTrigger_ArticButton = articController.leftTrigger();
+    lTrigger_ArticButton.onTrue(new cmdReverseIntake());
 
     // left trigger on driver = boost
     Trigger lTrigger_driveController = driveController.leftTrigger();
