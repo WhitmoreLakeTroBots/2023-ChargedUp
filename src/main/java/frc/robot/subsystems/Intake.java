@@ -21,16 +21,16 @@ public class Intake extends SubsystemBase {
     private WL_Spark rotMotor;
 
     public static double inPos = 0;
-    public static double outPos = 13.75;
-    public static double transferPos = 3.0;
-    public static double outOfTheWayPos = 20.0;
+    public static double outPos = 272;
+    public static double transferPos = 98.0;
+    public static double outOfTheWayPos = 188.0;
     public static double minPos = 0;
-    public static double maxPos = 35;
-    public static double safetyPos = 15;
+    public static double maxPos = 277;
+    public static double safetyPos = 172;
 
     private static double intakePow = 0.5;
 
-    private static double rotTol = 1.5;
+    private static double rotTol = 5;
     private static double stagPower = .25;
     private static double stagRotPos = 10;
 
@@ -61,7 +61,7 @@ public class Intake extends SubsystemBase {
         // update them via the RevClient.
 
         wls.setSmartCurrentLimit(15);
-        wls.setIdleMode(IdleMode.kCoast);
+        wls.setIdleMode(IdleMode.kBrake);
         wls.setSoftLimit(SoftLimitDirection.kReverse, -1);
         wls.setSoftLimit(SoftLimitDirection.kForward, (float) maxPos);
         wls.burnFlash();
