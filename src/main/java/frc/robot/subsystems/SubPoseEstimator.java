@@ -169,7 +169,18 @@ public class SubPoseEstimator extends SubsystemBase {
     public enum targetPoses {
 
         NULLPOSE("Null pose", -99, -99, new Pose3d(new Translation3d(-99, -99, -99), new Rotation3d(0.0, 0.0, 0.0))),
-        TAGID1("April Tag 1", 1, 1, new Pose3d(new Translation3d(14.4, 1.70, 0.5), new Rotation3d(0.0, 0.0, 0.0)));
+        TAGID1("April Tag 1", 1, 1, new Pose3d(new Translation3d(14.4, 1.70, 0.5), new Rotation3d(0.0, 0.0, 0.0))),
+
+        BLUE_GAME_PIECE_1("blue game 1", 1, 1, new Pose3d(new Translation3d(7.061, 0.914, 0.0), new Rotation3d(0.0, 0.0, 0.0))),
+        BLUE_GAME_PIECE_2("blue game 2", 1, 1, new Pose3d(new Translation3d(7.061, 2.134, 0.0), new Rotation3d(0.0, 0.0, 0.0))),
+        BLUE_GAME_PIECE_3("blue game 3", 1, 1, new Pose3d(new Translation3d(7.061, 3.404, 0.0), new Rotation3d(0.0, 0.0, 0.0))),
+        BLUE_GAME_PIECE_4("blue game 4", 1, 1, new Pose3d(new Translation3d(7.061, 4.572, 0.0), new Rotation3d(0.0, 0.0, 0.0))),
+
+        RED_GAME_PIECE_1("red game 1", 1, 1, new Pose3d(new Translation3d(9.448, 0.914, 0.0), new Rotation3d(0.0, 0.0, 0.0))),
+        RED_GAME_PIECE_2("red game 2", 1, 1, new Pose3d(new Translation3d(9.448, 2.134, 0.0), new Rotation3d(0.0, 0.0, 0.0))),
+        RED_GAME_PIECE_3("red game 3", 1, 1, new Pose3d(new Translation3d(9.448, 3.404, 0.0), new Rotation3d(0.0, 0.0, 0.0))),
+        RED_GAME_PIECE_4("red game 4", 1, 1, new Pose3d(new Translation3d(9.448, 4.572, 0.0), new Rotation3d(0.0, 0.0, 0.0)));
+
 
         private final String name;
         private final Pose3d pose;
