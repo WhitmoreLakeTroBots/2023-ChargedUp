@@ -316,6 +316,7 @@ public class Arm extends SubsystemBase {
             CurrentMode = newMode;
         } else {
             CurrentMode = Mode.SAFETYMODE;
+            RobotContainer.getInstance().m_Intake.setIntakeRotPos(Intake.outOfTheWayPos);
         }
     }
 

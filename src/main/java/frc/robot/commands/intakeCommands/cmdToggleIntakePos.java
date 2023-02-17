@@ -3,12 +3,12 @@ package frc.robot.commands.intakeCommands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
-public class cmdTogglePos extends CommandBase {
+public class cmdToggleIntakePos extends CommandBase {
 
     private boolean bDone = true;
 
 
-    public cmdTogglePos() {
+    public cmdToggleIntakePos() {
         
 
         // m_subsystem = subsystem;

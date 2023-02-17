@@ -141,6 +141,9 @@ public class Intake extends SubsystemBase {
             targetRotPos = RobotMath.safetyCap(target, minPos, maxPos);
             isInPos = false;
         }
+        else{
+            RobotContainer.getInstance().m_arm.setCurrentMode(Mode.SAFETYMODE);
+        }
     }
 
     private void detectCube() {
