@@ -161,9 +161,9 @@ public class Intake extends SubsystemBase {
 
     public void startIntake() {
         intakeMotor.set(intakePow);
-        currentState = intakeState.STARTING;
-        curTime = RobotMath.getTime();
-        endTime = curTime + delayTime;
+       // currentState = intakeState.STARTING;
+        //curTime = RobotMath.getTime();
+        //endTime = curTime + delayTime;
     }
 
     public void stopIntake() {
