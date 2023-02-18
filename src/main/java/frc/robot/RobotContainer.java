@@ -182,7 +182,7 @@ public class RobotContainer {
 
     // Start intake artic
     Trigger rTrigger_ArticButton = articController.rightTrigger();
-    rTrigger_ArticButton.whileTrue(new cmdStartIntake())
+    rTrigger_ArticButton.whileTrue(new cmdReverseIntake())
         .onFalse(new cmdStopIntake())
         .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.LAWNGREEN));
 
@@ -195,7 +195,7 @@ public class RobotContainer {
     lBumper_ArticButton.onTrue(new cmdIntakePos(Intake.outPos, false));
 
     Trigger lTrigger_ArticButton = articController.leftTrigger();
-    lTrigger_ArticButton.whileTrue(new cmdReverseIntake())
+    lTrigger_ArticButton.whileTrue(new cmdStartIntake())
     .onFalse(new cmdStopIntake());
 
     //start button E stop
@@ -213,8 +213,9 @@ public class RobotContainer {
 
     // right trigger on driver is AUTO DRIVE
     Trigger rTrigger_driveController = driveController.rightTrigger();
-    rTrigger_driveController.whileTrue(new cmdDriveStraight(72, 0.4))
-    //.whileTrue(new cmdDriveToTarget(SubPoseEstimator.targetPoses.BLUE_GAME_PIECE_1, 0.1))
+   rTrigger_driveController
+   // .whileTrue(new cmdDriveStraight(72, 0.4))
+        .whileTrue(new cmdDriveToTarget(SubPoseEstimator.targetPoses.BLUE_GAME_PIECE_1, 0.1))
         .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.RAINBOW))
         .onFalse(new cmdDisableAutoDrive());
 
