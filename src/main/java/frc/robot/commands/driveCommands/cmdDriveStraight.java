@@ -63,7 +63,7 @@ public class cmdDriveStraight extends CommandBase {
         double headingDelta = 0;
         
         RobotContainer.getInstance().m_driveTrain.doDrive(power, 0, headingDelta, .4);
-        if (targetPosition <= RobotContainer.getInstance().m_driveTrain.getDistanceTraveledInches()) {
+        if (RobotContainer.getInstance().m_driveTrain.getDistanceTraveledInches() >= targetPosition  ) {
             bDone = true;
             // end(false);
             RobotContainer.getInstance().m_driveTrain.StopDrive();

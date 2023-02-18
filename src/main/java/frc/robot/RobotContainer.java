@@ -211,7 +211,8 @@ public class RobotContainer {
 
     // right trigger on driver is AUTO DRIVE
     Trigger rTrigger_driveController = driveController.rightTrigger();
-    rTrigger_driveController.whileTrue(new cmdDriveToTarget(SubPoseEstimator.targetPoses.BLUE_GAME_PIECE_1, 0.1))
+    rTrigger_driveController.whileTrue(new cmdDriveStraight(72, 0.4))
+    //.whileTrue(new cmdDriveToTarget(SubPoseEstimator.targetPoses.BLUE_GAME_PIECE_1, 0.1))
         .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.RAINBOW))
         .onFalse(new cmdDisableAutoDrive());
 
