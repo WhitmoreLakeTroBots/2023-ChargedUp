@@ -7,6 +7,7 @@ import frc.robot.commands.driveCommands.cmdActiveBrake;
 import frc.robot.commands.driveCommands.cmdDriveStraight;
 import frc.robot.commands.driveCommands.cmdResetGyro;
 import frc.robot.commands.driveCommands.cmdUpdateDriveSpeed;
+import frc.robot.commands.intakeCommands.cmdIntakePos;
 import frc.robot.commands.intakeCommands.cmdReverseIntake;
 import frc.robot.commands.intakeCommands.cmdStartIntake;
 import frc.robot.commands.intakeCommands.cmdStopIntake;
@@ -87,7 +88,7 @@ public class RobotContainer {
      * m_chooser.addOption("strafe right", new cmdStrafe(12, -.25, 0.0));
      */
     SmartDashboard.putData("Auton", new A_R_P1_V1());
-    SmartDashboard.putData("drive 6 feet", new cmdDriveStraight(72, 0.2));
+    SmartDashboard.putData("drive 6 feet", new cmdDriveStraight(72, 0.4,0));
     /*
      * SmartDashboard.putData("turn-0", new cmdTurnByGyro(0, .2, true));
      * SmartDashboard.putData("driveforward", new cmdDriveStraight(24, .25,
@@ -187,7 +188,7 @@ public class RobotContainer {
         .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.SKYBLUE));
     
     Trigger lBumper_ArticButton = articController.leftBumper();
-    lBumper_ArticButton.onTrue(new cmdToggleIntakePos());
+    lBumper_ArticButton.onTrue(new cmdIntakePos(Intake.outPos, false));
 
     Trigger lTrigger_ArticButton = articController.leftTrigger();
     lTrigger_ArticButton.onTrue(new cmdReverseIntake());

@@ -104,7 +104,7 @@ public class Arm extends SubsystemBase {
 
             case DELIVERLOW:
                 RobotContainer.getInstance().m_Intake.setIntakeRotPos(Intake.outPos);
-                goToDeliverLow();
+               // goToDeliverLow();
                 break;
 
             case DELIVERMED:

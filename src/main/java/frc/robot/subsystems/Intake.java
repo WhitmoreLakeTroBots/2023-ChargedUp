@@ -84,7 +84,7 @@ public class Intake extends SubsystemBase {
             break;
             case STARTING:
             if (RobotMath.getTime() > endTime) {
-                currentState = intakeState.RUNNING;
+              //  currentState = intakeState.RUNNING;
             }
             break;
 
