@@ -141,7 +141,8 @@ public class Intake extends SubsystemBase {
         return intakeMotor.getOutputCurrent();
     }
     public void setIntakeRotPos(double target) {
-        if((RobotContainer.getInstance().m_arm.getArmRotPos() < (Arm.intakeRotPos + Arm.tolRot))){
+        if((RobotContainer.getInstance().m_arm.getArmRotPos() < (Arm.intakeRotPos + Arm.tolRot))&& 
+            (!RobotContainer.getInstance().m_arm.ismoving())){
             targetRotPos = RobotMath.safetyCap(target, minPos, maxPos);
             isInPos = false;
         }

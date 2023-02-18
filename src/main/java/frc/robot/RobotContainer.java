@@ -11,6 +11,7 @@ import frc.robot.commands.intakeCommands.cmdIntakePos;
 import frc.robot.commands.intakeCommands.cmdReverseIntake;
 import frc.robot.commands.intakeCommands.cmdStartIntake;
 import frc.robot.commands.intakeCommands.cmdStopIntake;
+import frc.robot.commands.intakeCommands.cmdStopIntakeRot;
 import frc.robot.commands.intakeCommands.cmdToggleIntakePos;
 import frc.robot.commands.lightingCommands.cmdUpdateBaseColor;
 import frc.robot.commands.visionCommands.cmdDisableAutoDrive;
@@ -88,7 +89,7 @@ public class RobotContainer {
      * m_chooser.addOption("strafe right", new cmdStrafe(12, -.25, 0.0));
      */
     SmartDashboard.putData("Auton", new A_R_P1_V1());
-    SmartDashboard.putData("drive 6 feet", new cmdDriveStraight(72, 0.4,0));
+    SmartDashboard.putData("drive 6 feet", new cmdDriveStraight(72, 0.4));
     /*
      * SmartDashboard.putData("turn-0", new cmdTurnByGyro(0, .2, true));
      * SmartDashboard.putData("driveforward", new cmdDriveStraight(24, .25,
@@ -179,7 +180,8 @@ public class RobotContainer {
 
     // Start intake artic
     Trigger rTrigger_ArticButton = articController.rightTrigger();
-    rTrigger_ArticButton.onTrue(new cmdStartIntake())
+    rTrigger_ArticButton.whileTrue(new cmdStartIntake())
+        .onFalse(new cmdStopIntake())
         .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.LAWNGREEN));
 
     // Stop intake artic
@@ -191,7 +193,15 @@ public class RobotContainer {
     lBumper_ArticButton.onTrue(new cmdIntakePos(Intake.outPos, false));
 
     Trigger lTrigger_ArticButton = articController.leftTrigger();
-    lTrigger_ArticButton.onTrue(new cmdReverseIntake());
+    lTrigger_ArticButton.whileTrue(new cmdReverseIntake())
+    .onFalse(new cmdStopIntake());
+
+    //start button E stop
+    Trigger start_ArticButton = articController.start();
+    start_ArticButton.onTrue(new cmdStopIntake())
+    .onTrue(new cmdSetArmMode(Arm.Mode.STOP, false))
+    .onTrue(new cmdStopIntakeRot());
+
 
     // left trigger on driver = boost
     Trigger lTrigger_driveController = driveController.leftTrigger();

@@ -24,7 +24,7 @@ public class Arm extends SubsystemBase {
     private double targetArmExtendPos = 0;
     private double targetArmRotPos = 0;
     private double targetPowerExtend = 0.80;
-    private double targetPowerRot = 0.55;
+    private double targetPowerRot = 0.65;
 
     private static double maxPosExtend = 250;
     private static double minPosExtend = -1;
@@ -49,7 +49,7 @@ public class Arm extends SubsystemBase {
     public static double intakeRotPos = 0;
     public static double intakeExtPos = 1;
 
-    private static double safetyArmRotPos = 20;
+    private static double safetyArmRotPos = 10;  //was 20
     private static double safetyArmExtPos = 7;
     // fix safety positions
     private static double safetyUpperArmRotPos = 065;
@@ -127,6 +127,11 @@ public class Arm extends SubsystemBase {
                 goToStart();
                 break;
 
+                case STOP:
+                pauseExt();
+                pauseRot();
+                break;
+
             default:
                 goToStart();
 
@@ -166,6 +171,13 @@ public class Arm extends SubsystemBase {
 
     public double getArmRotPos() {
         return armRot.getPosition();
+    }
+    public boolean ismoving(){
+        if (armRot.get() == 0){
+            return false;
+        }else{
+            return true;
+        }
     }
 
     private void setArmExtendTargPos(double target, double stagPos, double stagPower) {
@@ -339,7 +351,8 @@ public class Arm extends SubsystemBase {
         DELIVERMED,
         DELIVERHIGH,
         INTAKE,
-        SAFETYMODE;
+        SAFETYMODE,
+        STOP;
     }
 
 }
