@@ -23,12 +23,13 @@ public class Intake extends SubsystemBase {
     public static double inPos = 0;
     public static double outPos = 272;
     public static double transferPos = 98.0;
-    public static double outOfTheWayPos = 188.0;
+    public static double outOfTheWayPos = 200.0;
     public static double minPos = 0;
     public static double maxPos = 277;
     public static double safetyPos = 172;
 
     private static double intakePow = 0.5;
+    private static double rotPow = 0.7;
 
     private static double rotTol = 5;
     private static double stagPower = .25;
@@ -39,6 +40,10 @@ public class Intake extends SubsystemBase {
     private double intakeCurrCutOff = 8;
     private intakeState currentState = intakeState.STOP;
     private boolean isInPos = false;
+
+    private double curTime;
+    private double endTime;
+    private double delayTime = 0.5;
 
     private double targetRotPos = 0;
 
@@ -78,7 +83,7 @@ public class Intake extends SubsystemBase {
 
             break;
             case STARTING:
-            if ((getIntakeCur() < intakeCurrCutOff )&&(getIntakeCur()>1)) {
+            if (RobotMath.getTime() > endTime) {
                 currentState = intakeState.RUNNING;
             }
             break;
@@ -107,11 +112,11 @@ public class Intake extends SubsystemBase {
             default:
         }
 
-        rotMotor.set(RobotMath.goToPosStag(getIntakeRotPos(), targetRotPos, rotTol, intakePow, stagRotPos,
+        rotMotor.set(RobotMath.goToPosStag(getIntakeRotPos(), targetRotPos, rotTol, rotPow, stagRotPos,
                 stagPower));
 
 
-        if(RobotMath.isInRange(intakeMotor.getPosition(), targetRotPos, rotTol)){
+        if(RobotMath.isInRange(getIntakeRotPos(), targetRotPos, rotTol)){
             isInPos = true;
         }
 
@@ -136,13 +141,12 @@ public class Intake extends SubsystemBase {
         return intakeMotor.getOutputCurrent();
     }
     public void setIntakeRotPos(double target) {
-        if((RobotContainer.getInstance().m_arm.getCurrentMode() == Mode.SAFETYMODE) && 
-        (RobotContainer.getInstance().m_arm.isInPos())){
+        if((RobotContainer.getInstance().m_arm.getArmRotPos() < (Arm.intakeRotPos + Arm.tolRot))){
             targetRotPos = RobotMath.safetyCap(target, minPos, maxPos);
             isInPos = false;
         }
         else{
-            RobotContainer.getInstance().m_arm.setCurrentMode(Mode.SAFETYMODE);
+          //  RobotContainer.getInstance().m_arm.setCurrentMode(Mode.SAFETYMODE);
         }
     }
 
@@ -157,6 +161,8 @@ public class Intake extends SubsystemBase {
     public void startIntake() {
         intakeMotor.set(intakePow);
         currentState = intakeState.STARTING;
+        curTime = RobotMath.getTime();
+        endTime = curTime + delayTime;
     }
 
     public void stopIntake() {

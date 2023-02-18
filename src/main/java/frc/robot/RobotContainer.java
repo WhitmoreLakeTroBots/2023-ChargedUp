@@ -87,6 +87,7 @@ public class RobotContainer {
      * m_chooser.addOption("strafe right", new cmdStrafe(12, -.25, 0.0));
      */
     SmartDashboard.putData("Auton", new A_R_P1_V1());
+    SmartDashboard.putData("drive 6 feet", new cmdDriveStraight(72, 0.2));
     /*
      * SmartDashboard.putData("turn-0", new cmdTurnByGyro(0, .2, true));
      * SmartDashboard.putData("driveforward", new cmdDriveStraight(24, .25,
@@ -199,7 +200,7 @@ public class RobotContainer {
 
     // right trigger on driver is AUTO DRIVE
     Trigger rTrigger_driveController = driveController.rightTrigger();
-    rTrigger_driveController.whileTrue(new cmdDriveToTarget(SubPoseEstimator.targetPoses.TAGID1, .05))
+    rTrigger_driveController.whileTrue(new cmdDriveToTarget(SubPoseEstimator.targetPoses.BLUE_GAME_PIECE_1, 0.1))
         .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.RAINBOW))
         .onFalse(new cmdDisableAutoDrive());
 
@@ -256,6 +257,8 @@ public class RobotContainer {
     SmartDashboard.putNumber("Field_x", m_Estimator.getFieldX());
     SmartDashboard.putNumber("Field_y", m_Estimator.getFieldY());
     SmartDashboard.putNumber("Field_z", m_Estimator.getFieldZ());
+    SmartDashboard.putNumber("dist to x", m_Estimator.diffX);
+    SmartDashboard.putNumber("dist to y", m_Estimator.diffY);
     SmartDashboard.putNumber("Field_yaw", Math.toDegrees(m_Estimator.getFieldYawRad()));
     SmartDashboard.putNumber("Field_pitch", Math.toDegrees(m_Estimator.getFieldPitchRad()));
     SmartDashboard.putNumber("Field_roll", Math.toDegrees(m_Estimator.getFieldRollRad()));

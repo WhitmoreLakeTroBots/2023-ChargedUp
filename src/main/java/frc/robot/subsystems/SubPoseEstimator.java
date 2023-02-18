@@ -48,6 +48,9 @@ public class SubPoseEstimator extends SubsystemBase {
     public int grid = 0;
     public int column = 0;
 
+    public double diffX = 0;
+    public double diffY = 0;
+
     public SubPoseEstimator() {
 
         try {
