@@ -50,7 +50,7 @@ public class cmdDriveStraight extends CommandBase {
     public void initialize() {
         bDone = false;
         RobotContainer.getInstance().m_driveTrain.resetEncoders();
-        RobotContainer.getInstance().m_driveTrain.doDrive(power, 0, 0, .4);
+        RobotContainer.getInstance().m_driveTrain.doDrive(power, 0, 0, 1);
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -62,7 +62,7 @@ public class cmdDriveStraight extends CommandBase {
         
        // double headingDelta = 0;
         
-        RobotContainer.getInstance().m_driveTrain.doDrive(power, 0, headingDelta, .4);
+        RobotContainer.getInstance().m_driveTrain.doDrive(power, 0, headingDelta, 1);
         if (RobotContainer.getInstance().m_driveTrain.getDistanceTraveledInches() >= targetPosition  ) {
             bDone = true;
             // end(false);

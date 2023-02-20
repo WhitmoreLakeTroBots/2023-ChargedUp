@@ -132,4 +132,7 @@ public class SubGyro extends SubsystemBase {
 
     return deltaHeading(getNormaliziedNavxAngle(), targetHeading);
   }
+  public void softGyroReset() {
+    softoffset = navx.getAngle() * -1;
+  }
 }

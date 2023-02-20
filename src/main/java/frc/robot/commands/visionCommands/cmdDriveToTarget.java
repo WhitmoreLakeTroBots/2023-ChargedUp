@@ -35,6 +35,13 @@ public class cmdDriveToTarget extends CommandBase {
         // Figure out initial drive based on pose.
         RobotContainer.getInstance().m_driveTrain.enableGoToPos();
 
+        diffPose = targetPose.relativeTo(RobotContainer.getInstance().m_Estimator.getRobotFieldPose());
+        RobotContainer.getInstance().m_driveTrain.cmdGoToPos(RobotMath.metersToInches(diffPose.getX()),
+        RobotMath.metersToInches(diffPose.getY())
+        ,0
+        //, Math.toDegrees(diffPose.getRotation().getY()) * -1
+        ,power);
+
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -44,14 +51,21 @@ public class cmdDriveToTarget extends CommandBase {
 
             // converting to inches from pos value before entering drive train
             // Pos may be reversed, currently driving the wrong direction
-            // diffPose =
-            // targetPose.relativeTo(RobotContainer.getInstance().m_Estimator.getRobotFieldPose());
-            diffPose = RobotContainer.getInstance().m_Estimator.getRobotFieldPose().relativeTo(targetPose);
+          //   diffPose = targetPose.relativeTo(RobotContainer.getInstance().m_Estimator.getRobotFieldPose());
+//diffPose = RobotContainer.getInstance().m_Estimator.getRobotFieldPose().relativeTo(targetPose);
             RobotContainer.getInstance().m_Estimator.diffX = diffPose.getX();
             RobotContainer.getInstance().m_Estimator.diffY = diffPose.getY();
-            RobotContainer.getInstance().m_driveTrain.cmdGoToPos(RobotMath.metersToInches(diffPose.getX()),
-                    RobotMath.metersToInches(diffPose.getY()), Math.toDegrees(diffPose.getRotation().getY()) * -1,
-                    power);
+
+            RobotContainer.getInstance().m_Estimator.calcDiffX = targetPose.getX() - RobotContainer.getInstance().m_Estimator.getRobotFieldPose().getX();
+            RobotContainer.getInstance().m_Estimator.calcDiffY = targetPose.getY() - RobotContainer.getInstance().m_Estimator.getRobotFieldPose().getY();
+           
+       /*     RobotContainer.getInstance().m_driveTrain.cmdGoToPos(RobotMath.metersToInches(diffPose.getX()),
+                    RobotMath.metersToInches(diffPose.getY())
+                    ,0
+                    //, Math.toDegrees(diffPose.getRotation().getY()) * -1
+                    ,power);
+
+                    */
         }
         if (RobotContainer.getInstance().m_driveTrain.isComplete()) {
             RobotContainer.getInstance().m_driveTrain.StopDrive();

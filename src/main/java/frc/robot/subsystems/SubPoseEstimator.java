@@ -26,7 +26,7 @@ public class SubPoseEstimator extends SubsystemBase {
 
     // default camera position
     private final Transform3d cam11_2_robotTransform3d = new Transform3d(new Translation3d(0, 0, .45),
-            new Rotation3d(Math.toRadians(87.3), Math.toRadians(0), Math.toRadians(9)));
+            new Rotation3d(Math.toRadians(-87.3), Math.toRadians(0), Math.toRadians(9)));
     // The parameter for loadFromResource() will be different depending on the game.
     private AprilTagFieldLayout aprilTagFieldLayout = null;
 
@@ -50,6 +50,9 @@ public class SubPoseEstimator extends SubsystemBase {
 
     public double diffX = 0;
     public double diffY = 0;
+
+    public double calcDiffX;
+    public double calcDiffY;
 
     public SubPoseEstimator() {
 

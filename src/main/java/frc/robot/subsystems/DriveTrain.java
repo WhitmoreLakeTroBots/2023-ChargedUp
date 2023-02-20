@@ -23,8 +23,8 @@ public class DriveTrain extends SubsystemBase {
     private double wheelDiameter = 8; // in inches
     private double gearRatio = 12.75; // Motor to wheel ratio
     private double teleopPower = .40;
-    public static double normalDriveSpeed = 0.40;
-    public static double boostSpeed = 0.80;
+    public static double normalDriveSpeed = 0.50;
+    public static double boostSpeed = 1.0;
 
     private boolean bGoToPos = false;
     private double driveDist = 0.0;

@@ -74,7 +74,7 @@ public class RobotContainer {
     m_chooser.setDefaultOption("A_R_P1_V1", new A_R_P1_V1());
     m_chooser.addOption("A_R_P1_V1", new A_R_P1_V1());
     m_chooser.addOption("active break", new cmdActiveBrake());
-    m_chooser.addOption("drive straight", new cmdDriveStraight(72, 0.4));
+    m_chooser.addOption("drive straight", new cmdDriveStraight(120, 0.6));
     m_chooser.addOption("bluecube1", new cmdDriveToTarget(SubPoseEstimator.targetPoses.BLUE_GAME_PIECE_1, 0.40));
 
     /*
@@ -90,8 +90,7 @@ public class RobotContainer {
      * m_chooser.addOption("strafe left", new cmdStrafe(12, .25, 0.0));
      * m_chooser.addOption("strafe right", new cmdStrafe(12, -.25, 0.0));
      */
-    SmartDashboard.putData("Auton", new A_R_P1_V1());
-    SmartDashboard.putData("drive 6 feet", new cmdDriveStraight(72, 0.4));
+ 
     /*
      * SmartDashboard.putData("turn-0", new cmdTurnByGyro(0, .2, true));
      * SmartDashboard.putData("driveforward", new cmdDriveStraight(24, .25,
@@ -143,12 +142,12 @@ public class RobotContainer {
     // A is gripper close cone
     Trigger A_ArticButton = articController.a();
     A_ArticButton.onTrue(new cmdSetGripperPos(Gripper.coneClosePos, false))
-        .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.ORANGE));
+        .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.YELLOW));
 
     // X is gripper close cube
     Trigger X_ArticButton = articController.x();
     X_ArticButton.onTrue(new cmdSetGripperPos(Gripper.cubeClosePos, false))
-        .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.ORANGE));
+        .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.VIOLET));
 
     // Y is gripper open
     Trigger Y_ArticButton = articController.y();
@@ -215,7 +214,7 @@ public class RobotContainer {
     Trigger rTrigger_driveController = driveController.rightTrigger();
    rTrigger_driveController
    // .whileTrue(new cmdDriveStraight(72, 0.4))
-        .whileTrue(new cmdDriveToTarget(SubPoseEstimator.targetPoses.BLUE_GAME_PIECE_1, 0.1))
+        .whileTrue(new cmdDriveToTarget(SubPoseEstimator.targetPoses.RED_GAME_PIECE_1, 0.4))
         .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.RAINBOW))
         .onFalse(new cmdDisableAutoDrive());
 
@@ -233,6 +232,10 @@ public class RobotContainer {
     Trigger rBack_driveController = driveController.back();
     rBack_driveController.onTrue(new cmdResetGyro())
         .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.WHITE));
+
+    Trigger a_driveController = driveController.a();
+    a_driveController.whileTrue(new cmdActiveBrake())
+    .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.RED));
 
   }
 
@@ -274,6 +277,8 @@ public class RobotContainer {
     SmartDashboard.putNumber("Field_z", m_Estimator.getFieldZ());
     SmartDashboard.putNumber("dist to x", m_Estimator.diffX);
     SmartDashboard.putNumber("dist to y", m_Estimator.diffY);
+    SmartDashboard.putNumber("calc diff x", m_Estimator.calcDiffX);
+    SmartDashboard.putNumber("calc diff y", m_Estimator.calcDiffY);
     SmartDashboard.putNumber("Field_yaw", Math.toDegrees(m_Estimator.getFieldYawRad()));
     SmartDashboard.putNumber("Field_pitch", Math.toDegrees(m_Estimator.getFieldPitchRad()));
     SmartDashboard.putNumber("Field_roll", Math.toDegrees(m_Estimator.getFieldRollRad()));
