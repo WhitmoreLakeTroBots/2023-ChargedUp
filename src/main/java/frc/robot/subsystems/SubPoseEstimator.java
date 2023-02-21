@@ -1,18 +1,20 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotMath;
 //import edu.wpi.first.apriltag.*;
 
 import java.io.IOException;
 
-import org.photonvision.PhotonCamera;
-import org.photonvision.PhotonUtils;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
+import org.photonvision.*;
+import org.photonvision.targeting.PhotonTrackedTarget;
+import java.util.List;
 
 import java.util.Optional;
 
@@ -26,7 +28,7 @@ public class SubPoseEstimator extends SubsystemBase {
 
     // default camera position
     private final Transform3d cam11_2_robotTransform3d = new Transform3d(new Translation3d(0, 0, .45),
-            new Rotation3d(Math.toRadians(-87.3), Math.toRadians(0), Math.toRadians(9)));
+            new Rotation3d(Math.toRadians(0), Math.toRadians(0), Math.toRadians(9)));
     // The parameter for loadFromResource() will be different depending on the game.
     private AprilTagFieldLayout aprilTagFieldLayout = null;
 
@@ -54,6 +56,8 @@ public class SubPoseEstimator extends SubsystemBase {
     public double calcDiffX;
     public double calcDiffY;
 
+    public List<PhotonTrackedTarget> tags;
+
     public SubPoseEstimator() {
 
         try {
@@ -69,37 +73,8 @@ public class SubPoseEstimator extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-
-        var results = cam11.getLatestResult();
-
-        if (results.hasTargets()) {
-            m_tag_ID = results.getBestTarget().getFiducialId();
-            Optional<Pose3d> bestTagPose = aprilTagFieldLayout.getTagPose(m_tag_ID);
-
-            if (bestTagPose.isPresent()) {
-                m_HasTargets = results.hasTargets();
-                robotFieldPose = PhotonUtils.estimateFieldToRobotAprilTag(
-                        results.getBestTarget().getBestCameraToTarget(),
-                        bestTagPose.get(),
-                        cam11_2_robotTransform3d);
-
-                m_field_x = robotFieldPose.getX();
-                m_field_y = robotFieldPose.getY();
-                m_field_z = robotFieldPose.getZ();
-                m_field_rollRad = robotFieldPose.getRotation().getX();
-                m_field_yawRad = robotFieldPose.getRotation().getZ();
-                m_field_pitchRad = robotFieldPose.getRotation().getY();
-
-                m_cam11_x = results.getBestTarget().getBestCameraToTarget().getX();
-                m_cam11_y = results.getBestTarget().getBestCameraToTarget().getY();
-                m_cam11_z = results.getBestTarget().getBestCameraToTarget().getZ();
-
-            } else {
-                NullThePose();
-            }
-        } else {
-            NullThePose();
-        }
+        tags = cam11.getLatestResult().getTargets();
+        processTags();
     }
 
     @Override
@@ -170,6 +145,55 @@ public class SubPoseEstimator extends SubsystemBase {
 
     public double getFieldPitchRad() {
         return m_field_pitchRad;
+    }
+
+    private void processTags(){
+        var results = cam11.getLatestResult();
+
+        if (results.hasTargets()) {
+            m_tag_ID = results.getBestTarget().getFiducialId();
+            Optional<Pose3d> bestTagPose = aprilTagFieldLayout.getTagPose(m_tag_ID);
+
+            if (bestTagPose.isPresent()) {
+                m_HasTargets = results.hasTargets();
+                robotFieldPose = PhotonUtils.estimateFieldToRobotAprilTag(
+                        results.getBestTarget().getBestCameraToTarget(),
+                        bestTagPose.get(),
+                        cam11_2_robotTransform3d);
+
+                m_field_x = robotFieldPose.getX();
+                m_field_y = robotFieldPose.getY();
+                m_field_z = robotFieldPose.getZ();
+                m_field_rollRad = robotFieldPose.getRotation().getX();
+                m_field_yawRad = robotFieldPose.getRotation().getZ();
+                m_field_pitchRad = robotFieldPose.getRotation().getY();
+
+                m_cam11_x = results.getBestTarget().getBestCameraToTarget().getX();
+                m_cam11_y = results.getBestTarget().getBestCameraToTarget().getY();
+                m_cam11_z = results.getBestTarget().getBestCameraToTarget().getZ();
+
+            } else {
+                NullThePose();
+            }
+        } else {
+            NullThePose();
+        }
+    }
+
+    public double getDistanceFromTagInInches(int tagID){
+        double distance = -99;
+        try{
+            for(int i=0;i<tags.size();i++){
+                if(tags.get(i).getFiducialId() == tagID){
+                    distance = tags.get(i).getBestCameraToTarget().getX();
+                }
+            }
+            if(distance != -99){
+                return RobotMath.metersToInches(distance);
+            }
+            else{return -99;}
+        }
+        catch(Exception e){return -99;}
     }
 
     public enum targetPoses {
