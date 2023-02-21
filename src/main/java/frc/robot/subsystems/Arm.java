@@ -1,18 +1,13 @@
 package frc.robot.subsystems;
 
-import frc.robot.commands.*;
 import frc.robot.hardware.WL_Spark;
 
 import com.revrobotics.CANSparkMax.IdleMode;
 
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.RobotMath;
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
-import edu.wpi.first.wpilibj.motorcontrol.Spark;
 
 /**
  *
@@ -103,7 +98,7 @@ public class Arm extends SubsystemBase {
                 break;
 
             case DELIVERLOW:
-                RobotContainer.getInstance().m_Intake.setIntakeRotPos(Intake.outPos);
+                RobotContainer.getInstance().m_Intake.setIntakeRotPos(Intake.outPos); 
                // goToDeliverLow();
                 break;
 
@@ -125,6 +120,10 @@ public class Arm extends SubsystemBase {
             case SAFETYMODE:
                 RobotContainer.getInstance().m_Intake.setIntakeRotPos(Intake.outOfTheWayPos);
                 goToStart();
+                break;
+
+            case TRANSFERPOS:
+                RobotContainer.getInstance().m_Intake.setIntakeRotPos(Intake.transferPos);
                 break;
 
                 case STOP:
@@ -352,6 +351,7 @@ public class Arm extends SubsystemBase {
         DELIVERHIGH,
         INTAKE,
         SAFETYMODE,
+        TRANSFERPOS,
         STOP;
     }
 

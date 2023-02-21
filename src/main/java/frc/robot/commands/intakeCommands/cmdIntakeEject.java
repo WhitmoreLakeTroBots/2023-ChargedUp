@@ -2,21 +2,16 @@ package frc.robot.commands.intakeCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.Arm;
-import frc.robot.subsystems.Intake;
+import frc.robot.RobotMath;
 
-public class cmdIntakePos extends CommandBase {
+public class cmdIntakeEject extends CommandBase {
 
-    private boolean bDone = true;
-    private boolean bWait = false;
-   // private double target;
+    private boolean bDone = false;
+    private double delay = 0.5;
+    private double endTime;
 
-    private Arm.Mode nMode;
+    public cmdIntakeEject() {
 
-
-    public cmdIntakePos(Arm.Mode pMode, boolean wait) {
-        nMode = pMode;
-        bWait = wait;
         // m_subsystem = subsystem;
         // addRequirements(m_subsystem);
 
@@ -27,23 +22,17 @@ public class cmdIntakePos extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-       // RobotContainer.getInstance().m_Intake.setIntakeRotPos(target);
-        RobotContainer.getInstance().m_arm.setCurrentMode(nMode);
+        RobotContainer.getInstance().m_Intake.startIntake();
+        endTime = RobotMath.getTime() + delay;
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        if(bWait){
-            if(RobotContainer.getInstance().m_Intake.getIsInPos()){
-                bDone = true;
-            }
-            else{
-                bDone = false;
-            }
-        }
-        else{
+        if(RobotMath.getTime() > endTime){
+            RobotContainer.getInstance().m_Intake.stopIntake();
             bDone = true;
+            end(false);
         }
     }
 
