@@ -122,6 +122,10 @@ public class Arm extends SubsystemBase {
                 goToStart();
                 break;
 
+            case TRANSFERPOS:
+                RobotContainer.getInstance().m_Intake.setIntakeRotPos(Intake.transferPos);
+                break;
+
                 case STOP:
                 pauseExt();
                 pauseRot();
@@ -347,6 +351,7 @@ public class Arm extends SubsystemBase {
         DELIVERHIGH,
         INTAKE,
         SAFETYMODE,
+        TRANSFERPOS,
         STOP;
     }
 

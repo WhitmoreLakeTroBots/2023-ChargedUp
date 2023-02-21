@@ -14,10 +14,10 @@ import frc.robot.subsystems.Lighting.lightPattern;
 /**
  *
  */
-public class A_R_P1_V1 extends SequentialCommandGroup {
+public class Auto_V1 extends SequentialCommandGroup {
 
 
-    public A_R_P1_V1() {
+    public Auto_V1() {
         //sets intake to deliver high
         addCommands(new cmdUpdateBaseColor(lightPattern.RAINBOWLAVA));
         addCommands(new cmdIntakePos(Arm.Mode.DELIVERHIGH, true));
@@ -32,7 +32,7 @@ public class A_R_P1_V1 extends SequentialCommandGroup {
         
         //addCommands(new cmdIntakePos(Intake.inPos, true));
         addCommands(new cmdUpdateBaseColor(lightPattern.RAINBOW));
-        addCommands(new cmdDriveStraight(96, 0.5, 0)); //dist in inches
+        addCommands(new cmdDriveStraight(148, 0.5, 0)); //dist in inches
         //addCommands(new Auton1Parallel(Arm.Mode.INTAKE,10,0.3,true));
     }
 

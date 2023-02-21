@@ -1,6 +1,6 @@
 package frc.robot;
 
-import frc.robot.commands.AutonCommands.A_R_P1_V1;
+import frc.robot.commands.AutonCommands.Auto_V1;
 import frc.robot.commands.armCommands.cmdSetArmMode;
 import frc.robot.commands.armCommands.cmdSetGripperPos;
 import frc.robot.commands.driveCommands.cmdActiveBrake;
@@ -71,8 +71,8 @@ public class RobotContainer {
     configureButtonBindings();
 
     // Test Drive code
-    m_chooser.setDefaultOption("A_R_P1_V1", new A_R_P1_V1());
-    m_chooser.addOption("A_R_P1_V1", new A_R_P1_V1());
+    m_chooser.setDefaultOption("A_R_P1_V1", new Auto_V1());
+    m_chooser.addOption("A_R_P1_V1", new Auto_V1());
     m_chooser.addOption("active break", new cmdActiveBrake());
     m_chooser.addOption("drive straight", new cmdDriveStraight(120, 0.6));
     m_chooser.addOption("bluecube1", new cmdDriveToTarget(SubPoseEstimator.targetPoses.BLUE_GAME_PIECE_1, 0.40));
