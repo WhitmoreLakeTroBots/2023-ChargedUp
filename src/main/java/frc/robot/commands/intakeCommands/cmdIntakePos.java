@@ -2,16 +2,20 @@ package frc.robot.commands.intakeCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
+import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Intake;
 
 public class cmdIntakePos extends CommandBase {
 
     private boolean bDone = true;
     private boolean bWait = false;
-    private double target;
+   // private double target;
 
-    public cmdIntakePos(double ntarget, boolean wait) {
-        target = ntarget;
+    private Arm.Mode nMode;
+
+
+    public cmdIntakePos(Arm.Mode pMode, boolean wait) {
+        nMode = pMode;
         bWait = wait;
         // m_subsystem = subsystem;
         // addRequirements(m_subsystem);
@@ -23,7 +27,8 @@ public class cmdIntakePos extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        RobotContainer.getInstance().m_Intake.setIntakeRotPos(target);
+       // RobotContainer.getInstance().m_Intake.setIntakeRotPos(target);
+        RobotContainer.getInstance().m_arm.setCurrentMode(nMode);
     }
 
     // Called every time the scheduler runs while the command is scheduled.

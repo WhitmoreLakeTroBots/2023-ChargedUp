@@ -190,8 +190,8 @@ public class RobotContainer {
     rBumper_ArticButton.onTrue(new cmdStopIntake())
         .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.SKYBLUE));
     
-    Trigger lBumper_ArticButton = articController.leftBumper();
-    lBumper_ArticButton.onTrue(new cmdIntakePos(Intake.outPos, false));
+   // Trigger lBumper_ArticButton = articController.leftBumper();
+    //lBumper_ArticButton.onTrue(new cmdIntakePos(Intake.outPos, false));
 
     Trigger lTrigger_ArticButton = articController.leftTrigger();
     lTrigger_ArticButton.whileTrue(new cmdStartIntake())
