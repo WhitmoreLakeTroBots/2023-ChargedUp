@@ -263,6 +263,9 @@ public class RobotContainer {
 
     SmartDashboard.putNumber("Heading", m_subGyro.getNormaliziedNavxAngle());
     SmartDashboard.putNumber("Dist", m_driveTrain.getDistanceTraveledInches());
+    SmartDashboard.putNumber("roll", m_subGyro.getroll());
+    SmartDashboard.putNumber("pitch", m_subGyro.getpitch());
+    SmartDashboard.putNumber("yaw", m_subGyro.getyaw());
 
     SmartDashboard.putNumber("ArmExtendPos", m_arm.getArmExtendPos());
     SmartDashboard.putNumber("ArmRotPos", m_arm.getArmRotPos());
@@ -274,16 +277,16 @@ public class RobotContainer {
 
     SmartDashboard.putNumber("cSensor", m_Gripper.getDistance());
 
-    SmartDashboard.putNumber("Field_x", m_Estimator.getFieldX());
-    SmartDashboard.putNumber("Field_y", m_Estimator.getFieldY());
-    SmartDashboard.putNumber("Field_z", m_Estimator.getFieldZ());
-    SmartDashboard.putNumber("dist to x", m_Estimator.diffX);
-    SmartDashboard.putNumber("dist to y", m_Estimator.diffY);
-    SmartDashboard.putNumber("calc diff x", m_Estimator.calcDiffX);
-    SmartDashboard.putNumber("calc diff y", m_Estimator.calcDiffY);
-    SmartDashboard.putNumber("Field_yaw", Math.toDegrees(m_Estimator.getFieldYawRad()));
-    SmartDashboard.putNumber("Field_pitch", Math.toDegrees(m_Estimator.getFieldPitchRad()));
-    SmartDashboard.putNumber("Field_roll", Math.toDegrees(m_Estimator.getFieldRollRad()));
+    //SmartDashboard.putNumber("Field_x", m_Estimator.getFieldX());
+    //SmartDashboard.putNumber("Field_y", m_Estimator.getFieldY());
+    //SmartDashboard.putNumber("Field_z", m_Estimator.getFieldZ());
+    //SmartDashboard.putNumber("dist to x", m_Estimator.diffX);
+    //SmartDashboard.putNumber("dist to y", m_Estimator.diffY);
+    //SmartDashboard.putNumber("calc diff x", m_Estimator.calcDiffX);
+    //SmartDashboard.putNumber("calc diff y", m_Estimator.calcDiffY);
+    //SmartDashboard.putNumber("Field_yaw", Math.toDegrees(m_Estimator.getFieldYawRad()));
+    //SmartDashboard.putNumber("Field_pitch", Math.toDegrees(m_Estimator.getFieldPitchRad()));
+    //SmartDashboard.putNumber("Field_roll", Math.toDegrees(m_Estimator.getFieldRollRad()));
 
     SmartDashboard.putNumber("cam11_x", m_Estimator.getCameraX());
     SmartDashboard.putNumber("cam11_y", m_Estimator.getCameraY());

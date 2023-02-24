@@ -42,6 +42,17 @@ public class SubGyro extends SubsystemBase {
     return navx.getAngle() + softoffset;
   }
 
+  public double getyaw(){
+    return navx.getYaw();
+  }
+
+  public double getpitch(){
+    return navx.getPitch();
+  }
+  public double getroll(){
+    return navx.getRoll();
+  }
+
   public double getNormaliziedNavxAngle() {
     return gyroNormalize(getNavxAngleRaw() + navxOffset);
   }

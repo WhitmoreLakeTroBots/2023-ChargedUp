@@ -38,7 +38,7 @@ public class A_B_P1_V2 extends SequentialCommandGroup {
         addCommands(new cmdDriveStraight(30, 0.2, 0)); //dist in inches
         //addCommands(new Auton1Parallel(Arm.Mode.INTAKE,10,0.3,true));
 
-        addCommands(new cmdDriveStraight(106, 0.5, 0)); //dist in inches
+        addCommands(new cmdDriveStraight(106, 0.3, 0)); //dist in inches
 
         addCommands(new cmdDriveStraight(30, 0.2, 0)); //dist in inches
         //strafe to infront of cube 
