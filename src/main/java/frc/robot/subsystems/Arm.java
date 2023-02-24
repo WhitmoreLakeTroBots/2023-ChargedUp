@@ -18,7 +18,7 @@ public class Arm extends SubsystemBase {
     private WL_Spark armRot;
     private double targetArmExtendPos = 0;
     private double targetArmRotPos = 0;
-    private double targetPowerExtend = 0.80;
+    private double targetPowerExtend = 0.90;
     private double targetPowerRot = 0.68;
 
     private static double maxPosExtend = 250;
@@ -30,7 +30,7 @@ public class Arm extends SubsystemBase {
     private double stagPosExtend = 40.0;
     private double stagPosRot = 40.0;
     private double stagPowerExtend = 0.2;
-    private double stagPowerRot = 0.025;
+    private double stagPowerRot = -0.03;
 
     public static double carryRotPos = 30;
     public static double carryExtendPos = 2;
@@ -44,8 +44,8 @@ public class Arm extends SubsystemBase {
     public static double intakeRotPos = 0;
     public static double intakeExtPos = 1;
 
-    private static double safetyArmRotPos = 10;  //was 20
-    private static double safetyArmExtPos = 7;
+    private static double safetyArmRotPos = 7;  //was 20
+    private static double safetyArmExtPos = 15;
     // fix safety positions
     private static double safetyUpperArmRotPos = 065;
     private static double safetyUpperArmExtPos = 180;

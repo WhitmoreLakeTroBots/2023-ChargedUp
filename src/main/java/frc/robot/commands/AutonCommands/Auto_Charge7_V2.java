@@ -5,7 +5,7 @@ import frc.robot.commands.armCommands.*;
 import frc.robot.commands.driveCommands.*;
 import frc.robot.commands.intakeCommands.cmdIntakePos;
 import frc.robot.commands.lightingCommands.*;
-import frc.robot.commands.visionCommands.cmdVisionDriveDistance;
+import frc.robot.commands.visionCommands.*;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Gripper;
 import frc.robot.subsystems.Lighting.lightPattern;
