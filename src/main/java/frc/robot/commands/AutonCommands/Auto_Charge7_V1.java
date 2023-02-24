@@ -27,12 +27,13 @@ public class Auto_Charge7_V1 extends SequentialCommandGroup {
         addCommands(new cmdSetGripperPos(Gripper.openPos,true));
         addCommands(new cmdUpdateBaseColor(lightPattern.LAWNGREEN));
         addCommands(new cmdSetArmMode(Arm.Mode.INTAKE, true));
+        addCommands(new cmdSetGripperPos(Gripper.coneClosePos, false));
         
         //addCommands(new cmdIntakePos(Intake.inPos, true));
         addCommands(new cmdUpdateBaseColor(lightPattern.RAINBOW));
-        addCommands(new cmdVisionDriveDistance(7,86,
+        addCommands(new cmdVisionDriveDistance(7,92,
             168,0,.5));
-        
+        addCommands(new cmdActiveBrake());
         //addCommands(new cmdGyroBalance);
     }
 

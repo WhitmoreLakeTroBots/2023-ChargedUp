@@ -33,11 +33,13 @@ public class Auto_Charge7_V2 extends SequentialCommandGroup {
 
         // drive over the charge station to get outside of the community
         addCommands(new cmdVisionDriveDistance(7,192,
-            200,0,0.5));
+            150,0,0.4));
+        
+
         
         // drive ontop of the charge station
         addCommands(new cmdVisionDriveDistance(7,86,
-            106,0,-0.5));
+            46,0,-0.4));
 
 
         //addCommands(new cmdGyroBalance);
