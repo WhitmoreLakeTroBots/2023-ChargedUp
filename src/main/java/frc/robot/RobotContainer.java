@@ -161,8 +161,7 @@ public class RobotContainer {
 
     // Y is gripper open
     Trigger Y_ArticButton = articController.y();
-    Y_ArticButton.onTrue(new cmdSetGripperPos(Gripper.openPos, false))
-        .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.GOLD));
+    Y_ArticButton.onTrue(new cmdSetGripperPos(Gripper.openPos, false));
 
     // DUp set extention high
     Trigger dUP_ArticButton = articController.povUp();
