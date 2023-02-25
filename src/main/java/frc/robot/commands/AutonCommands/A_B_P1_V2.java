@@ -3,7 +3,6 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 import frc.robot.commands.armCommands.*;
 import frc.robot.commands.driveCommands.*;
-import frc.robot.commands.intakeCommands.cmdIntakeEject;
 import frc.robot.commands.intakeCommands.cmdIntakePos;
 import frc.robot.commands.intakeCommands.cmdStartIntake;
 import frc.robot.commands.intakeCommands.cmdStopIntake;

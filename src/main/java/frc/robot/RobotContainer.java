@@ -4,7 +4,6 @@ import frc.robot.commands.AutonCommands.A_B_P1_V2;
 import frc.robot.commands.AutonCommands.A_B_P3_V2;
 import frc.robot.commands.AutonCommands.Auto_Charge2_V1;
 import frc.robot.commands.AutonCommands.Auto_Charge7_V1;
-import frc.robot.commands.AutonCommands.Auto_Charge7_V2;
 import frc.robot.commands.AutonCommands.Auto_V1;
 import frc.robot.commands.armCommands.cmdSetArmMode;
 import frc.robot.commands.armCommands.cmdSetGripperPos;
@@ -12,12 +11,10 @@ import frc.robot.commands.driveCommands.cmdActiveBrake;
 import frc.robot.commands.driveCommands.cmdDriveStraight;
 import frc.robot.commands.driveCommands.cmdResetGyro;
 import frc.robot.commands.driveCommands.cmdUpdateDriveSpeed;
-import frc.robot.commands.intakeCommands.cmdIntakePos;
 import frc.robot.commands.intakeCommands.cmdReverseIntake;
 import frc.robot.commands.intakeCommands.cmdStartIntake;
 import frc.robot.commands.intakeCommands.cmdStopIntake;
 import frc.robot.commands.intakeCommands.cmdStopIntakeRot;
-import frc.robot.commands.intakeCommands.cmdToggleIntakePos;
 import frc.robot.commands.lightingCommands.cmdUpdateBaseColor;
 import frc.robot.commands.visionCommands.cmdDisableAutoDrive;
 import frc.robot.commands.visionCommands.cmdDriveToTarget;
@@ -161,8 +158,7 @@ public class RobotContainer {
 
     // Y is gripper open
     Trigger Y_ArticButton = articController.y();
-    Y_ArticButton.onTrue(new cmdSetGripperPos(Gripper.openPos, false))
-        .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.GOLD));
+    Y_ArticButton.onTrue(new cmdSetGripperPos(Gripper.openPos, false));
 
     // DUp set extention high
     Trigger dUP_ArticButton = articController.povUp();

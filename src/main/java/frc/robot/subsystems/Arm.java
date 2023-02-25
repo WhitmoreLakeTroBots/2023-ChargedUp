@@ -19,7 +19,7 @@ public class Arm extends SubsystemBase {
     private double targetArmExtendPos = 0;
     private double targetArmRotPos = 0;
     private double targetPowerExtend = 0.90;
-    private double targetPowerRot = 0.75;
+    private double targetPowerRot = 0.70;
 
     private static double maxPosExtend = 250;
     private static double minPosExtend = -1;
