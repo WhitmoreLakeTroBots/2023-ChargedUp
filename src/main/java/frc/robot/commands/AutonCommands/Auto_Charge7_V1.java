@@ -16,6 +16,7 @@ import frc.robot.subsystems.Lighting.lightPattern;
 public class Auto_Charge7_V1 extends SequentialCommandGroup {
 
     public Auto_Charge7_V1() {
+        addCommands(new cmdResetGyro());
         //sets intake to deliver high
         addCommands(new cmdUpdateBaseColor(lightPattern.RAINBOWLAVA));
         addCommands(new cmdIntakePos(Arm.Mode.DELIVERHIGH, true));
