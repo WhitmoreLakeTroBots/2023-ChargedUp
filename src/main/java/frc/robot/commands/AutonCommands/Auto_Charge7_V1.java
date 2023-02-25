@@ -31,10 +31,10 @@ public class Auto_Charge7_V1 extends SequentialCommandGroup {
         
         //addCommands(new cmdIntakePos(Intake.inPos, true));
         addCommands(new cmdUpdateBaseColor(lightPattern.RAINBOW));
-        addCommands(new cmdVisionDriveDistance(7,92,
-            168,0,.5));
+        addCommands(new cmdVisionDriveDistance(7,93,
+            168,0,.45));
         addCommands(new cmdActiveBrake());
-        addCommands(new cmdActiveBalance());
+        //addCommands(new cmdActiveBalance());
     }
 
 

@@ -13,7 +13,7 @@ import java.util.function.DoubleSupplier;
  */
 public class cmdActiveBalance extends CommandBase {
     private double targetPosition = 0; // inches
-    private double power = 0.08; // was 0.025
+    private double power = 0.2; // was 0.025
     private double targetHeading = 0;
     private boolean bDone = false;
     private double overshootValue = 0;

@@ -38,17 +38,17 @@ public class A_B_P3_V2 extends SequentialCommandGroup {
         addCommands(new cmdDriveStraight(30, 0.2, 0)); //dist in inches
         //addCommands(new Auton1Parallel(Arm.Mode.INTAKE,10,0.3,true));
 
-        addCommands(new cmdDriveStraight(106, 0.5, 0)); //dist in inches
+        addCommands(new cmdDriveStraight(86, 0.3, 0)); //dist in inches
 
         addCommands(new cmdDriveStraight(30, 0.2, 0)); //dist in inches
         //strafe to infront of cube 
-        addCommands(new cmdStrafe(22, 0.2, 0)); //dist in inches
+        addCommands(new cmdStrafe(22, 0.3, 0)); //dist in inches
         //lower intake 
         addCommands(new cmdIntakePos(Arm.Mode.DELIVERLOW, true));
         //start intake
         addCommands(new cmdStartIntake());
         //drive 20 inches
-        addCommands(new cmdDriveStraight(20, 0.2, 0)); //dist in inches
+        addCommands(new cmdDriveStraight(40, 0.2, 0)); //dist in inches
         //transfer cube to gripper
         addCommands(new cmdStopIntake());
         addCommands(new cmdIntakePos(Arm.Mode.TRANSFERPOS, true));
@@ -61,8 +61,8 @@ public class A_B_P3_V2 extends SequentialCommandGroup {
         //strafe back
         addCommands(new cmdStrafe(20, -0.2, 0)); //dist in inches
         //drive to commmunity
-        addCommands(new cmdDriveStraight(30, -0.2, 0)); //dist in inches
-        addCommands(new cmdDriveStraight(126, -0.5, 0)); //dist in inches
+        addCommands(new cmdDriveStraight(30, -0.5, 0)); //dist in inches
+        addCommands(new cmdDriveStraight(146, -0.5, 0)); //dist in inches
         //extend intake 
         addCommands(new cmdSetArmMode(Arm.Mode.DELIVERHIGH, false));
         //drive to delivery
