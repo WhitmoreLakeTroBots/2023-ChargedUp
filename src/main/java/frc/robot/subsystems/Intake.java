@@ -29,7 +29,7 @@ public class Intake extends SubsystemBase {
     public static double safetyPos = 172;
 
     private static double intakePow = 0.5;
-    private static double rotPow = 0.7;
+    private static double rotPow = 0.85;
 
     private static double rotTol = 5;
     private static double stagPower = .25;
