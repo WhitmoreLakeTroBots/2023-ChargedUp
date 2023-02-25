@@ -30,7 +30,7 @@ public class Arm extends SubsystemBase {
     private double stagPosExtend = 40.0;
     private double stagPosRot = 40.0;
     private double stagPowerExtend = 0.2;
-    private double stagPowerRot = -0.10;
+    private double stagPowerRot = -0.05;
 
     public static double carryRotPos = 30;
     public static double carryExtendPos = 2;
@@ -47,7 +47,7 @@ public class Arm extends SubsystemBase {
     private static double safetyArmRotPos = 7;  //was 20
     private static double safetyArmExtPos = 15;
     // fix safety positions
-    private static double safetyUpperArmRotPos = 065;
+    private static double safetyUpperArmRotPos = 67;
     private static double safetyUpperArmExtPos = 180;
 
     private static double pauseRotPos = 0;
