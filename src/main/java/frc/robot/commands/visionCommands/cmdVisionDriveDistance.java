@@ -53,14 +53,20 @@ public class cmdVisionDriveDistance extends CommandBase {
     public void execute() {
 
         
-        double totalWheelDist = RobotContainer.getInstance().m_driveTrain.getDriveDist();
+        double totalWheelDist = RobotContainer.getInstance().m_driveTrain.getDistanceTraveledInches();
         double totalTagDist = RobotContainer.getInstance().m_Estimator.getDistanceFromTagInInches(this.tagNum);
         
         // Stop so we do not get a penalty by crossing centerline of the field
         if (RobotMath.isInRange(totalWheelDist, this.encoderMaxDistInches, this.tolInches)){
+            RobotContainer.getInstance().m_driveTrain.StopDrive();
             end(false);
         // Stop because we are the correct vision distance from the tag... AKA on top of the charge station    
-        } else if (RobotMath.isInRange(totalTagDist, this.targetVisionInches, this.tolInches)){ 
+        } else if(this.encoderMaxDistInches < totalWheelDist){
+            RobotContainer.getInstance().m_driveTrain.StopDrive();
+            end(false);
+        }
+        
+        else if (RobotMath.isInRange(totalTagDist, this.targetVisionInches, this.tolInches)){ 
             end (false);
         }
         else {
