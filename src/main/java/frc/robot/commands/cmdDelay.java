@@ -12,8 +12,8 @@ public class cmdDelay extends CommandBase {
     public double endTime = 0;
     public double delayTime = 0;
 
-    public cmdDelay(double mSeconds) {
-        delayTime = mSeconds;
+    public cmdDelay(double seconds) {
+        delayTime = seconds;
     }
 
     @Override

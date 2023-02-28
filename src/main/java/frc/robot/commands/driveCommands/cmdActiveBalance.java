@@ -17,9 +17,9 @@ public class cmdActiveBalance extends CommandBase {
     private boolean bDone = false;
     private boolean encoders_need_reset = false;
 
-    private final double pitchDegTol = 2;
+    private final double pitchDegTol = 3.5;
 
-    private final double kp_balance = 0.0002;
+    private final double kp_balance = 0.0001;
     private final double ki_balance = 0.0000025;
     private final double kd_balance = 0.000000025;
 

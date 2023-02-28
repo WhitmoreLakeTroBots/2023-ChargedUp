@@ -4,6 +4,7 @@ import frc.robot.commands.AutonCommands.A_B_P1_V2;
 import frc.robot.commands.AutonCommands.A_B_P3_V2;
 import frc.robot.commands.AutonCommands.Auto_Charge2_V1;
 import frc.robot.commands.AutonCommands.Auto_Charge7_V1;
+import frc.robot.commands.AutonCommands.Auto_Charge7_V2;
 import frc.robot.commands.AutonCommands.Auto_V1;
 import frc.robot.commands.armCommands.cmdSetArmMode;
 import frc.robot.commands.armCommands.cmdSetGripperPos;
@@ -82,7 +83,7 @@ public class RobotContainer {
     m_chooser.addOption("bluecube1", new cmdDriveToTarget(SubPoseEstimator.targetPoses.BLUE_GAME_PIECE_1, 0.40));
     m_chooser.addOption("Auto charge 2 red", new Auto_Charge2_V1());
     m_chooser.addOption("Auto charge 7 blue", new Auto_Charge7_V1());
-   // m_chooser.addOption("Auto charge 7 blue 2", new Auto_Charge7_V2());
+    m_chooser.addOption("Auto charge 7 blue 2", new Auto_Charge7_V2());
 
     /*
      * m_chooser.addOption("driveforward", new cmdDriveStraight(24, .25, 0.0));
@@ -213,7 +214,6 @@ public class RobotContainer {
     // left trigger on driver = boost
     Trigger lTrigger_driveController = driveController.leftTrigger();
     lTrigger_driveController.onTrue(new cmdUpdateDriveSpeed(DriveTrain.boostSpeed))
-        .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.RAINBOWPARTY))
         .onFalse(new cmdUpdateDriveSpeed(DriveTrain.normalDriveSpeed));
 
     // right trigger on driver is AUTO DRIVE

@@ -1,6 +1,6 @@
 package frc.robot.commands.AutonCommands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-
+import frc.robot.commands.cmdDelay;
 import frc.robot.commands.armCommands.*;
 import frc.robot.commands.driveCommands.*;
 import frc.robot.commands.intakeCommands.cmdIntakePos;
@@ -33,17 +33,23 @@ public class Auto_Charge7_V2 extends SequentialCommandGroup {
         addCommands(new cmdUpdateBaseColor(lightPattern.RAINBOW));
 
         // drive over the charge station to get outside of the community
-        addCommands(new cmdVisionDriveDistance(7,192,
-            150,0,0.4));
-        
+        addCommands(new cmdVisionDriveDistance(7,150,
+            122,0,0.4));
 
+        addCommands(new cmdVisionDriveDistance(7,192,
+            50,0,0.10));
+
+        addCommands(new cmdDelay(2));
+        
+        
         
         // drive ontop of the charge station
         addCommands(new cmdVisionDriveDistance(7,86,
-            46,0,-0.4));
+            86,0,-0.4));
 
 
         //addCommands(new cmdGyroBalance);
+        addCommands(new cmdActiveBalance());
     }
 
 
