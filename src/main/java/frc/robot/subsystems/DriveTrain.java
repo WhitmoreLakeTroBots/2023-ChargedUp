@@ -117,7 +117,14 @@ public class DriveTrain extends SubsystemBase {
     public void doDrive(double drive, double strafe, double turn, double speed) {
         double Drive = drive;
         double Strafe = strafe;
-        double Turn = turn;
+        double Turn;
+
+        if(speed > 0.8){
+            Turn = turn * 0.5;
+        }
+        else{
+            Turn = turn;
+        }
 
         lDM1Power = Drive + Strafe + Turn;
         rDM1Power = Drive - Strafe - Turn;
