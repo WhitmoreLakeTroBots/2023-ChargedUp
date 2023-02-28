@@ -35,17 +35,18 @@ public class A_B_P1_V2 extends SequentialCommandGroup {
         
         //addCommands(new cmdIntakePos(Intake.inPos, true));
         addCommands(new cmdUpdateBaseColor(lightPattern.RAINBOW));
-        addCommands(new cmdDriveStraight(30, 0.2, 0)); //dist in inches
+        addCommands(new cmdDriveStraight(30, 0.4, 0)); //dist in inches
         //addCommands(new Auton1Parallel(Arm.Mode.INTAKE,10,0.3,true));
-
-        addCommands(new cmdDriveStraight(86, 0.4, 0)); //dist in inches
         addCommands(new cmdIntakePos(Arm.Mode.DELIVERLOW, false));
-
+        addCommands(new cmdDriveStraight(86, 0.55, 0)); //dist in inches
+        
+        addCommands(new cmdIntakePos(Arm.Mode.DELIVERLOW, false));
         addCommands(new cmdDriveStraight(30, 0.25, 0)); //dist in inches
+        //lower intake 
+        
         //strafe to infront of cube 
         addCommands(new cmdStrafe(24, -0.4, 0)); //dist in inches
-        //lower intake 
-        addCommands(new cmdIntakePos(Arm.Mode.DELIVERLOW, true));
+        
         //start intake
         addCommands(new cmdStartIntake());
         //drive 20 inches
@@ -63,13 +64,13 @@ public class A_B_P1_V2 extends SequentialCommandGroup {
         //addCommands(new cmdStrafe(20, 0.2, 0)); //dist in inches
         //drive to commmunity
         addCommands(new cmdDriveStraight(30, -0.4, 0)); //dist in inches
-        addCommands(new cmdDriveStraight(136, -0.5, 0)); //dist in inches
+        addCommands(new cmdDriveStraight(136, -0.55, 0)); //dist in inches
         //extend intake 
         addCommands(new cmdSetArmMode(Arm.Mode.DELIVERHIGH, false));
         //drive to delivery
-        addCommands(new cmdDriveStraight(28, -0.2, 0)); //dist in inches
+        addCommands(new cmdDriveStraight(25, -0.2, 0)); //dist in inches
         //strafe to position
-        addCommands(new cmdStrafe(18, -0.3, 0)); //dist in inches
+        addCommands(new cmdStrafe(18, -0.4, 0)); //dist in inches
         //extend arm
         addCommands(new cmdSetArmMode(Arm.Mode.DELIVERHIGH, true));
         //deliver
