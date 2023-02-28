@@ -43,7 +43,7 @@ public class cmdActiveBalance extends CommandBase {
     public void execute() {
 
         double currHeading = RobotContainer.getInstance().m_subGyro.getNormaliziedNavxAngle();
-        double currPitch = RobotContainer.getInstance().m_subGyro.getroll();
+        double currPitch = RobotContainer.getInstance().m_subGyro.getroll(); //navx rotated 90 degrees on robot
         double turnRate = RobotMath.calcTurnRate(currHeading, targetHeading,
                 RobotContainer.getInstance().m_driveTrain.kp_driveStraightGyro * 2 );
 
