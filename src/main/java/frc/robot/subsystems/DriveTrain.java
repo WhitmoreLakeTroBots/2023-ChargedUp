@@ -33,7 +33,7 @@ public class DriveTrain extends SubsystemBase {
     private double travelDist = 0.0;
     private double drivePower = 0.0;
     private boolean bComplete = true;
-    public double gyroHeading = 0.0; 
+    public double gyroHeading = 0.0;
 
     private double lDM1Power;
     private double lDM2Power;
@@ -172,6 +172,7 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public void StopDrive() {
+        setMotorBrakeMode(WL_Spark.IdleMode.kBrake);
         lDM1.set(0);
         lDM2.set(0);
         rDM1.set(0);
@@ -190,6 +191,37 @@ public class DriveTrain extends SubsystemBase {
                 + rDM2.getPositionABS()) / 4;
         return (motorAverageRotations * wheelDiameter * Math.PI) / gearRatio;
     }
+
+    public void setMotorBrakeMode_coast (){
+        setMotorBrakeMode(WL_Spark.IdleMode.kCoast);
+    }
+
+    public void setMotorBrakeMode_brake (){
+        setMotorBrakeMode(WL_Spark.IdleMode.kBrake);
+    }
+
+    public void setMotorBrakeMode (WL_Spark.IdleMode newMotorBrakeMode){
+
+        lDM1.setIdleMode(newMotorBrakeMode);
+        lDM2.setIdleMode(newMotorBrakeMode);
+        rDM1.setIdleMode(newMotorBrakeMode);
+        rDM2.setIdleMode(newMotorBrakeMode);
+
+    }
+
+    public void doTankDrive (double leftpower, double rightpower){
+
+        double lp = RobotMath.safetyCap(leftpower, -1.0, 1.0);
+        double rp = RobotMath.safetyCap(rightpower,-1.0, 1.0);
+
+        lDM1.set(lp);
+        lDM2.set(lp);
+        rDM1.set(rp);
+        rDM2.set(rp);
+
+    }
+
+
 
     public void activeBrake(double power) {
 
@@ -223,7 +255,7 @@ public class DriveTrain extends SubsystemBase {
         this.strafeDist = strafe;
         this.heading = heading;
         this.drivePower = mPower;
-        // calculate drive hypotenuse and save 
+        // calculate drive hypotenuse and save
         this.travelDist = Math.sqrt(Math.pow(driveDist, 2) + Math.pow(strafeDist, 2));
     }
     public void enableGoToPos() {
