@@ -78,9 +78,9 @@ public class RobotContainer {
     m_chooser.addOption("Auto V1", new Auto_V1());
     m_chooser.addOption("Auto Blue P1", new A_B_P1_V2());
     m_chooser.addOption("Auto Blue P3", new A_B_P3_V2());
-    m_chooser.addOption("active break", new cmdActiveBrake());
-    m_chooser.addOption("drive straight", new cmdDriveStraight(120, 0.6));
-    m_chooser.addOption("bluecube1", new cmdDriveToTarget(SubPoseEstimator.targetPoses.BLUE_GAME_PIECE_1, 0.40));
+    //m_chooser.addOption("active break", new cmdActiveBrake());
+    //m_chooser.addOption("drive straight", new cmdDriveStraight(120, 0.6));
+   // m_chooser.addOption("bluecube1", new cmdDriveToTarget(SubPoseEstimator.targetPoses.BLUE_GAME_PIECE_1, 0.40));
     m_chooser.addOption("Auto charge 2 red", new Auto_Charge2_V1());
     m_chooser.addOption("Auto charge 7 blue", new Auto_Charge7_V1());
     
