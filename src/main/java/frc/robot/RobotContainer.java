@@ -83,7 +83,8 @@ public class RobotContainer {
     m_chooser.addOption("bluecube1", new cmdDriveToTarget(SubPoseEstimator.targetPoses.BLUE_GAME_PIECE_1, 0.40));
     m_chooser.addOption("Auto charge 2 red", new Auto_Charge2_V1());
     m_chooser.addOption("Auto charge 7 blue", new Auto_Charge7_V1());
-    m_chooser.addOption("Auto charge 7 blue 2", new Auto_Charge7_V2());
+    
+    // m_chooser.addOption("Auto charge 7 blue 2", new Auto_Charge7_V2());
 
     /*
      * m_chooser.addOption("driveforward", new cmdDriveStraight(24, .25, 0.0));

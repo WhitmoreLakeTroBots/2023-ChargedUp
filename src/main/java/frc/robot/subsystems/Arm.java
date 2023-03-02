@@ -44,7 +44,7 @@ public class Arm extends SubsystemBase {
     public static double intakeRotPos = 0;
     public static double intakeExtPos = 1;
 
-    private static double safetyArmRotPos = 7;  //was 20
+    private static double safetyArmRotPos = 4;  //was 20
     private static double safetyArmExtPos = 15;
     // fix safety positions
     private static double safetyUpperArmRotPos = 67;
