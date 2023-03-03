@@ -42,7 +42,7 @@ public class DriveTrain extends SubsystemBase {
 
     //private final double maxrpm = 5676;
 
-    public final double kp_driveStraightGyro = 0.05;
+    public final double kp_driveStraightGyro = 0.025;
 
     private double joyDeadBand = 0.03;
 

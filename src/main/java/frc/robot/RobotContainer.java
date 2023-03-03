@@ -211,6 +211,9 @@ public class RobotContainer {
     .onTrue(new cmdSetArmMode(Arm.Mode.STOP, false))
     .onTrue(new cmdStopIntakeRot());
 
+    Trigger b_articButton = articController.b();
+    b_articButton.onTrue(new cmdSetArmMode(Arm.Mode.TRANSFERPOS, false));
+
 
     // left trigger on driver = boost
     Trigger lTrigger_driveController = driveController.leftTrigger();
