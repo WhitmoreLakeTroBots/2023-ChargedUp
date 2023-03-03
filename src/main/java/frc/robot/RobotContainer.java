@@ -195,7 +195,8 @@ public class RobotContainer {
 
     // Stop intake artic
     Trigger rBumper_ArticButton = articController.rightBumper();
-    rBumper_ArticButton.onTrue(new cmdStopIntake())
+    rBumper_ArticButton.whileTrue(new cmdReverseIntake())
+        .onFalse(new cmdStopIntake())
         .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.SKYBLUE));
     
    // Trigger lBumper_ArticButton = articController.leftBumper();
