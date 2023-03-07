@@ -279,8 +279,9 @@ public class RobotContainer {
     SmartDashboard.putNumber("ArmExtendPos", m_arm.getArmExtendPos());
     SmartDashboard.putNumber("ArmRotPos", m_arm.getArmRotPos());
     SmartDashboard.putNumber("gripperpos", m_Gripper.getGripPos());
-    SmartDashboard.putNumber("Intake Velocity", m_Intake.getIntakeVelocity());
-    SmartDashboard.putNumber("Intake Current", m_Intake.getIntakeCur());
+    //SmartDashboard.putNumber("Intake Velocity", m_Intake.getIntakeVelocity());
+    //SmartDashboard.putNumber("Intake Current", m_Intake.getIntakeCur());
+    SmartDashboard.putNumber("Drive Current", m_driveTrain.getDriveCurr());
     SmartDashboard.putNumber("Intake Rotation",m_Intake.getIntakeRotPos());
     // SmartDashboard.putNumber("LDM1POS", m_driveTrain.lDM1.getPositionABS());
 

@@ -24,12 +24,12 @@ public class Gripper extends SubsystemBase {
     public static double maxPosGrip = 40;
     public static double openPos = maxPosGrip;
 
-    private static double griptol = 1.5;
+    private static double griptol = 2.0;
 
     private double targetGripPos = 0;
     private double stagPosGrip = 0;
-    private double targetGripPower = .25;
-    private double stagPowerGrip = .12;
+    private double targetGripPower = 0.50;
+    private double stagPowerGrip = .20;
 
     //for cSensor
     private boolean isCube;

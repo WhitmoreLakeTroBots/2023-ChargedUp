@@ -80,7 +80,7 @@ public class DriveTrain extends SubsystemBase {
         // to
         // update them via the RevClient.
 
-        wls.setSmartCurrentLimit(40);
+        wls.setSmartCurrentLimit(60);
         wls.setIdleMode(IdleMode.kBrake);
         wls.burnFlash();
 
@@ -269,4 +269,5 @@ public class DriveTrain extends SubsystemBase {
     }
     public double getDriveDist(){return driveDist;}
     public double getStrafeDist(){return strafeDist;}
+    public double getDriveCurr(){return lDM1.getOutputCurrent();}
 }
