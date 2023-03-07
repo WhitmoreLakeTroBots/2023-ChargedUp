@@ -41,7 +41,7 @@ public class A_B_P1_V2 extends SequentialCommandGroup {
         addCommands(new cmdDriveStraight(86, 0.55, 0)); //dist in inches
         
         addCommands(new cmdIntakePos(Arm.Mode.DELIVERLOW, false));
-        addCommands(new cmdDriveStraight(30, 0.25, 0)); //dist in inches
+        addCommands(new cmdDriveStraight(22, 0.25, 0)); //dist in inches, was 30 inches
         //lower intake 
         
         //strafe to infront of cube 

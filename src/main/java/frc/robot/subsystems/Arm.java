@@ -30,14 +30,14 @@ public class Arm extends SubsystemBase {
     private double stagPosExtend = 40.0;
     private double stagPosRot = 40.0;
     private double stagPowerExtend = 0.2;
-    private double stagPowerRot = -0.05;
+    private double stagPowerRot = 0.30;
 
     public static double carryRotPos = 30;
     public static double carryExtendPos = 4;
-    public static double deliveryHighRotPos = 77;
+    public static double deliveryHighRotPos = 80.5;
     public static double deliveryHighExtendPos = 245;
     // fix med and low delivery positions to where they should be
-    public static double deliveryMedRotPos = 77;
+    public static double deliveryMedRotPos = 80;
     public static double deliveryMedExtendPos = 12;
     public static double deliveryLowRotPos = 66;
     public static double deliveryLowExtendPos = 0;

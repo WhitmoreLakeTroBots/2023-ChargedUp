@@ -2,6 +2,8 @@ package frc.robot.commands.visionCommands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.RobotMath;
+import frc.robot.subsystems.Lighting;
+import frc.robot.subsystems.Lighting.lightPattern;
 
 
 // This command accespts a tag ID, and Vision Distance to drive until you are that distance from the tag.
@@ -59,11 +61,13 @@ public class cmdVisionDriveDistance extends CommandBase {
         // Stop so we do not get a penalty by crossing centerline of the field
         if (RobotMath.isInRange(totalWheelDist, this.encoderMaxDistInches, this.tolInches)){
             RobotContainer.getInstance().m_driveTrain.StopDrive();
+            RobotContainer.getInstance().m_Lighting.setNewBaseColor(Lighting.lightPattern.BLACK.getValue());
             end(false);
         // Stop because we are the correct vision distance from the tag... AKA on top of the charge station    
         } 
         
         else if (RobotMath.isInRange(totalTagDist, this.targetVisionInches, this.tolInches)){ 
+            RobotContainer.getInstance().m_Lighting.setNewBaseColor(Lighting.lightPattern.WHITE.getValue());
             end (false);
         }
         else {
@@ -72,6 +76,7 @@ public class cmdVisionDriveDistance extends CommandBase {
             this.headingDeg, RobotContainer.getInstance().m_driveTrain.kp_driveStraightGyro);
             RobotContainer.getInstance().m_driveTrain.doDrive(power, 0, turnRate, 1);
         }
+
 
     }
 
