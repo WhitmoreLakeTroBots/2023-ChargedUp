@@ -33,11 +33,11 @@ public class Auto_Charge2_V2 extends SequentialCommandGroup {
         addCommands(new cmdUpdateBaseColor(lightPattern.RAINBOW));
 
         // drive over the charge station to get outside of the community
-        addCommands(new cmdVisionDriveDistance(2,170,
+        /*addCommands(new cmdVisionDriveDistance(2,170,
             142,0,0.4));
-
+        */
         addCommands(new cmdVisionDriveDistance(2,192,
-            50,0,0.10));
+            192,0,0.40));
 
         addCommands(new cmdDelay(1));
         
