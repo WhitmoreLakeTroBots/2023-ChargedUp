@@ -1,4 +1,6 @@
 package frc.robot.commands.AutonCommands;
+import com.revrobotics.CANSparkMax.IdleMode;
+
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 import frc.robot.commands.armCommands.*;
@@ -35,15 +37,18 @@ public class A_B_P1_V2 extends SequentialCommandGroup {
         
         //addCommands(new cmdIntakePos(Intake.inPos, true));
         addCommands(new cmdUpdateBaseColor(lightPattern.RAINBOW));
+        addCommands(new cmdSetBrakeMode(IdleMode.kCoast));
         addCommands(new cmdDriveStraight(30, 0.4, 0)); //dist in inches
         //addCommands(new Auton1Parallel(Arm.Mode.INTAKE,10,0.3,true));
         addCommands(new cmdIntakePos(Arm.Mode.DELIVERLOW, false));
-        addCommands(new cmdDriveStraight(86, 0.55, 0)); //dist in inches
-        
+        addCommands(new cmdDriveStraight(20, 0.55, 0));
+        addCommands(new cmdDriveStraight(46, 0.75, 0)); //dist in inches
+        addCommands(new cmdDriveStraight(15, 0.55, 0)); //target distance was 20
         addCommands(new cmdIntakePos(Arm.Mode.DELIVERLOW, false));
         addCommands(new cmdDriveStraight(22, 0.25, 0)); //dist in inches, was 30 inches
         //lower intake 
         
+        addCommands(new cmdSetBrakeMode(IdleMode.kBrake));
         //strafe to infront of cube 
         addCommands(new cmdStrafe(24, -0.4, 0)); //dist in inches
         
@@ -61,14 +66,18 @@ public class A_B_P1_V2 extends SequentialCommandGroup {
         //put intake away
         addCommands(new cmdSetArmMode(Arm.Mode.INTAKE, false));
         //strafe back
-        //addCommands(new cmdStrafe(20, 0.2, 0)); //dist in inches
+        //addCommands(new cmdStrafe(20, -0.2, 0)); //dist in inches
         //drive to commmunity
+        addCommands(new cmdSetBrakeMode(IdleMode.kCoast));
         addCommands(new cmdDriveStraight(30, -0.4, 0)); //dist in inches
-        addCommands(new cmdDriveStraight(136, -0.55, 0)); //dist in inches
+        addCommands(new cmdDriveStraight(30, -0.55, 0)); //dist in inches
+        addCommands(new cmdDriveStraight(76, -0.75, 0)); //dist in inches
+        addCommands(new cmdDriveStraight(30, -0.55, 0)); //dist in inches
         //extend intake 
         addCommands(new cmdSetArmMode(Arm.Mode.DELIVERHIGH, false));
         //drive to delivery
         addCommands(new cmdDriveStraight(25, -0.2, 0)); //dist in inches
+        addCommands(new cmdSetBrakeMode(IdleMode.kBrake));
         //strafe to position
         addCommands(new cmdStrafe(18, -0.4, 0)); //dist in inches
         //extend arm
