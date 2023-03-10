@@ -22,6 +22,7 @@ public class cmdIntakeEject extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+        bDone = false;
         RobotContainer.getInstance().m_Intake.startIntake();
         endTime = RobotMath.getTime() + delay;
     }

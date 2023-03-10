@@ -46,6 +46,7 @@ public class cmdVisionDriveDistance extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+        bDone = false;
         RobotContainer.getInstance().m_driveTrain.disableGoToPos();
         RobotContainer.getInstance().m_driveTrain.resetEncoders();
     }

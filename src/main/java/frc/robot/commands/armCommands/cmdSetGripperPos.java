@@ -51,6 +51,7 @@ public class cmdSetGripperPos extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+        bdone = false;
         if (stagPos == -1) {
             double pos = RobotContainer.getInstance().m_Gripper.getGripPos();
 

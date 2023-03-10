@@ -28,7 +28,8 @@ public class cmdIntakePos extends CommandBase {
     @Override
     public void initialize() {
        // RobotContainer.getInstance().m_Intake.setIntakeRotPos(target);
-        RobotContainer.getInstance().m_arm.setCurrentMode(nMode);
+       bDone = false; 
+       RobotContainer.getInstance().m_arm.setCurrentMode(nMode);
     }
 
     // Called every time the scheduler runs while the command is scheduled.
