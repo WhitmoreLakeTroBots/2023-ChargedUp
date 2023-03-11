@@ -21,18 +21,18 @@ public class Intake extends SubsystemBase {
     private WL_Spark rotMotor;
 
     public static double inPos = 2;
-    public static double outPos = 54.0;
-    public static double transferPos = 21.0;
-    public static double outOfTheWayPos = 40.0;
+    public static double outPos = 84.0;
+    public static double transferPos = 25.0;
+    public static double outOfTheWayPos = 67.0;
     public static double minPos = 0;
-    public static double maxPos = 57.0;
-    public static double safetyPos = 40.0;
+    public static double maxPos = 87.0;
+    public static double safetyPos = 67.0;
 
-    private static double intakePow = 0.5;
-    private static double rotPow = 0.40;
+    private static double intakePow = 0.70;
+    private static double rotPow = 0.80;
 
     private static double rotTol = 3;
-    private static double stagPower = -0.05;
+    private static double stagPower = 0.05;
     private static double stagRotPos = 30;
 
     private boolean isRunning = false;
@@ -46,6 +46,9 @@ public class Intake extends SubsystemBase {
     private double delayTime = 0.5;
 
     private double targetRotPos = 0;
+
+    private double holdPow = -0.04;
+    private double holdPos = 34;
 
     public Intake() {
 
@@ -112,8 +115,11 @@ public class Intake extends SubsystemBase {
             default:
         }
 
+        /*rotMotor.set(RobotMath.goToPosStagHold(getIntakeRotPos(), targetRotPos, rotTol, rotPow, stagRotPos,
+                stagPower,holdPow,holdPos));
+        */
         rotMotor.set(RobotMath.goToPosStag(getIntakeRotPos(), targetRotPos, rotTol, rotPow, stagRotPos,
-                stagPower));
+            stagPower));
 
 
         if(RobotMath.isInRange(getIntakeRotPos(), targetRotPos, rotTol)){
