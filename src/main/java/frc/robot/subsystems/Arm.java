@@ -22,7 +22,7 @@ public class Arm extends SubsystemBase {
     private double targetPowerRot = 0.70;
 
     private static double maxPosExtend = 250;
-    private static double minPosExtend = -1;
+    private static double minPosExtend = 1;
     private static double maxPosRot = 92;
     private static double minPosRot = 0;
     private static double tolExtend = 4.0;
@@ -33,7 +33,7 @@ public class Arm extends SubsystemBase {
     private double stagPowerRot = 0.30;
 
     public static double carryRotPos = 30;
-    public static double carryExtendPos = 4;
+    public static double carryExtendPos = 5;
     public static double deliveryHighRotPos = 80.5;
     public static double deliveryHighExtendPos = 245;
     // fix med and low delivery positions to where they should be
@@ -42,7 +42,7 @@ public class Arm extends SubsystemBase {
     public static double deliveryLowRotPos = 66;
     public static double deliveryLowExtendPos = 0;
     public static double intakeRotPos = 0;
-    public static double intakeExtPos = 1;
+    public static double intakeExtPos = 3;
 
     private static double safetyArmRotPos = 4;  //was 20
     private static double safetyArmExtPos = 15;

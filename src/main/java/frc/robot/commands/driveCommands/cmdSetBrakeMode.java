@@ -9,7 +9,6 @@ public class cmdSetBrakeMode extends CommandBase {
 
     private WL_Spark.IdleMode nMode;
 
-    private boolean bWait = false;
     private boolean bDone = false;
    
 

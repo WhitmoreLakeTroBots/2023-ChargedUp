@@ -1,18 +1,8 @@
 package frc.robot.subsystems;
 
-import frc.robot.commands.*;
-import frc.robot.hardware.WL_Spark;
 
-import java.util.Arrays;
-
-import com.revrobotics.CANSparkMax.IdleMode;
-
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.Robot;
-import frc.robot.RobotMath;
-import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 
 /**

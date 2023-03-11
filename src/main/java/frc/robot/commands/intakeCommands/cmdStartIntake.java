@@ -5,7 +5,7 @@ import frc.robot.RobotContainer;
 
 public class cmdStartIntake extends CommandBase {
 
-    private boolean bDone = true;
+    private boolean bDone = false;
 
     public cmdStartIntake() {
 
@@ -19,17 +19,20 @@ public class cmdStartIntake extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+        bDone = false;
         RobotContainer.getInstance().m_Intake.startIntake();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+        bDone = true;
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
+        bDone = true;
     }
 
     // Returns true when the command should end.
