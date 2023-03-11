@@ -4,6 +4,8 @@ import frc.robot.commands.cmdDelay;
 import frc.robot.commands.armCommands.*;
 import frc.robot.commands.driveCommands.*;
 import frc.robot.commands.intakeCommands.cmdIntakePos;
+import frc.robot.commands.intakeCommands.cmdStartIntake;
+import frc.robot.commands.intakeCommands.cmdStopIntake;
 import frc.robot.commands.lightingCommands.*;
 import frc.robot.commands.visionCommands.*;
 import frc.robot.subsystems.Arm;
@@ -13,9 +15,9 @@ import frc.robot.subsystems.Lighting.lightPattern;
 /**
  *
  */
-public class Auto_Charge2_V2 extends SequentialCommandGroup {
+public class Auto_Charge_V2 extends SequentialCommandGroup {
 
-    public Auto_Charge2_V2() {
+    public Auto_Charge_V2(int aprilTag) {
         addCommands(new cmdResetGyro());
         //sets intake to deliver high
         addCommands(new cmdUpdateBaseColor(lightPattern.RAINBOWLAVA));
@@ -33,20 +35,23 @@ public class Auto_Charge2_V2 extends SequentialCommandGroup {
         addCommands(new cmdUpdateBaseColor(lightPattern.RAINBOW));
 
         // drive over the charge station to get outside of the community
-        /*addCommands(new cmdVisionDriveDistance(2,170,
-            142,0,0.4));
-        */
-        addCommands(new cmdVisionDriveDistance(2,192,
-            192,0,0.40));
-
-        addCommands(new cmdDelay(1));
+        addCommands(new cmdVisionDriveDistance(aprilTag,170,
+            120,0,0.4));
+        addCommands(new cmdIntakePos(Arm.Mode.INTAKE, false));
+        addCommands(new cmdVisionDriveDistance(aprilTag,192,
+            72,0,0.40));
         
-        
-        
+        addCommands(new cmdIntakePos(Arm.Mode.INTAKE, true));
+        //addCommands(new cmdDelay(1));
+        addCommands(new cmdStartIntake());
+        addCommands(new cmdDriveStraight(30, 0.25));
+        addCommands(new cmdStopIntake());
+        addCommands(new cmdIntakePos(Arm.Mode.TRANSFERPOS, true));
+    
         // drive ontop of the charge station
-        addCommands(new cmdVisionDriveDistance(2,86,
+        addCommands(new cmdVisionDriveDistance(aprilTag,86,
             106,0,-0.4));
-
+        addCommands(new cmdIntakePos(Arm.Mode.START, false));
 
         //addCommands(new cmdGyroBalance);
         addCommands(new cmdActiveBalance());
