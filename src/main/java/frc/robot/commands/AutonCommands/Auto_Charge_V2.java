@@ -47,10 +47,10 @@ public class Auto_Charge_V2 extends SequentialCommandGroup {
         addCommands(new cmdVisionDriveDistance(aprilTag,192,
             72,0,0.40));
         addCommands(new cmdSetBrakeMode(IdleMode.kBrake));
-        
+        addCommands(new cmdStartIntake());
         addCommands(new cmdIntakePos(Arm.Mode.DELIVERLOW, true));
         //addCommands(new cmdDelay(1));
-        addCommands(new cmdStartIntake());
+        //addCommands(new cmdStartIntake());
         addCommands(new cmdDriveStraight(30, 0.25));
         addCommands(new cmdStopIntake());
         addCommands(new cmdIntakePos(Arm.Mode.TRANSFERPOS, true));

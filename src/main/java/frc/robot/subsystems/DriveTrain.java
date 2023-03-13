@@ -132,7 +132,6 @@ public class DriveTrain extends SubsystemBase {
         rDM2Power = Drive + Strafe - Turn;
         scale();
         SetMotorPower(speed);
-        System.err.print("LDMPower " + lDM1Power);
     }
 
     public double getMaxValue() {
