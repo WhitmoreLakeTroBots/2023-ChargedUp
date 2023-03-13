@@ -8,8 +8,8 @@ import frc.robot.RobotMath;
 public class cmdSetGripperPos extends CommandBase {
 
     private double targPos = 0;
-    private double stagPos = 1.0;
-    private double stagPower = 1.0;
+    //private double stagPos = 1.0;
+    //private double stagPower = 1.0;
     private double startTime = 0;
     
     private double timeOut = 0.5; // in seconds

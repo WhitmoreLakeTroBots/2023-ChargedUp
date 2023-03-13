@@ -32,9 +32,11 @@ public class Intake extends SubsystemBase {
     private static double intakePow = 0.70;
     private static double rotPow = 0.80;
 
-    private static double rotTol = 3;
+    private static double rotTol = 2;
     private static double stagPower = 0.05;
     private static double stagRotPos = 30;
+
+    private final double rotMotorRampRate = 50;
 
     private boolean isRunning = false;
     private boolean cubeFound = false;
@@ -59,6 +61,9 @@ public class Intake extends SubsystemBase {
 
         rotMotor = new WL_Spark(Constants.CANID.intakeRot, WL_Spark.MotorType.kBrushless);
         rotMotor.setInverted(true);
+        rotMotor.setOpenLoopRampRate(rotMotorRampRate);
+        rotMotor.setSoftLimit(SoftLimitDirection.kReverse, -1);
+        rotMotor.setSoftLimit(SoftLimitDirection.kForward, (float) maxPos);
         setSparkParms(rotMotor);
     }
 
@@ -71,8 +76,6 @@ public class Intake extends SubsystemBase {
 
         wls.setSmartCurrentLimit(30);
         wls.setIdleMode(IdleMode.kBrake);
-        wls.setSoftLimit(SoftLimitDirection.kReverse, -1);
-        wls.setSoftLimit(SoftLimitDirection.kForward, (float) maxPos);
         wls.burnFlash();
     }
 

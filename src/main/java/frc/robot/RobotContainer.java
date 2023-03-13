@@ -1,11 +1,10 @@
 package frc.robot;
 
-import frc.robot.commands.AutonCommands.A_B_P1_V2;
-import frc.robot.commands.AutonCommands.A_B_P3_V2;
 import frc.robot.commands.AutonCommands.Auto_Charge2_V1;
 import frc.robot.commands.AutonCommands.Auto_Charge7_V1;
 import frc.robot.commands.AutonCommands.Auto_Charge_V2;
 import frc.robot.commands.AutonCommands.Auto_V1;
+import frc.robot.commands.AutonCommands.AutonBarrier_V2;
 import frc.robot.commands.armCommands.cmdSetArmMode;
 import frc.robot.commands.armCommands.cmdSetGripperPos;
 import frc.robot.commands.driveCommands.cmdActiveBrake;
@@ -76,8 +75,8 @@ public class RobotContainer {
     // Test Drive code
     m_chooser.setDefaultOption("Auto V1", new Auto_V1());
     m_chooser.addOption("Auto V1", new Auto_V1());
-    m_chooser.addOption("Auto Red barrier", new A_B_P1_V2());
-    m_chooser.addOption("Auto Blue barrier", new A_B_P3_V2());
+    m_chooser.addOption("Auto Red barrier", new AutonBarrier_V2(true));
+    m_chooser.addOption("Auto Blue barrier", new AutonBarrier_V2(false));
     //m_chooser.addOption("active break", new cmdActiveBrake());
     //m_chooser.addOption("drive straight", new cmdDriveStraight(120, 0.6));
    // m_chooser.addOption("bluecube1", new cmdDriveToTarget(SubPoseEstimator.targetPoses.BLUE_GAME_PIECE_1, 0.40));
