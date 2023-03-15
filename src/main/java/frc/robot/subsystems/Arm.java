@@ -27,17 +27,10 @@ public class Arm extends SubsystemBase {
     private static double minPosRot = 0;
     private static double tolExtend = 4.0;
     public static double tolRot = 2;
-<<<<<<< HEAD
-    private final double stagPosExtend = 40.0;
+    private final double stagPosExtend = 20.0;
     private final double stagPosRot = 40.0;
     private final double stagPowerExtend = 0.2;
     private final double stagPowerRot = 0.30;
-=======
-    private double stagPosExtend = 20.0;
-    private double stagPosRot = 40.0;
-    private double stagPowerExtend = 0.2;
-    private double stagPowerRot = 0.30;
->>>>>>> 151c2f22de70303e085e6c83e0d5fbd7d971acbe
 
     public static double carryRotPos = 30;
     public static double carryExtendPos = 2;
