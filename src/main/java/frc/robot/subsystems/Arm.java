@@ -27,10 +27,10 @@ public class Arm extends SubsystemBase {
     private static double minPosRot = 0;
     private static double tolExtend = 4.0;
     public static double tolRot = 2;
-    private double stagPosExtend = 40.0;
-    private double stagPosRot = 40.0;
-    private double stagPowerExtend = 0.2;
-    private double stagPowerRot = 0.30;
+    private final double stagPosExtend = 40.0;
+    private final double stagPosRot = 40.0;
+    private final double stagPowerExtend = 0.2;
+    private final double stagPowerRot = 0.30;
 
     public static double carryRotPos = 30;
     public static double carryExtendPos = 5;
@@ -179,16 +179,14 @@ public class Arm extends SubsystemBase {
         }
     }
 
-    private void setArmExtendTargPos(double target, double stagPos, double stagPower) {
+    private void setArmExtendTargPos(double target) {
         targetArmExtendPos = RobotMath.safetyCap(target, minPosExtend, maxPosExtend);
-        stagPosExtend = stagPos;
-        stagPowerExtend = stagPower;
+     
     }
 
-    private void setArmRotTargPos(double target, double stagPos, double stagPower) {
+    private void setArmRotTargPos(double target) {
         targetArmRotPos = RobotMath.safetyCap(target, minPosRot, maxPosRot);
-        stagPosRot = stagPos;
-        stagPowerRot = stagPower;
+        
     }
 
     private void pauseExt() {
@@ -211,9 +209,9 @@ public class Arm extends SubsystemBase {
 
     private void goToStart() {
         // move extention to start pos
-        setArmExtendTargPos(0, stagPosExtend, stagPowerExtend);
+        setArmExtendTargPos(0);
         // move rotation to start pos
-        setArmRotTargPos(0, stagPosRot, stagPosRot);
+        setArmRotTargPos(0);
         // beware of rot safety pos
         pauseRotPos = 0;
         if ((armRot.getPosition() <= safetyArmRotPos) && (armExtend.getPosition() > safetyArmExtPos)) {
@@ -225,9 +223,9 @@ public class Arm extends SubsystemBase {
 
     private void goToCarry() {
         // move ext to carry pos
-        setArmExtendTargPos(carryExtendPos, stagPosExtend, stagPosExtend);
+        setArmExtendTargPos(carryExtendPos);
         // move rot to carry pos
-        setArmRotTargPos(carryRotPos, stagPosRot, stagPosRot);
+        setArmRotTargPos(carryRotPos);
         // beware of rot safety pos
         pauseRotPos = carryRotPos;
         pauseExtPos = carryExtendPos;
@@ -247,9 +245,9 @@ public class Arm extends SubsystemBase {
 
     private void goToDeliverLow() {
         // move ext to deliver low pos
-        setArmExtendTargPos(deliveryLowExtendPos, stagPosExtend, stagPowerExtend);
+        setArmExtendTargPos(deliveryLowExtendPos);
         // move rot to deliver low pos
-        setArmRotTargPos(deliveryLowRotPos, stagPosRot, stagPowerRot);
+        setArmRotTargPos(deliveryLowRotPos);
         // beware of rot safety pos
         pauseExtPos = deliveryLowExtendPos;
 
@@ -264,9 +262,9 @@ public class Arm extends SubsystemBase {
 
     private void goToDeliverMed() {
         // move ext to deliver med pos
-        setArmExtendTargPos(deliveryMedExtendPos, stagPosExtend, stagPowerExtend);
+        setArmExtendTargPos(deliveryMedExtendPos);
         // move rot to deliver med pos
-        setArmRotTargPos(deliveryMedRotPos, stagPosRot, stagPowerRot);
+        setArmRotTargPos(deliveryMedRotPos);
         // beware of rot safety pos
         pauseExtPos = deliveryMedExtendPos;
 
@@ -281,9 +279,9 @@ public class Arm extends SubsystemBase {
 
     private void goToDeliverHigh() {
         // move ext to deliver high pos
-        setArmExtendTargPos(deliveryHighExtendPos, stagPosExtend, stagPowerExtend);
+        setArmExtendTargPos(deliveryHighExtendPos);
         // move rot to deliver high pos
-        setArmRotTargPos(deliveryHighRotPos, stagPosRot, stagPowerRot);
+        setArmRotTargPos(deliveryHighRotPos);
         // beware of rot safety pos
         pauseExtPos = deliveryHighExtendPos;
         pauseRotPos = deliveryHighRotPos;
@@ -303,8 +301,8 @@ public class Arm extends SubsystemBase {
     }
 
     private void goToIntake() {
-        setArmExtendTargPos(intakeExtPos, stagPosExtend, stagPowerExtend);
-        setArmRotTargPos(intakeRotPos, stagPosRot, stagPowerRot);
+        setArmExtendTargPos(intakeExtPos);
+        setArmRotTargPos(intakeRotPos);
         pauseExtPos = intakeExtPos;
 
         if ((armRot.getPosition() <= safetyArmRotPos) && (armExtend.getPosition() > safetyArmExtPos)) {
