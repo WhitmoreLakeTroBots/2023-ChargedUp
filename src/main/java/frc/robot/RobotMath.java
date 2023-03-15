@@ -131,23 +131,23 @@ public class RobotMath {
     }
     public static double goToPosStag(double currentPos, double targetPos, double tol, double power, double stagStart, double stagPower){
         
-        //if before pos. add power
-        if((currentPos < (targetPos - tol))) {
+       
+       //if in range stop
+        if(isInRange(currentPos, targetPos, tol)){
+            return 0;
+        } 
+        else if(currentPos<(targetPos+stagStart)&&currentPos>targetPos){
+            return -stagPower;
+        }
+        else if(currentPos>(targetPos-stagStart)&&currentPos<targetPos){
+            return stagPower;
+        }
+        else if((currentPos < targetPos)) {
             return power;
         }
         //if after pos. subract power
-        else if((currentPos > (targetPos + tol))) {
+        else if(currentPos > targetPos) {
             return -1*power;
-        }
-        else if(currentPos<(targetPos-stagStart)){
-            return stagPower;
-        }
-        else if(currentPos>(targetPos+stagStart)){
-            return -1*stagPower;
-        }
-        //if in range stop
-        else if(isInRange(currentPos, targetPos, tol)){
-            return 0;
         }
         else {
             return 0;
