@@ -136,10 +136,10 @@ public class RobotMath {
         if(isInRange(currentPos, targetPos, tol)){
             return 0;
         } 
-        else if(currentPos<(targetPos+stagStart)&&currentPos>targetPos){
+        else if(currentPos<=(targetPos+stagStart)&&currentPos>targetPos){
             return -stagPower;
         }
-        else if(currentPos>(targetPos-stagStart)&&currentPos<targetPos){
+        else if(currentPos>=(targetPos-stagStart)&&currentPos<targetPos){
             return stagPower;
         }
         else if((currentPos < targetPos)) {

@@ -25,17 +25,17 @@ public class Arm extends SubsystemBase {
     private static double minPosExtend = 1;
     private static double maxPosRot = 92;
     private static double minPosRot = 0;
-    private static double tolExtend = 4.0;
+    private static double tolExtend = 2.0;
     public static double tolRot = 2;
     private final double stagPosExtend = 20.0;
-    private final double stagPosRot = 40.0;
+    private final double stagPosRot = 15.0;
     private final double stagPowerExtend = 0.2;
-    private final double stagPowerRot = 0.30;
+    private final double stagPowerRot = 0.50;
 
     public static double carryRotPos = 30;
     public static double carryExtendPos = 2;
     public static double deliveryHighRotPos = 80.5;
-    public static double deliveryHighExtendPos = 208;
+    public static double deliveryHighExtendPos = 206;
     // fix med and low delivery positions to where they should be
     public static double deliveryMedRotPos = 80;
     public static double deliveryMedExtendPos = 12;
@@ -77,7 +77,7 @@ public class Arm extends SubsystemBase {
         // to
         // update them via the RevClient.
 
-        wls.setSmartCurrentLimit(25);
+        wls.setSmartCurrentLimit(40);
         wls.setIdleMode(IdleMode.kBrake);
         wls.burnFlash();
     }
