@@ -18,10 +18,10 @@ import frc.robot.subsystems.Lighting.lightPattern;
 /**
  *
  */
-public class AutonBarrier_V2 extends SequentialCommandGroup {
+public class AutonWall_V2 extends SequentialCommandGroup {
 
 
-    public AutonBarrier_V2(boolean red) {
+    public AutonWall_V2(boolean red) {
         addCommands(new cmdResetGyro());
         //sets intake to deliver high
         addCommands(new cmdUpdateBaseColor(lightPattern.RAINBOWLAVA));
@@ -43,7 +43,7 @@ public class AutonBarrier_V2 extends SequentialCommandGroup {
         addCommands(new cmdDriveStraight(30, 0.4, 0)); //dist in inches
         //addCommands(new Auton1Parallel(Arm.Mode.INTAKE,10,0.3,true));
         addCommands(new cmdDriveStraight(20, 0.55, 0));
-        addCommands(new cmdDriveStraight(40, 0.75, 0)); //dist in inches
+        addCommands(new cmdDriveStraight(40, 0.40, 0)); //dist in inches
         addCommands(new cmdDriveStraight(15, 0.55, 0)); //target distance was 20
         addCommands(new cmdIntakePos(Arm.Mode.DELIVERLOW, false));
         addCommands(new cmdDriveStraight(22, 0.25, 0)); //dist in inches, was 30 inches
@@ -57,9 +57,9 @@ public class AutonBarrier_V2 extends SequentialCommandGroup {
         addCommands(new cmdIntakePos(Arm.Mode.DELIVERLOW, true));
         //strafe to infront of cube for red alliance left for blue alliance right 
         if(red){
-            addCommands(new cmdStrafe(24, -0.4, 0)); //dist in inches
+            addCommands(new cmdStrafe(24, 0.4, 0)); //dist in inches
         } else{
-            addCommands(new cmdStrafe(24, 0.4, 0)); //dist in inches 
+            addCommands(new cmdStrafe(24, -0.4, 0)); //dist in inches 
         }
         
        
@@ -81,6 +81,9 @@ public class AutonBarrier_V2 extends SequentialCommandGroup {
         //addCommands(new cmdStrafe(20, -0.2, 0)); //dist in inches
         addCommands(new cmdSetGripperPos(Gripper.cubeClosePos,false));
         //drive to commmunity
+        
+        
+        /* 
         addCommands(new cmdSetBrakeMode(IdleMode.kCoast));
         addCommands(new cmdDriveStraight(30, -0.4, 0)); //dist in inches
         //addCommands(new cmdSetGripperPos(Gripper.cubeClosePos,false));
@@ -96,11 +99,12 @@ public class AutonBarrier_V2 extends SequentialCommandGroup {
         
         //strafe to position for red alliance left for blue alliance right
         /*if(red){
-            addCommands(new cmdStrafe(22, -0.4, 0)); //dist in inches
+            addCommands(new cmdStrafe(22, 0.4, 0)); //dist in inches
         } else{
-            addCommands(new cmdStrafe(22, 0.4, 0)); //dist in inches 
+            addCommands(new cmdStrafe(22, -0.4, 0)); //dist in inches 
         }
         */
+        /* 
         //addCommands(new cmdStopIntake());
         //extend arm
         addCommands(new cmdSetArmMode(Arm.Mode.DELIVERHIGH, true));
@@ -108,7 +112,7 @@ public class AutonBarrier_V2 extends SequentialCommandGroup {
         addCommands(new cmdSetGripperPos(Gripper.openPos,true));
         // go to intake 
         addCommands(new cmdSetArmMode(Arm.Mode.INTAKE, true));
-
+        */
     }
 
 

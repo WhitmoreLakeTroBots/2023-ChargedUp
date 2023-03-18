@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.AutonCommands.AutonWall_V2;
 
 //import org.apache.commons.io.filefilter.TrueFileFilter;
 
@@ -77,6 +78,8 @@ public class RobotContainer {
     m_chooser.addOption("Auto V1", new Auto_V1());
     m_chooser.addOption("Auto Red barrier", new AutonBarrier_V2(true));
     m_chooser.addOption("Auto Blue barrier", new AutonBarrier_V2(false));
+    m_chooser.addOption("Auto Red wall", new AutonWall_V2(true));
+    m_chooser.addOption("Auto Blue barrier", new AutonWall_V2(false));
     //m_chooser.addOption("active break", new cmdActiveBrake());
     //m_chooser.addOption("drive straight", new cmdDriveStraight(120, 0.6));
    // m_chooser.addOption("bluecube1", new cmdDriveToTarget(SubPoseEstimator.targetPoses.BLUE_GAME_PIECE_1, 0.40));
