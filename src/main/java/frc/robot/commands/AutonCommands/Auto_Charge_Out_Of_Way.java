@@ -69,10 +69,10 @@ public class Auto_Charge_Out_Of_Way extends SequentialCommandGroup {
         addCommands(new cmdActiveBalance());
         */
         if(aprilTag == 2){
-            addCommands(new cmdStrafe(20,-0.4));
+            addCommands(new cmdStrafe(20,-0.4,0));
         }
         else{
-            addCommands(new cmdStrafe(20,0.4));
+            addCommands(new cmdStrafe(20,0.4,0));
         }
     }
 

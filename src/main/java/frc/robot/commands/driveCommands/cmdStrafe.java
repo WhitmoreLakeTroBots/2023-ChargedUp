@@ -18,7 +18,7 @@ private WL_Spark.IdleMode idleMode = WL_Spark.IdleMode.kBrake;
 
 
 
-public cmdStrafe(double targetDistance, double speed) {
+/*public cmdStrafe(double targetDistance, double speed) {
 
     targetPosition = targetDistance;
     power = speed;
@@ -28,6 +28,7 @@ public cmdStrafe(double targetDistance, double speed) {
     // addRequirements(m_subsystem);    
 
 }
+*/
     public cmdStrafe(double targetDistance, double speed, double heading) {
 
         targetPosition = targetDistance;
