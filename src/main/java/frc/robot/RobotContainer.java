@@ -88,10 +88,10 @@ public class RobotContainer {
     m_chooser.addOption("Auto charge 7 blue", new Auto_Charge7_V1());
     
 
-   // m_chooser.addOption("Auto charge 2 red v2", new Auto_Charge_V2(2));
-   // m_chooser.addOption("Auto charge 7 blue v2", new Auto_Charge_V2(7));
-    m_chooser.addOption("Auto charge v3 Red", new Auto_Charge_Out_Of_Way(2));
-    m_chooser.addOption("Auto charge v3 Blue", new Auto_Charge_Out_Of_Way(7));
+    m_chooser.addOption("Auto charge 2 red v2", new Auto_Charge_V2(2));
+    m_chooser.addOption("Auto charge 7 blue v2", new Auto_Charge_V2(7));
+   // m_chooser.addOption("Auto charge v3 Red", new Auto_Charge_Out_Of_Way(2));
+   // m_chooser.addOption("Auto charge v3 Blue", new Auto_Charge_Out_Of_Way(7));
     // m_chooser.addOption("Auto charge 7 blue 2", new Auto_Charge7_V2());
 
     /*
