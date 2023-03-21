@@ -2,6 +2,7 @@ package frc.robot;
 
 import frc.robot.commands.AutonCommands.Auto_Charge2_V1;
 import frc.robot.commands.AutonCommands.Auto_Charge7_V1;
+import frc.robot.commands.AutonCommands.Auto_Charge_Out_Of_Way;
 import frc.robot.commands.AutonCommands.Auto_Charge_V2;
 import frc.robot.commands.AutonCommands.Auto_V1;
 import frc.robot.commands.AutonCommands.AutonBarrier_V2;
@@ -79,7 +80,7 @@ public class RobotContainer {
     m_chooser.addOption("Auto Red barrier", new AutonBarrier_V2(true));
     m_chooser.addOption("Auto Blue barrier", new AutonBarrier_V2(false));
     m_chooser.addOption("Auto Red wall", new AutonWall_V2(true));
-    m_chooser.addOption("Auto Blue barrier", new AutonWall_V2(false));
+    m_chooser.addOption("Auto Blue wall", new AutonWall_V2(false));
     //m_chooser.addOption("active break", new cmdActiveBrake());
     //m_chooser.addOption("drive straight", new cmdDriveStraight(120, 0.6));
    // m_chooser.addOption("bluecube1", new cmdDriveToTarget(SubPoseEstimator.targetPoses.BLUE_GAME_PIECE_1, 0.40));
@@ -87,8 +88,10 @@ public class RobotContainer {
     m_chooser.addOption("Auto charge 7 blue", new Auto_Charge7_V1());
     
 
-    m_chooser.addOption("Auto charge 2 red v2", new Auto_Charge_V2(2));
-    m_chooser.addOption("Auto charge 7 blue v2", new Auto_Charge_V2(7));
+   // m_chooser.addOption("Auto charge 2 red v2", new Auto_Charge_V2(2));
+   // m_chooser.addOption("Auto charge 7 blue v2", new Auto_Charge_V2(7));
+    m_chooser.addOption("Auto charge v3 Red", new Auto_Charge_Out_Of_Way(2));
+    m_chooser.addOption("Auto charge v3 Blue", new Auto_Charge_Out_Of_Way(7));
     // m_chooser.addOption("Auto charge 7 blue 2", new Auto_Charge7_V2());
 
     /*
