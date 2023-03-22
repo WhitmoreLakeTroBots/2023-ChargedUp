@@ -30,6 +30,7 @@ public class Intake extends SubsystemBase {
     public static double safetyPos = 63.0;
 
     private static double intakePow = 0.70;
+    private static double intakeRevPow = -1.0;
     private static double rotPow = 0.65;
 
     private static double rotTol = 1;
@@ -205,7 +206,7 @@ public class Intake extends SubsystemBase {
     }
 
     public void runInReverse(){
-        intakeMotor.set(-intakePow);
+        intakeMotor.set(intakeRevPow);
     }
     public boolean getIsInPos(){return isInPos;}
     
