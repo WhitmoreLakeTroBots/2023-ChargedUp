@@ -44,9 +44,9 @@ public class AutonWall_V2 extends SequentialCommandGroup {
         //addCommands(new Auton1Parallel(Arm.Mode.INTAKE,10,0.3,true));
         addCommands(new cmdDriveStraight(20, 0.55, 0));
         addCommands(new cmdDriveStraight(40, 0.40, 0)); //dist in inches
-        addCommands(new cmdDriveStraight(15, 0.55, 0)); //target distance was 20
+        addCommands(new cmdDriveStraight(25, 0.55, 0)); //target distance was 20
         addCommands(new cmdIntakePos(Arm.Mode.DELIVERLOW, false));
-        addCommands(new cmdDriveStraight(22, 0.25, 0)); //dist in inches, was 30 inches
+        addCommands(new cmdDriveStraight(22, 0.45, 0)); //dist in inches, was 30 inches
         //lower intake 
         
         addCommands(new cmdSetBrakeMode(IdleMode.kBrake));
@@ -57,19 +57,19 @@ public class AutonWall_V2 extends SequentialCommandGroup {
         addCommands(new cmdIntakePos(Arm.Mode.DELIVERLOW, true));
         //strafe to infront of cube for red alliance left for blue alliance right 
         if(red){
-            addCommands(new cmdStrafe(24, 0.4, 0)); //dist in inches
+            addCommands(new cmdStrafe(19, 0.5, 0)); //dist in inches
         } else{
-            addCommands(new cmdStrafe(24, -0.4, 0)); //dist in inches 
+            addCommands(new cmdStrafe(19, -0.5, 0)); //dist in inches 
         }
         
        
         //drive 20 inches
-        addCommands(new cmdDriveStraight(30, 0.2, 0)); //dist in inches
+        addCommands(new cmdDriveStraight(24, 0.45, 0)); //dist in inches
         //transfer cube to gripper
         addCommands(new cmdStopIntake());
         //addCommands(new cmdIntakePos(Arm.Mode.INTAKE, true));
         addCommands(new cmdIntakePos(Arm.Mode.TRANSFERPOS, true));
-        addCommands(new cmdDelay(0.5));
+        addCommands(new cmdDelay(0.4));
         //addCommands(new cmdStopIntake());
         //eject from intake to gripper
         //addCommands(new cmdIntakeEject());
@@ -81,6 +81,35 @@ public class AutonWall_V2 extends SequentialCommandGroup {
         //addCommands(new cmdStrafe(20, -0.2, 0)); //dist in inches
         addCommands(new cmdSetGripperPos(Gripper.cubeClosePos,false));
         //drive to commmunity
+
+        addCommands(new cmdSetBrakeMode(IdleMode.kCoast));
+        
+        addCommands(new cmdDriveStraight(28, -0.50, 0)); //dist in inches
+        //addCommands(new cmdSetGripperPos(Gripper.cubeClosePos,false));
+        addCommands(new cmdDriveStraight(45, -0.60, 0)); //dist in inches
+        addCommands(new cmdDriveStraight(61, -0.40, 0)); //dist in inches
+        addCommands(new cmdSetArmMode(Arm.Mode.DELIVERHIGH, false));
+        addCommands(new cmdDriveStraight(26, -0.60, 0)); //dist in inches
+        //extend intake 
+        //addCommands(new cmdSetArmMode(Arm.Mode.DELIVERHIGH, false));
+        //drive to delivery
+        addCommands(new cmdDriveStraight(15, -0.45, 0)); //dist in inches
+        addCommands(new cmdSetBrakeMode(IdleMode.kBrake));
+
+        
+        if(red){
+            addCommands(new cmdStrafe(20, 0.45, 0)); //dist in inches
+        } else{
+            addCommands(new cmdStrafe(20, -0.45, 0)); //dist in inches 
+        }
+        
+        //addCommands(new cmdStopIntake());
+        //extend arm
+        addCommands(new cmdSetArmMode(Arm.Mode.DELIVERHIGH, true));
+        //deliver
+        addCommands(new cmdSetGripperPos(Gripper.openPos,true));
+        // go to intake 
+        addCommands(new cmdSetArmMode(Arm.Mode.INTAKE, true));
         
         
         /* 

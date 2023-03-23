@@ -51,16 +51,16 @@ public class Auto_Charge_V2 extends SequentialCommandGroup {
         addCommands(new cmdIntakePos(Arm.Mode.DELIVERLOW, true));
         //addCommands(new cmdDelay(1));
         //addCommands(new cmdStartIntake());
-        addCommands(new cmdDriveStraight(30, 0.25));
+        addCommands(new cmdDriveStraight(15, 0.35));
         addCommands(new cmdStopIntake());
         addCommands(new cmdIntakePos(Arm.Mode.TRANSFERPOS, true));
-        addCommands(new cmdDelay(0.5));
+        addCommands(new cmdDelay(0.4));
         addCommands(new cmdSetGripperPos(Gripper.cubeClosePos, false));
     
         addCommands(new cmdSetBrakeMode(IdleMode.kCoast));
         // drive ontop of the charge station
         addCommands(new cmdVisionDriveDistance(aprilTag,86,
-            126,5,-0.55));
+            141,5,-0.50));
         addCommands(new cmdSetBrakeMode(IdleMode.kCoast));
         //addCommands(new cmdIntakePos(Arm.Mode.START, false));
         

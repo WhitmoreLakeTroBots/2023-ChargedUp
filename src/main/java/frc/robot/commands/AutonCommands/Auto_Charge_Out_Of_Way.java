@@ -20,7 +20,7 @@ import frc.robot.subsystems.Lighting.lightPattern;
 public class Auto_Charge_Out_Of_Way extends SequentialCommandGroup {
 
     public Auto_Charge_Out_Of_Way(int aprilTag) {
-        //addCommands(new cmdResetGyro());
+        addCommands(new cmdResetGyro());
         //sets intake to deliver high
         //addCommands(new cmdUpdateBaseColor(lightPattern.RAINBOWLAVA));
         addCommands(new cmdIntakePos(Arm.Mode.DELIVERHIGH, true));
@@ -45,7 +45,7 @@ public class Auto_Charge_Out_Of_Way extends SequentialCommandGroup {
             120,0,0.40));
         addCommands(new cmdIntakePos(Arm.Mode.DELIVERLOW, false));
         addCommands(new cmdVisionDriveDistance(aprilTag,192,
-            72,0,0.40));
+            52,0,0.40));
         addCommands(new cmdSetBrakeMode(IdleMode.kBrake));
         addCommands(new cmdStartIntake());
         addCommands(new cmdIntakePos(Arm.Mode.DELIVERLOW, true));
