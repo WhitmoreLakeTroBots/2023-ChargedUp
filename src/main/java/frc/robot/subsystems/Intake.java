@@ -20,20 +20,24 @@ public class Intake extends SubsystemBase {
     private WL_Spark intakeMotor;
     private WL_Spark rotMotor;
 
-    public static double inPos = 0;
-    public static double outPos = 272;
-    public static double transferPos = 98.0;
-    public static double outOfTheWayPos = 200.0;
+    public static double inPos = 2;
+    public static double outPos = 90.0;
+    public static double transferPos = 29.0;
+    public static double outOfTheWayPos = 68.0;
     public static double minPos = 0;
-    public static double maxPos = 277;
-    public static double safetyPos = 172;
+    public static double maxPos = 91;
+    //safety pos must be less than out of the way pos - 1 - tol
+    public static double safetyPos = 63.0;
 
-    private static double intakePow = 0.5;
-    private static double rotPow = 0.85;
+    private static double intakePow = 0.70;
+    private static double intakeRevPow = -1.0;
+    private static double rotPow = 0.65;
 
-    private static double rotTol = 5;
-    private static double stagPower = .25;
+    private static double rotTol = 1;
+    private static double stagPower = 0.15;
     private static double stagRotPos = 10;
+
+    private final double rotMotorRampRate = 0;
 
     private boolean isRunning = false;
     private boolean cubeFound = false;
@@ -47,6 +51,9 @@ public class Intake extends SubsystemBase {
 
     private double targetRotPos = 0;
 
+    private double holdPow = -0.04;
+    private double holdPos = 34;
+
     public Intake() {
 
         intakeMotor = new WL_Spark(Constants.CANID.intake, WL_Spark.MotorType.kBrushless);
@@ -55,6 +62,9 @@ public class Intake extends SubsystemBase {
 
         rotMotor = new WL_Spark(Constants.CANID.intakeRot, WL_Spark.MotorType.kBrushless);
         rotMotor.setInverted(true);
+        rotMotor.setOpenLoopRampRate(rotMotorRampRate);
+        rotMotor.setSoftLimit(SoftLimitDirection.kReverse, -1);
+        rotMotor.setSoftLimit(SoftLimitDirection.kForward, (float) maxPos);
         setSparkParms(rotMotor);
     }
 
@@ -65,10 +75,8 @@ public class Intake extends SubsystemBase {
         // to
         // update them via the RevClient.
 
-        wls.setSmartCurrentLimit(15);
+        wls.setSmartCurrentLimit(30);
         wls.setIdleMode(IdleMode.kBrake);
-        wls.setSoftLimit(SoftLimitDirection.kReverse, -1);
-        wls.setSoftLimit(SoftLimitDirection.kForward, (float) maxPos);
         wls.burnFlash();
     }
 
@@ -112,8 +120,11 @@ public class Intake extends SubsystemBase {
             default:
         }
 
+        /*rotMotor.set(RobotMath.goToPosStagHold(getIntakeRotPos(), targetRotPos, rotTol, rotPow, stagRotPos,
+                stagPower,holdPow,holdPos));
+        */
         rotMotor.set(RobotMath.goToPosStag(getIntakeRotPos(), targetRotPos, rotTol, rotPow, stagRotPos,
-                stagPower));
+            stagPower));
 
 
         if(RobotMath.isInRange(getIntakeRotPos(), targetRotPos, rotTol)){
@@ -195,7 +206,7 @@ public class Intake extends SubsystemBase {
     }
 
     public void runInReverse(){
-        intakeMotor.set(-intakePow);
+        intakeMotor.set(intakeRevPow);
     }
     public boolean getIsInPos(){return isInPos;}
     

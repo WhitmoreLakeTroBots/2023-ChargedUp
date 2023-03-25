@@ -80,7 +80,7 @@ public class DriveTrain extends SubsystemBase {
         // to
         // update them via the RevClient.
 
-        wls.setSmartCurrentLimit(60);
+        wls.setSmartCurrentLimit(50);
         wls.setIdleMode(IdleMode.kBrake);
         wls.burnFlash();
 
@@ -132,7 +132,6 @@ public class DriveTrain extends SubsystemBase {
         rDM2Power = Drive + Strafe - Turn;
         scale();
         SetMotorPower(speed);
-        System.err.print("LDMPower " + lDM1Power);
     }
 
     public double getMaxValue() {

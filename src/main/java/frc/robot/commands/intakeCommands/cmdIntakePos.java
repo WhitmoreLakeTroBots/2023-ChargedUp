@@ -3,7 +3,7 @@ package frc.robot.commands.intakeCommands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Arm;
-import frc.robot.subsystems.Intake;
+
 
 public class cmdIntakePos extends CommandBase {
 
@@ -28,7 +28,8 @@ public class cmdIntakePos extends CommandBase {
     @Override
     public void initialize() {
        // RobotContainer.getInstance().m_Intake.setIntakeRotPos(target);
-        RobotContainer.getInstance().m_arm.setCurrentMode(nMode);
+       bDone = false; 
+       RobotContainer.getInstance().m_arm.setCurrentMode(nMode);
     }
 
     // Called every time the scheduler runs while the command is scheduled.

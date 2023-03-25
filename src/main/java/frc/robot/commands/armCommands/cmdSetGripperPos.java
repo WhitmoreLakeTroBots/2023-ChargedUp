@@ -8,8 +8,8 @@ import frc.robot.RobotMath;
 public class cmdSetGripperPos extends CommandBase {
 
     private double targPos = 0;
-    private double stagPos = 1.0;
-    private double stagPower = 1.0;
+    //private double stagPos = 1.0;
+    //private double stagPower = 1.0;
     private double startTime = 0;
     
     private double timeOut = 0.5; // in seconds
@@ -30,7 +30,7 @@ public class cmdSetGripperPos extends CommandBase {
 
     // if fixedDist = false => stagPosition is suposed to recieve the percantage to
     // be traversed in stag, in 0.xx format
-    public cmdSetGripperPos(double targetPos, double stagPosition, double stagPow, boolean fixedDist) {
+    /*public cmdSetGripperPos(double targetPos, double stagPosition, double stagPow, boolean fixedDist) {
         targPos = targetPos;
         bWait = true;
 
@@ -42,21 +42,25 @@ public class cmdSetGripperPos extends CommandBase {
         } else {
             stagPos = -1;
         }
+    
         stagPower = stagPow;
         // m_subsystem = subsystem;
         // addRequirements(m_subsystem);
 
     }
+    */
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        if (stagPos == -1) {
+        bdone = false;
+        /*if (stagPos == -1) {
             double pos = RobotContainer.getInstance().m_Gripper.getGripPos();
 
             stagPos = (Math.abs(pos - targPos)) * stagPos;
         }
-        RobotContainer.getInstance().m_Gripper.setGripPos(targPos, stagPos, stagPower);
+        */
+        RobotContainer.getInstance().m_Gripper.setGripPos(targPos);
         startTime = RobotMath.getTime();
         endTime = startTime + timeOut;
     }
@@ -83,6 +87,7 @@ public class cmdSetGripperPos extends CommandBase {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
+        bdone = true;
        // RobotContainer.getInstance().m_Gripper.stop();
     }
 

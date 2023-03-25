@@ -131,6 +131,31 @@ public class RobotMath {
     }
     public static double goToPosStag(double currentPos, double targetPos, double tol, double power, double stagStart, double stagPower){
         
+       
+       //if in range stop
+        if(isInRange(currentPos, targetPos, tol)){
+            return 0;
+        } 
+        else if(currentPos<=(targetPos+stagStart)&&currentPos>targetPos){
+            return -stagPower;
+        }
+        else if(currentPos>=(targetPos-stagStart)&&currentPos<targetPos){
+            return stagPower;
+        }
+        else if((currentPos < targetPos)) {
+            return power;
+        }
+        //if after pos. subract power
+        else if(currentPos > targetPos) {
+            return -1*power;
+        }
+        else {
+            return 0;
+        } 
+    }
+
+    public static double goToPosStagHold(double currentPos, double targetPos, double tol, double power, double stagStart, double stagPower, double holdPow, double holdPos){
+        
         //if before pos. add power
         if((currentPos < (targetPos - tol))) {
             return power;
@@ -147,6 +172,9 @@ public class RobotMath {
         }
         //if in range stop
         else if(isInRange(currentPos, targetPos, tol)){
+            if(currentPos>holdPos){
+                return holdPow;
+            }
             return 0;
         }
         else {

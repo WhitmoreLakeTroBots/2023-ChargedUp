@@ -29,12 +29,15 @@ public class cmdSetArmMode extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+        System.err.println("cmdSetArmMode initialize - current mode " + nMode.name());
+        bDone = false;
         RobotContainer.getInstance().m_arm.setCurrentMode(nMode);
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+        System.err.println("cmdSetArmMode execute");
         if(bWait){
             if(RobotContainer.getInstance().m_arm.isInPos()){
                 bDone = true;
@@ -51,11 +54,13 @@ public class cmdSetArmMode extends CommandBase {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
+        bDone = true;
     }
 
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
+        if(bDone){System.err.println("cmdSetArmMode bdone is true");}
         return bDone;
     }
 

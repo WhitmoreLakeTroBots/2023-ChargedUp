@@ -1,20 +1,7 @@
 package frc.robot.subsystems;
 
 
-import frc.robot.CommonLogic;
-import frc.robot.RobotContainer;
-import frc.robot.Constants.*;
-import frc.robot.hardware.WL_Spark;
 
-import java.lang.System.Logger.Level;
-import java.time.Duration;
-import java.util.concurrent.locks.Condition;
-
-import javax.swing.text.AbstractDocument.LeafElement;
-
-import com.revrobotics.SparkMaxPIDController;
-import frc.robot.PID;
-import frc.robot.Robot;
 import frc.robot.RobotMath;
 //import frc.robot.commands.*;
 //import edu.wpi.first.wpilibj.livewindow.LiveWindow;

@@ -15,21 +15,21 @@ import frc.robot.hardware.WL_Spark;
  */
 public class Gripper extends SubsystemBase {
 
-    private WL_Spark gripperMoter;
+    private WL_Spark gripperMotor;
 
     public static double coneClosePos = 0;
-    public static double cubeClosePos = 13.75;
+    public static double cubeClosePos = 13.0;
 
     private static double minPosGrip = 0;
     public static double maxPosGrip = 40;
     public static double openPos = maxPosGrip;
 
-    private static double griptol = 2.0;
+    private static double griptol = 2;
 
     private double targetGripPos = 0;
-    private double stagPosGrip = 0;
-    private double targetGripPower = 0.50;
-    private double stagPowerGrip = .20;
+    private static double stagPosGrip = 10;
+    private static double targetGripPower = 0.50;
+    private static double stagPowerGrip = 0.15;
 
     //for cSensor
     private boolean isCube;
@@ -49,9 +49,9 @@ public class Gripper extends SubsystemBase {
     */
     public Gripper() {
 
-        gripperMoter = new WL_Spark(Constants.CANID.gripper, WL_Spark.MotorType.kBrushless);
-        gripperMoter.setInverted(true);
-        setSparkParms(gripperMoter);
+        gripperMotor = new WL_Spark(Constants.CANID.gripper, WL_Spark.MotorType.kBrushless);
+        gripperMotor.setInverted(true);
+        setSparkParms(gripperMotor);
 
         cSensor = new ColorSensorV3(I2C.Port.kMXP);
     }
@@ -73,9 +73,9 @@ public class Gripper extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        gripperMoter.set(RobotMath.goToPosStag(getGripPos(), targetGripPos, griptol, targetGripPower, stagPosGrip,
+        gripperMotor.set(RobotMath.goToPosStag(getGripPos(), targetGripPos, griptol, targetGripPower, stagPosGrip,
                 stagPowerGrip));
-        checkObject();
+       // checkObject();
         //closeGripperObject();
 
     }
@@ -90,7 +90,7 @@ public class Gripper extends SubsystemBase {
     // here. Call these from Commands.
 
     public double getGripPos() {
-        return gripperMoter.getPosition();
+        return gripperMotor.getPosition();
     }
 
     public void setGripPos(double target, double stagPos, double stagPower) {
@@ -100,6 +100,9 @@ public class Gripper extends SubsystemBase {
         
     }
 
+    public void setGripPos(double target) {
+        targetGripPos = RobotMath.safetyCap(target, minPosGrip, maxPosGrip);
+    }
     public boolean isCube() {
         return false;
     }
@@ -113,7 +116,6 @@ public class Gripper extends SubsystemBase {
     }
 
     public void stop() {
-        stagPowerGrip = 0;
         targetGripPos = getGripPos();
     }
 

@@ -3,7 +3,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.RobotMath;
 import frc.robot.subsystems.Lighting;
-import frc.robot.subsystems.Lighting.lightPattern;
+
 
 
 // This command accespts a tag ID, and Vision Distance to drive until you are that distance from the tag.
@@ -46,6 +46,7 @@ public class cmdVisionDriveDistance extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+        bDone = false;
         RobotContainer.getInstance().m_driveTrain.disableGoToPos();
         RobotContainer.getInstance().m_driveTrain.resetEncoders();
     }

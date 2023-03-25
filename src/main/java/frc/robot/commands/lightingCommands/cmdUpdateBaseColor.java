@@ -4,8 +4,6 @@ import frc.robot.RobotContainer;
 import frc.robot.subsystems.Lighting;
 import frc.robot.subsystems.Lighting.lightPattern;
 
-import java.util.function.DoubleSupplier;
-
 
 public class cmdUpdateBaseColor extends CommandBase {
 
