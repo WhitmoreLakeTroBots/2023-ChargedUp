@@ -36,9 +36,11 @@ public class LLSubPoseEstimator extends SubsystemBase {
     public NetworkTableEntry camerapose_robotspace = null;
     public NetworkTableEntry tid = null;
     public NetworkTableEntry tv = null;
-    public final double [] NullTransform = {-99.0, -99.0, -99.0, 0.0, 0.0, 0.0};
+    public double [] NullTransform = {-99.0, -99.0, -99.0, 0.0, 0.0, 0.0};
     public final String strPose = "x= %3.2f y=%3.2 z=%3.2";
-  /*  botpose	Robot transform in field-space. Translation (X,Y,Z) Rotation(Roll,Pitch,Yaw), total latency (cl+tl)
+
+
+    /*  botpose	Robot transform in field-space. Translation (X,Y,Z) Rotation(Roll,Pitch,Yaw), total latency (cl+tl)
 botpose_wpiblue	Robot transform in field-space (blue driverstation WPILIB origin). Translation (X,Y,Z) Rotation(Roll,Pitch,Yaw), total latency (cl+tl)
 botpose_wpired	Robot transform in field-space (red driverstation WPILIB origin). Translation (X,Y,Z) Rotation(Roll,Pitch,Yaw), total latency (cl+tl)
 camerapose_targetspace	3D transform of the camera in the coordinate system of the primary in-view AprilTag (array (6))
@@ -69,6 +71,9 @@ tid
         inst = NetworkTableInstance.getDefault();
 
         llTable = inst.getTable("limelight-back");
+        tid = llTable.getEntry("tid");
+        targetpose_cameraspace = llTable.getEntry("targetpose_cameraspace");
+        //targetpose_robotspace = llTable.getEntry("targetpose_robotspace");
 
 
     }
@@ -81,14 +86,14 @@ tid
     public void getLimeLightData() {
 
          botpose = llTable.getEntry("botpose");
-         botpose_wpiblue = llTable.getEntry("botpose_wpiblue");
+
+         /*botpose_wpiblue = llTable.getEntry("botpose_wpiblue");
          botpose_wpired = llTable.getEntry("botpose_wpired");
          camerapose_targetspace = llTable.getEntry("camerapose_targetspace");
          targetpose_cameraspace = llTable.getEntry("targetpose_cameraspace");
-         targetpose_robotspace = llTable.getEntry("target[pse_robotspace");
-         botpose_targetspace = llTable.getEntry("botpose_targetspace");
+                  botpose_targetspace = llTable.getEntry("botpose_targetspace");
          camerapose_robotspace = llTable.getEntry("camerapose_robotspace");
-         tid = llTable.getEntry("tid");
+
 
         //If Limelight has a target insight
          tv = llTable.getEntry("tv"); 	//Whether the limelight has any valid targets (0 or 1)
@@ -96,9 +101,9 @@ tid
         currTime = RobotMath.getTime();
         if ((currTime - lastPrintTime ) > 1.0) {
             lastPrintTime = currTime;
-            System.err.println (formatPose(camerapose_targetspace.getDoubleArray(NullTransform)));
+            //System.err.println (formatPose(camerapose_targetspace.getDoubleArray(NullTransform)));
         }
-
+*/
     }
     @Override
     public void simulationPeriodic() {
@@ -109,22 +114,29 @@ tid
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
+    public int getFiducialId() {
+        return (int)tid.getInteger(-99);
+    }
 
+    public String getCamPoseString (){
+        return formatPose(camerapose_targetspace.getDoubleArray(NullTransform));
+    }
     public String formatPose (double [] data){
-
-        return String.format (strPose, data[0], data[1], data[2]);
+        return ("hello !:)");
+        //return String.format (strPose, data[0], data[1], data[2]);
 
     }
     public double getCameraX() {
-        return camerapose_targetspace.getDoubleArray(NullTransform)[0];
+        return targetpose_cameraspace.getDoubleArray(NullTransform)[0];
+
     }
 
     public double getCameraY() {
-        return camerapose_robotspace.getDoubleArray(NullTransform)[1];
+        return targetpose_cameraspace.getDoubleArray(NullTransform)[1];
     }
 
     public double getCameraZ() {
-        return camerapose_robotspace.getDoubleArray(NullTransform)[2];
+        return targetpose_cameraspace.getDoubleArray(NullTransform)[2];
     }
 
     public double getFieldX() {
@@ -152,7 +164,9 @@ tid
     }
 
 
-
+    public double getDistanceFromTagInInches (int tagID) {
+        return this.getDistanceFromTagInInches();
+    }
 
     public double getDistanceFromTagInInches(){
         double distance = -99.0;
@@ -169,6 +183,17 @@ tid
             else{return -99;}
         }
         catch(Exception e){return -99;}
+    }
+
+    public Pose3d getRobotFieldPose() {
+        robotFieldPose = new Pose3d(
+            botpose.getDoubleArray(NullTransform)[0],
+            botpose.getDoubleArray(NullTransform)[1],
+            botpose.getDoubleArray(NullTransform)[2],
+            new Rotation3d(0.0, 0.0, 0.0)
+            );
+
+        return robotFieldPose;
     }
 
     public enum targetPoses {

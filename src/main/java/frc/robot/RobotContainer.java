@@ -51,7 +51,9 @@ public class RobotContainer {
   public final DriveTrain m_driveTrain = new DriveTrain();
   public final Lighting m_Lighting = new Lighting();
   public final Arm m_arm = new Arm();
-  public final SubPoseEstimator m_Estimator = new SubPoseEstimator();
+  //public final SubPoseEstimator m_Estimator = new SubPoseEstimator();
+  public final LLSubPoseEstimator m_Estimator = new LLSubPoseEstimator();
+
   public final Gripper m_Gripper = new Gripper();
   public final Intake m_Intake = new Intake();
 
@@ -86,7 +88,7 @@ public class RobotContainer {
    // m_chooser.addOption("bluecube1", new cmdDriveToTarget(SubPoseEstimator.targetPoses.BLUE_GAME_PIECE_1, 0.40));
     m_chooser.addOption("Auto charge 2 red", new Auto_Charge2_V1());
     m_chooser.addOption("Auto charge 7 blue", new Auto_Charge7_V1());
-    
+
 
     m_chooser.addOption("Auto charge 2 red v2", new Auto_Charge_V2(2));
     m_chooser.addOption("Auto charge 7 blue v2", new Auto_Charge_V2(7));
@@ -97,17 +99,17 @@ public class RobotContainer {
     /*
      * m_chooser.addOption("driveforward", new cmdDriveStraight(24, .25, 0.0));
      * m_chooser.addOption("driveback", new cmdDriveStraight(24, -.25, 0.0));
-     * 
+     *
      * m_chooser.addOption("turn-90 (left)", new cmdTurnByGyro(-90, .2, true));
      * m_chooser.addOption("turn 90 (right)", new cmdTurnByGyro(90, .2, false));
-     * 
+     *
      * m_chooser.addOption("turn-180 (left)", new cmdTurnByGyro(180, .2, true));
      * m_chooser.addOption("turn 180 (right)", new cmdTurnByGyro(180, .2, false));
-     * 
+     *
      * m_chooser.addOption("strafe left", new cmdStrafe(12, .25, 0.0));
      * m_chooser.addOption("strafe right", new cmdStrafe(12, -.25, 0.0));
      */
- 
+
     /*
      * SmartDashboard.putData("turn-0", new cmdTurnByGyro(0, .2, true));
      * SmartDashboard.putData("driveforward", new cmdDriveStraight(24, .25,
@@ -206,7 +208,7 @@ public class RobotContainer {
     rBumper_ArticButton.whileTrue(new cmdReverseIntake())
         .onFalse(new cmdStopIntake())
         .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.SKYBLUE));
-    
+
    // Trigger lBumper_ArticButton = articController.leftBumper();
     //lBumper_ArticButton.onTrue(new cmdIntakePos(Intake.outPos, false));
 
@@ -294,7 +296,7 @@ public class RobotContainer {
     // SmartDashboard.putNumber("LDM1POS", m_driveTrain.lDM1.getPositionABS());
 
     SmartDashboard.putNumber("cSensor", m_Gripper.getDistance());
-    
+
 
     //SmartDashboard.putNumber("Field_x", m_Estimator.getFieldX());
     //SmartDashboard.putNumber("Field_y", m_Estimator.getFieldY());
@@ -307,9 +309,9 @@ public class RobotContainer {
     //SmartDashboard.putNumber("Field_pitch", Math.toDegrees(m_Estimator.getFieldPitchRad()));
     //SmartDashboard.putNumber("Field_roll", Math.toDegrees(m_Estimator.getFieldRollRad()));
 
-    SmartDashboard.putNumber("cam11_x", m_Estimator.getCameraX());
-    SmartDashboard.putNumber("cam11_y", m_Estimator.getCameraY());
-    SmartDashboard.putNumber("cam11_z", m_Estimator.getCameraZ());
+    SmartDashboard.putNumber("ll_x", m_Estimator.getCameraX());
+    SmartDashboard.putNumber("ll_y", m_Estimator.getCameraY());
+    SmartDashboard.putNumber("ll_z", m_Estimator.getCameraZ());
     SmartDashboard.putNumber("TagID", m_Estimator.getFiducialId());
 
     SmartDashboard.putNumber("Drive distance", m_driveTrain.getDriveDist());
