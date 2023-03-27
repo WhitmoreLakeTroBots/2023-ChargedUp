@@ -21,13 +21,13 @@ public class Intake extends SubsystemBase {
     private WL_Spark rotMotor;
 
     public static double inPos = 2;
-    public static double outPos = 90.0;
+    public static double outPos = 75.0; //was 90
     public static double transferPos = 29.0;
-    public static double outOfTheWayPos = 68.0;
+    public static double outOfTheWayPos = 58.0; //was 68
     public static double minPos = 0;
     public static double maxPos = 91;
     //safety pos must be less than out of the way pos - 1 - tol
-    public static double safetyPos = 63.0;
+    public static double safetyPos = 54.5; //was 63
 
     private static double intakePow = 0.70;
     private static double intakeRevPow = -1.0;
