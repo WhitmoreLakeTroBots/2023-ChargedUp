@@ -16,7 +16,7 @@ public class cmdVisionDriveDistance extends CommandBase {
     private double targetVisionInches = 0.0;
     private double encoderMaxDistInches = 0.0;
     private double headingDeg = 0.0;
-    private final double tolInches = 3.0;
+    private final double tolInches = 6.0;
     private double power = .8;
 
     public cmdVisionDriveDistance( int tagId, double targetVisionDist_inches, 
@@ -58,7 +58,8 @@ public class cmdVisionDriveDistance extends CommandBase {
         
         double totalWheelDist = RobotContainer.getInstance().m_driveTrain.getDistanceTraveledInches();
         double totalTagDist = RobotContainer.getInstance().m_Estimator.getDistanceFromTagInInches(this.tagNum);
-        
+        System.err.println("vision distance: "+totalTagDist  + "    Wheeldist: " + totalWheelDist);
+
         // Stop so we do not get a penalty by crossing centerline of the field
         if (RobotMath.isInRange(totalWheelDist, this.encoderMaxDistInches, this.tolInches)){
             RobotContainer.getInstance().m_driveTrain.StopDrive();
@@ -68,6 +69,8 @@ public class cmdVisionDriveDistance extends CommandBase {
         } 
         
         else if (RobotMath.isInRange(totalTagDist, this.targetVisionInches, this.tolInches)){ 
+            System.err.println("stopped with vision");
+            RobotContainer.getInstance().m_driveTrain.StopDrive();
             RobotContainer.getInstance().m_Lighting.setNewBaseColor(Lighting.lightPattern.WHITE.getValue());
             end (false);
         }
@@ -76,6 +79,7 @@ public class cmdVisionDriveDistance extends CommandBase {
             double turnRate = RobotMath.calcTurnRate(RobotContainer.getInstance().m_subGyro.getNormaliziedNavxAngle(),
             this.headingDeg, RobotContainer.getInstance().m_driveTrain.kp_driveStraightGyro);
             RobotContainer.getInstance().m_driveTrain.doDrive(power, 0, turnRate, 1);
+            RobotContainer.getInstance().m_Lighting.setNewBaseColor(Lighting.lightPattern.GREEN.getValue());
         }
 
 

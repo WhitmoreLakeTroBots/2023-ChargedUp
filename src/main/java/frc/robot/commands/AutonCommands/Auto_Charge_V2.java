@@ -59,7 +59,7 @@ public class Auto_Charge_V2 extends SequentialCommandGroup {
     
         addCommands(new cmdSetBrakeMode(IdleMode.kCoast));
         // drive ontop of the charge station
-        addCommands(new cmdVisionDriveDistance(aprilTag,86,
+        addCommands(new cmdVisionDriveDistance(aprilTag,113,
             141,5,-0.50));
         addCommands(new cmdSetBrakeMode(IdleMode.kCoast));
         //addCommands(new cmdIntakePos(Arm.Mode.START, false));

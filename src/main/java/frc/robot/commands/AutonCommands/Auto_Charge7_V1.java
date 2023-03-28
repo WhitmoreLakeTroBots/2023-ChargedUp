@@ -18,20 +18,20 @@ public class Auto_Charge7_V1 extends SequentialCommandGroup {
     public Auto_Charge7_V1() {
         addCommands(new cmdResetGyro());
         //sets intake to deliver high
-        addCommands(new cmdUpdateBaseColor(lightPattern.RAINBOWLAVA));
+        //addCommands(new cmdUpdateBaseColor(lightPattern.RAINBOWLAVA));
         addCommands(new cmdIntakePos(Arm.Mode.DELIVERHIGH, true));
-        addCommands(new cmdUpdateBaseColor(lightPattern.BLUEGREEN));
+        //addCommands(new cmdUpdateBaseColor(lightPattern.BLUEGREEN));
         addCommands(new cmdSetArmMode(Arm.Mode.DELIVERHIGH, true));
        // addCommands(new Auton1Parallel(Arm.deliveryRotPos,Arm.deliveryExtendPos));
 
-        addCommands(new cmdUpdateBaseColor(lightPattern.CONFETTI));
+        //addCommands(new cmdUpdateBaseColor(lightPattern.CONFETTI));
         addCommands(new cmdSetGripperPos(Gripper.openPos,true));
-        addCommands(new cmdUpdateBaseColor(lightPattern.LAWNGREEN));
+        //addCommands(new cmdUpdateBaseColor(lightPattern.LAWNGREEN));
         addCommands(new cmdSetArmMode(Arm.Mode.INTAKE, true));
         addCommands(new cmdSetGripperPos(Gripper.coneClosePos, false));
         
         //addCommands(new cmdIntakePos(Intake.inPos, true));
-        addCommands(new cmdUpdateBaseColor(lightPattern.RAINBOW));
+        //addCommands(new cmdUpdateBaseColor(lightPattern.RAINBOW));
         addCommands(new cmdVisionDriveDistance(7,93,
             120,0,.45));
         //addCommands(new cmdActiveBrake());

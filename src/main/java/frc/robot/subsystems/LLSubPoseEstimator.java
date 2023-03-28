@@ -172,10 +172,10 @@ tid
         double distance = -99.0;
 
         try{
-             if (tv.getInteger(0) == 1){
+             //if (tv.getInteger(0) == 1){
                 //We have a value to work with
-                distance = camerapose_targetspace.getDoubleArray(NullTransform)[2];
-             }
+                distance = targetpose_cameraspace.getDoubleArray(NullTransform)[2];
+            // }
 
             if(distance != -99.0){
                 return RobotMath.metersToInches(distance);
