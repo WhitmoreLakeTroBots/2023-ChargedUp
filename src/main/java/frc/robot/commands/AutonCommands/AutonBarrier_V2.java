@@ -57,9 +57,9 @@ public class AutonBarrier_V2 extends SequentialCommandGroup {
         addCommands(new cmdIntakePos(Arm.Mode.DELIVERLOW, true));
         //strafe to infront of cube for red alliance left for blue alliance right 
         if(red){
-            addCommands(new cmdStrafe(19, -0.50, 0)); //dist in inches
+            addCommands(new cmdStrafe(22, -0.50, 0)); //dist in inches
         } else{
-            addCommands(new cmdStrafe(19, 0.50, 0)); //dist in inches 
+            addCommands(new cmdStrafe(22, 0.50, 0)); //dist in inches 
         }
         
        
@@ -91,7 +91,7 @@ public class AutonBarrier_V2 extends SequentialCommandGroup {
         //extend intake 
         //addCommands(new cmdSetArmMode(Arm.Mode.DELIVERHIGH, false));
         //drive to delivery
-        addCommands(new cmdDriveStraight(16, -0.2, 0)); //dist in inches
+        addCommands(new cmdDriveStraight(20, -0.2, 0)); //dist in inches
         addCommands(new cmdSetBrakeMode(IdleMode.kBrake));
         
         //strafe to position for red alliance left for blue alliance right

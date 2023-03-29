@@ -1,7 +1,6 @@
 package frc.robot;
 
-import frc.robot.commands.AutonCommands.Auto_Charge2_V1;
-import frc.robot.commands.AutonCommands.Auto_Charge7_V1;
+import frc.robot.commands.AutonCommands.Auto_ChargeV1;
 import frc.robot.commands.AutonCommands.Auto_Charge_Out_Of_Way;
 import frc.robot.commands.AutonCommands.Auto_Charge_V2;
 import frc.robot.commands.AutonCommands.Auto_V1;
@@ -86,8 +85,7 @@ public class RobotContainer {
     //m_chooser.addOption("active break", new cmdActiveBrake());
     //m_chooser.addOption("drive straight", new cmdDriveStraight(120, 0.6));
    // m_chooser.addOption("bluecube1", new cmdDriveToTarget(SubPoseEstimator.targetPoses.BLUE_GAME_PIECE_1, 0.40));
-    m_chooser.addOption("Auto charge 2 red", new Auto_Charge2_V1());
-    m_chooser.addOption("Auto charge 7 blue", new Auto_Charge7_V1());
+    m_chooser.addOption("Auto charge v1", new Auto_ChargeV1());
 
 
     m_chooser.addOption("Auto charge 2 red v2", new Auto_Charge_V2(2));
@@ -309,9 +307,9 @@ public class RobotContainer {
     //SmartDashboard.putNumber("Field_pitch", Math.toDegrees(m_Estimator.getFieldPitchRad()));
     //SmartDashboard.putNumber("Field_roll", Math.toDegrees(m_Estimator.getFieldRollRad()));
 
-    SmartDashboard.putNumber("ll_x", m_Estimator.getCameraX());
-    SmartDashboard.putNumber("ll_y", m_Estimator.getCameraY());
-    SmartDashboard.putNumber("ll_z", m_Estimator.getCameraZ());
+    SmartDashboard.putNumber("ll_x", m_Estimator.getCameraX()/0.0254);
+    SmartDashboard.putNumber("ll_y", m_Estimator.getCameraY()/0.0254);
+    SmartDashboard.putNumber("ll_z", m_Estimator.getCameraZ()/0.0254);
     SmartDashboard.putNumber("TagID", m_Estimator.getFiducialId());
 
     SmartDashboard.putNumber("Drive distance", m_driveTrain.getDriveDist());

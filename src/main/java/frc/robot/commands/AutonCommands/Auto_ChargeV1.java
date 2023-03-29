@@ -13,9 +13,9 @@ import frc.robot.subsystems.Lighting.lightPattern;
 /**
  *
  */
-public class Auto_Charge7_V1 extends SequentialCommandGroup {
+public class Auto_ChargeV1 extends SequentialCommandGroup {
 
-    public Auto_Charge7_V1() {
+    public Auto_ChargeV1() {
         addCommands(new cmdResetGyro());
         //sets intake to deliver high
         //addCommands(new cmdUpdateBaseColor(lightPattern.RAINBOWLAVA));
@@ -33,7 +33,7 @@ public class Auto_Charge7_V1 extends SequentialCommandGroup {
         //addCommands(new cmdIntakePos(Intake.inPos, true));
         //addCommands(new cmdUpdateBaseColor(lightPattern.RAINBOW));
         addCommands(new cmdVisionDriveDistance(7,93,
-            120,0,.45));
+            123,0,.45));
         //addCommands(new cmdActiveBrake());
         addCommands(new cmdActiveBalance());
     }

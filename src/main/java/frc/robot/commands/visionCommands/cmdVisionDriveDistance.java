@@ -59,20 +59,19 @@ public class cmdVisionDriveDistance extends CommandBase {
         double totalWheelDist = RobotContainer.getInstance().m_driveTrain.getDistanceTraveledInches();
         double totalTagDist = RobotContainer.getInstance().m_Estimator.getDistanceFromTagInInches(this.tagNum);
         System.err.println("vision distance: "+totalTagDist  + "    Wheeldist: " + totalWheelDist);
-
-        // Stop so we do not get a penalty by crossing centerline of the field
-        if (RobotMath.isInRange(totalWheelDist, this.encoderMaxDistInches, this.tolInches)){
-            RobotContainer.getInstance().m_driveTrain.StopDrive();
-            RobotContainer.getInstance().m_Lighting.setNewBaseColor(Lighting.lightPattern.BLACK.getValue());
-            end(false);
-        // Stop because we are the correct vision distance from the tag... AKA on top of the charge station    
-        } 
+ 
         
-        else if (RobotMath.isInRange(totalTagDist, this.targetVisionInches, this.tolInches)){ 
+        if (RobotMath.isInRange(totalTagDist, this.targetVisionInches, this.tolInches)){ 
             System.err.println("stopped with vision");
             RobotContainer.getInstance().m_driveTrain.StopDrive();
             RobotContainer.getInstance().m_Lighting.setNewBaseColor(Lighting.lightPattern.WHITE.getValue());
             end (false);
+        }
+        else if (RobotMath.isInRange(totalWheelDist, this.encoderMaxDistInches, this.tolInches)){
+            RobotContainer.getInstance().m_driveTrain.StopDrive();
+            RobotContainer.getInstance().m_Lighting.setNewBaseColor(Lighting.lightPattern.BLACK.getValue());
+            end(false);
+        // Stop because we are the correct vision distance from the tag... AKA on top of the charge station    
         }
         else {
             // Keep Driving as straight as possible by gyro.
