@@ -31,7 +31,7 @@ public class Intake extends SubsystemBase {
 
     private static double intakePow = 0.70;
     private static double intakeRevPow = -1.0;
-    private static double rotPow = 0.65;
+    private static double rotPow = 0.90;
 
     private static double rotTol = 1;
     private static double stagPower = 0.15;
