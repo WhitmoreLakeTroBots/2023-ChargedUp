@@ -96,9 +96,9 @@ public class AutonBarrier_V2 extends SequentialCommandGroup {
         
         //strafe to position for red alliance left for blue alliance right
         if(red){
-            addCommands(new cmdStrafe(20, -0.45, 0)); //dist in inches
+            addCommands(new cmdStrafe(8, -0.45, 0)); //dist in inches
         } else{
-            addCommands(new cmdStrafe(20, 0.45, 0)); //dist in inches 
+            addCommands(new cmdStrafe(8, 0.45, 0)); //dist in inches 
         }
         
         //addCommands(new cmdStopIntake());

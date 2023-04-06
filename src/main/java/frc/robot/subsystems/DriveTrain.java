@@ -80,7 +80,7 @@ public class DriveTrain extends SubsystemBase {
         // to
         // update them via the RevClient.
 
-        wls.setSmartCurrentLimit(50);
+        wls.setSmartCurrentLimit(45);
         wls.setIdleMode(IdleMode.kBrake);
         wls.burnFlash();
 

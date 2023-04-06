@@ -19,7 +19,7 @@ public class Arm extends SubsystemBase {
     private double targetArmExtendPos = 0;
     private double targetArmRotPos = 0;
     private double targetPowerExtend = 0.90;
-    private double targetPowerRot = 0.90;
+    private double targetPowerRot = 0.70;
 
     private static double maxPosExtend = 210;
     private static double minPosExtend = 1;
@@ -62,11 +62,15 @@ public class Arm extends SubsystemBase {
 
         armExtend = new WL_Spark(Constants.CANID.armExtend, WL_Spark.MotorType.kBrushless);
         armExtend.setInverted(false);
+        armExtend.setSmartCurrentLimit(40);
         setSparkParms(armExtend);
+        
 
         armRot = new WL_Spark(Constants.CANID.armRot, WL_Spark.MotorType.kBrushless);
         armRot.setInverted(true);
+        armRot.setSmartCurrentLimit(25);
         setSparkParms(armRot);
+        
 
     }
 
@@ -77,7 +81,6 @@ public class Arm extends SubsystemBase {
         // to
         // update them via the RevClient.
 
-        wls.setSmartCurrentLimit(40);
         wls.setIdleMode(IdleMode.kBrake);
         wls.burnFlash();
     }
