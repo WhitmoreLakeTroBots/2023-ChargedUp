@@ -64,7 +64,7 @@ public class AutonBarrier_V2 extends SequentialCommandGroup {
         
        
         //drive 20 inches
-        addCommands(new cmdDriveStraight(30, 0.2, 0)); //dist in inches
+        addCommands(new cmdDriveStraight(32, 0.2, 0)); //dist in inches
         //transfer cube to gripper
         addCommands(new cmdStopIntake());
         //addCommands(new cmdIntakePos(Arm.Mode.INTAKE, true));
@@ -79,15 +79,15 @@ public class AutonBarrier_V2 extends SequentialCommandGroup {
         //addCommands(new cmdSetArmMode(Arm.Mode.INTAKE, false));
         //strafe back
         //addCommands(new cmdStrafe(20, -0.2, 0)); //dist in inches
-        addCommands(new cmdSetGripperPos(Gripper.cubeClosePos,false));
+        //addCommands(new cmdSetGripperPos(Gripper.cubeClosePos,false));
         //drive to commmunity
         addCommands(new cmdSetBrakeMode(IdleMode.kCoast));
         addCommands(new cmdDriveStraight(30, -0.45, 0)); //dist in inches
-        //addCommands(new cmdSetGripperPos(Gripper.cubeClosePos,false));
+        addCommands(new cmdSetGripperPos(Gripper.cubeClosePos-2,false));
         addCommands(new cmdDriveStraight(30, -0.60, 0)); //dist in inches
         addCommands(new cmdDriveStraight(61, -0.80, 0)); //dist in inches
         addCommands(new cmdSetArmMode(Arm.Mode.DELIVERHIGH, false));
-        addCommands(new cmdDriveStraight(23, -0.60, 0)); //dist in inches
+        addCommands(new cmdDriveStraight(24, -0.60, 0)); //dist in inches
         //extend intake 
         //addCommands(new cmdSetArmMode(Arm.Mode.DELIVERHIGH, false));
         //drive to delivery
