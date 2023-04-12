@@ -83,7 +83,7 @@ public class AutonBarrier_V2 extends SequentialCommandGroup {
         //drive to commmunity
         addCommands(new cmdSetBrakeMode(IdleMode.kCoast));
         addCommands(new cmdDriveStraight(30, -0.45, 0)); //dist in inches
-        addCommands(new cmdSetGripperPos(Gripper.cubeClosePos-2,false));
+        addCommands(new cmdSetGripperPos(Gripper.cubeClosePos,false));
         addCommands(new cmdDriveStraight(30, -0.60, 0)); //dist in inches
         addCommands(new cmdDriveStraight(61, -0.80, 0)); //dist in inches
         addCommands(new cmdSetArmMode(Arm.Mode.DELIVERHIGH, false));

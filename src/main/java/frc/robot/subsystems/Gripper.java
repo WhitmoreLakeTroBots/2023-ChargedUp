@@ -18,7 +18,7 @@ public class Gripper extends SubsystemBase {
     private WL_Spark gripperMotor;
 
     public static double coneClosePos = 0;
-    public static double cubeClosePos = 13.0;
+    public static double cubeClosePos = 11.0;
 
     private static double minPosGrip = 0;
     public static double maxPosGrip = 40;
