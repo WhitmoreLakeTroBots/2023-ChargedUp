@@ -3,6 +3,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.RobotMath;
 import frc.robot.subsystems.Lighting;
+import frc.robot.Constants.GearTrain;
 
 
 
@@ -18,6 +19,7 @@ public class cmdVisionDriveDistance extends CommandBase {
     private double headingDeg = 0.0;
     private final double tolInches = 6.0;
     private double power = .8;
+    
 
     public cmdVisionDriveDistance( int tagId, double targetVisionDist_inches, 
         double encoderMaxDist_inches,double gyroHeadingDeg) {
@@ -26,6 +28,7 @@ public class cmdVisionDriveDistance extends CommandBase {
         this.targetVisionInches = targetVisionDist_inches;
         this.encoderMaxDistInches = encoderMaxDist_inches;
         this.headingDeg = gyroHeadingDeg;
+        this.power = 0.8;
 
 
     }
@@ -49,6 +52,7 @@ public class cmdVisionDriveDistance extends CommandBase {
         bDone = false;
         RobotContainer.getInstance().m_driveTrain.disableGoToPos();
         RobotContainer.getInstance().m_driveTrain.resetEncoders();
+        this.power = this.power*GearTrain.gearFactor; //after we changed gear ratios to keep autons same
     }
 
     // Called every time the scheduler runs while the command is scheduled.

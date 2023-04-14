@@ -2,6 +2,7 @@ package frc.robot.commands.driveCommands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.RobotMath;
+import frc.robot.Constants.GearTrain;
 
 
 /**
@@ -39,6 +40,7 @@ public class cmdTurnByGyro extends CommandBase {
             power = -1*power;
         }
         RobotContainer.getInstance().m_driveTrain.doDrive(0, 0, power, 1);
+        this.power = this.power*GearTrain.gearFactor; //after we changed gear ratios to keep autons same
     }
 
     // Called every time the scheduler runs while the command is scheduled.

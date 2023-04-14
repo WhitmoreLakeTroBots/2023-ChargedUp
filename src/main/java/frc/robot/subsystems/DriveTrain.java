@@ -21,7 +21,7 @@ public class DriveTrain extends SubsystemBase {
     private WL_Spark rDM2;
 
     private double wheelDiameter = 8; // in inches
-    private double gearRatio = 10.71; // Motor to wheel ratio was 12.75
+    private double gearRatio = 8.46; // Motor to wheel ratio was 10.71
     private double teleopPower = .40;
     public static double normalDriveSpeed = 0.50;
     public static double boostSpeed = 1.0;
@@ -80,7 +80,7 @@ public class DriveTrain extends SubsystemBase {
         // to
         // update them via the RevClient.
 
-        wls.setSmartCurrentLimit(45);
+        wls.setSmartCurrentLimit(60);
         wls.setIdleMode(IdleMode.kBrake);
         wls.burnFlash();
 

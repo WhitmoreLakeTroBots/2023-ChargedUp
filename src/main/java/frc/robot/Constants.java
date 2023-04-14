@@ -67,5 +67,8 @@ public class Constants {
         public static final double cameraPitchRadians = Math.toRadians(cameraPitchDegrees);
         public static double targetRangeMeters = 0; // how far from the target we want to be
     }
+    public static final class GearTrain{
+        public static final double gearFactor = 0.9;
+    }
 
 }

@@ -4,6 +4,7 @@ import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.RobotMath;
+import frc.robot.Constants.GearTrain;
 import frc.robot.subsystems.SubPoseEstimator;
 
 /**
@@ -41,6 +42,7 @@ public class cmdDriveToTarget extends CommandBase {
         ,0
         //, Math.toDegrees(diffPose.getRotation().getY()) * -1
         ,power);
+        this.power = this.power*GearTrain.gearFactor; //after we changed gear ratios to keep autons same
 
     }
 

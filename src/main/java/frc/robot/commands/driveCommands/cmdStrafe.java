@@ -2,6 +2,7 @@ package frc.robot.commands.driveCommands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.RobotMath;
+import frc.robot.Constants.GearTrain;
 import frc.robot.hardware.WL_Spark;
 
 
@@ -46,6 +47,7 @@ private WL_Spark.IdleMode idleMode = WL_Spark.IdleMode.kBrake;
         bDone = false;
         RobotContainer.getInstance().m_driveTrain.resetEncoders();
         RobotContainer.getInstance().m_driveTrain.doDrive(0,power,0,.4);
+        this.power = this.power*GearTrain.gearFactor; //after we changed gear ratios to keep autons same
     }
 
     // Called every time the scheduler runs while the command is scheduled.
