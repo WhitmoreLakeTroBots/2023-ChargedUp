@@ -236,9 +236,10 @@ public class RobotContainer {
     Trigger rTrigger_driveController = driveController.rightTrigger();
    rTrigger_driveController
    // .whileTrue(new cmdDriveStraight(72, 0.4))
-        .whileTrue(new cmdDriveToTarget(SubPoseEstimator.targetPoses.RED_GAME_PIECE_1, 0.4))
-        .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.RAINBOW))
-        .onFalse(new cmdDisableAutoDrive());
+   .onTrue(new cmdUpdateDriveSpeed(DriveTrain.grannyGear))
+   .onTrue(new cmdUpdateBaseColor(Lighting.lightPattern.ORANGE))
+   .onFalse(new cmdUpdateDriveSpeed(DriveTrain.normalDriveSpeed));
+
 
     // right bumper on driver = active break
     // Trigger rBumper_driveController = driveController.rightBumper();

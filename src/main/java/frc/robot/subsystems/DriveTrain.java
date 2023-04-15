@@ -25,6 +25,7 @@ public class DriveTrain extends SubsystemBase {
     private double teleopPower = .40;
     public static double normalDriveSpeed = 0.50;
     public static double boostSpeed = 1.0;
+    public static double grannyGear = 0.30;
 
     private boolean bGoToPos = false;
     private double driveDist = 0.0;
