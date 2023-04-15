@@ -44,7 +44,7 @@ public class AutonWall_V2 extends SequentialCommandGroup {
         //addCommands(new Auton1Parallel(Arm.Mode.INTAKE,10,0.3,true));
         addCommands(new cmdDriveStraight(20, 0.55, 0));
         addCommands(new cmdDriveStraight(40, 0.40, 0)); //dist in inches
-        addCommands(new cmdDriveStraight(25, 0.55, 0)); //target distance was 20
+        addCommands(new cmdDriveStraight(25, 0.60, 0)); //target distance was 20
         addCommands(new cmdIntakePos(Arm.Mode.DELIVERLOW, false));
         addCommands(new cmdDriveStraight(22, 0.45, 0)); //dist in inches, was 30 inches
         //lower intake 

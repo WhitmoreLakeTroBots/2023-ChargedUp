@@ -3,6 +3,7 @@ package frc.robot;
 import frc.robot.commands.AutonCommands.Auto_ChargeV1;
 import frc.robot.commands.AutonCommands.Auto_Charge_Out_Of_Way;
 import frc.robot.commands.AutonCommands.Auto_Charge_V2;
+import frc.robot.commands.AutonCommands.Auto_Charge_V3;
 import frc.robot.commands.AutonCommands.Auto_V1;
 import frc.robot.commands.AutonCommands.AutonBarrier_V2;
 import frc.robot.commands.armCommands.cmdSetArmMode;
@@ -90,8 +91,10 @@ public class RobotContainer {
 
     m_chooser.addOption("Auto charge 2 red v2", new Auto_Charge_V2(2));
     m_chooser.addOption("Auto charge 7 blue v2", new Auto_Charge_V2(7));
-    m_chooser.addOption("Auto charge v3 Red out of way", new Auto_Charge_Out_Of_Way(2));
-    m_chooser.addOption("Auto charge v3 Blue out of way", new Auto_Charge_Out_Of_Way(7));
+    m_chooser.addOption("Auto charge Red out of way", new Auto_Charge_Out_Of_Way(2));
+    m_chooser.addOption("Auto charge Blue out of way", new Auto_Charge_Out_Of_Way(7));
+    m_chooser.addOption("Auto charge blue V3", new Auto_Charge_V3(7));
+    m_chooser.addOption("Auto charge red V3", new Auto_Charge_V3(2));
     // m_chooser.addOption("Auto charge 7 blue 2", new Auto_Charge7_V2());
 
     /*

@@ -19,6 +19,7 @@ public class Auto_V1 extends SequentialCommandGroup {
 
     public Auto_V1() {
         //sets intake to deliver high
+        addCommands(new cmdResetGyro());
         addCommands(new cmdUpdateBaseColor(lightPattern.RAINBOWLAVA));
         addCommands(new cmdIntakePos(Arm.Mode.DELIVERHIGH, true));
         addCommands(new cmdUpdateBaseColor(lightPattern.BLUEGREEN));
@@ -32,7 +33,7 @@ public class Auto_V1 extends SequentialCommandGroup {
         
         //addCommands(new cmdIntakePos(Intake.inPos, true));
         addCommands(new cmdUpdateBaseColor(lightPattern.RAINBOW));
-        addCommands(new cmdDriveStraight(148, 0.4, 0)); //dist in inches
+        addCommands(new cmdDriveStraight(136, 0.4, 0)); //dist in inches
         //addCommands(new Auton1Parallel(Arm.Mode.INTAKE,10,0.3,true));
     }
 
