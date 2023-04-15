@@ -17,7 +17,7 @@ public class cmdActiveBalance extends CommandBase {
 
     private final double pitchDegTol = 10.0;
 
-    private final double kp_balance = 0.00006;
+    private final double kp_balance = 0.002; //was 0.00006, and then 0.0006
     private final double ki_balance = 0.0000025;
     private final double kd_balance = 0.000000025;
 
